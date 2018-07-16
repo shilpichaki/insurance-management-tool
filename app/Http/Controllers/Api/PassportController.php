@@ -30,8 +30,20 @@ class PassportController extends Controllers
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), 
-            ['name' => 'required','email' => 'required'],
-            ['title.required' => 'Title is required','body.required' => 'Body is required']
+            [
+                'emp_id' => 'required', 
+                'emp_first_name' => 'required', 
+                'emp_middle_name' => 'string|max:100',
+                'emp_last_name' => 'string|max:100',
+                'emp_dob' => 'required',
+                'emp_email' => 'required|string|email|max:255|unique:users',
+                'emp_phno' => 'required',
+                'emp_desg_id' => 'required',
+                'emp_reports_to' => 'required',
+                'emp_status' => 'required',
+                'password' => 'required|string|min:6|confirmed'
+            ],
+            ['emp_email.required' => 'Email is required','password.required' => 'Password is required']
         );
 
         if ($validator->fails()) {
