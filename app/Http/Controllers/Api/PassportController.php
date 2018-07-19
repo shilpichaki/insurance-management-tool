@@ -55,9 +55,16 @@ class PassportController extends Controller
         }
 
         $input = $request->all();
-        return $input;
-        $input['password'] = bcrypt($input['password']);
-        $user = User::create($input);
+
+        $user_input = [
+            "empid" => $input["emp_id"],
+            "email" => $input["emp_email"],
+            "userid" => $input["emp_email"],
+            "password" => bcrypt($input['password'])
+        ];
+
+        //return $user_input;
+        $user = User::create($user_input);
 
         $success['token'] = $user->createToken('MyApp')->accessToken;
         $success['name'] = $user->name;
