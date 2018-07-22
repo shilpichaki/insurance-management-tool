@@ -8,6 +8,9 @@ use App\User;
 use App\Employee;
 use Illuminate\Support\Facades\Auth;
 use Validator;
+use DB;
+
+use App\Util;
 
 class PassportController extends Controller
 {
@@ -15,7 +18,7 @@ class PassportController extends Controller
 
     public function login()
     {
-        if(Auth::attempt(['email' => request('email'),'password' => request('password')]))
+        if(Auth::attempt(['userid' => request('userid'),'password' => request('password')]))
         {
             $user = Auth::user();
             $success['token'] = $user->createToken('MyApp')->accessToken;
@@ -37,14 +40,15 @@ class PassportController extends Controller
             [
                 'emp_id' => 'required', 
                 'emp_first_name' => 'required', 
-                'emp_middle_name' => 'string|max:100',
-                'emp_last_name' => 'string|max:100',
+                'emp_middle_name' => 'string|max:100|nullable',
+                'emp_last_name' => 'string|max:100|nullable',
                 'emp_dob' => 'required',
                 'emp_email' => 'required|string|email|max:255',
                 'emp_phno' => 'required',
                 'emp_desg_id' => 'required',
                 'emp_reports_to' => 'required',
                 'emp_status' => 'required',
+                'userid' => 'required|unique:users',
                 'password' => 'required|string|min:6'
             ],
             ['emp_email.required' => 'Email is required','password.required' => 'Password is required']
@@ -56,9 +60,23 @@ class PassportController extends Controller
 
         $input = $request->all();
 
+        $employee_input = [
+            'emp_id' => $input["emp_id"], 
+            'emp_first_name' => $input["emp_first_name"], 
+            'emp_middle_name' => $input["emp_middle_name"],
+            'emp_last_name' => $input["emp_last_name"],
+            'emp_dob' => Util::mysqlDateTimeConverter($input["emp_dob"]),
+            'emp_email' => $input["emp_email"],
+            'emp_phno' => $input["emp_phno"],
+            'emp_desg_id' => $input["emp_desg_id"],
+            'emp_reports_to' => $input["emp_reports_to"],
+            'emp_status' => $input["emp_status"]
+        ];
+        $employee = Employee::create($employee_input);
+
         $user_input = [
             "empid" => $input["emp_id"],
-            "email" => $input["emp_email"],
+            "email" => $input["userid"],
             "userid" => $input["emp_email"],
             "password" => bcrypt($input['password'])
         ];
@@ -72,9 +90,19 @@ class PassportController extends Controller
         return response()->json(['success' => $success], $this->successStatus);
     }
 
-    public function getDetails()
+    public function getEmployeeDetails()
     {
-
+        $allEmployee = Employee::all();
+        $allEmployee = DB::select('Select * from tbl_employee_mast');
+        if(empty($allEmployee))
+        {
+            $result = array("status"=>0);
+        }
+        else
+        {
+            $result = array("status"=>1,"data"=>$allEmployee);
+        }
+        return $result;
     }
 }
 
