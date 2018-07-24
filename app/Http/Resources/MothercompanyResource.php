@@ -51,8 +51,8 @@ class MothercompanyResource extends Resource
             'address' => $this->m_company_address,
             'pin' => $this->m_company_pin,
             'city' => $this->m_company_city,
-            'state' => $this->state($this->m_company_state),
-            'country' => $this->company($this->m_company_country),
+            'state' => $this->state->state_name,
+            'country' => $this->country->country_name,
             'gstinno' => $this->m_company_GSTIN,
         ];
     }
