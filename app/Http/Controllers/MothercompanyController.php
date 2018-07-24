@@ -16,17 +16,8 @@ class MothercompanyController extends Controller
      */
     public function index()
     {
-        $motherCompanyList = Mothercompany::all();
-        if(empty($motherCompanyList))
-        {
-            $result = array("status"=>0);
-        }
-        else
-        {
-            $result = array("status"=>1,"data"=>$motherCompanyList);
-        }
+        $motherCompanyList = Mothercompany::paginate(15);
         return MothercompanyResource::collection($motherCompanyList);
-        // return $motherCompanyList;
     }
 
     /**

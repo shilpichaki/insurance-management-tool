@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Country;
 
 class CountryController extends Controller
 {
@@ -45,7 +46,8 @@ class CountryController extends Controller
      */
     public function show($id)
     {
-        //
+        $country = Country::findOrFail($id);
+        return $country;
     }
 
     /**

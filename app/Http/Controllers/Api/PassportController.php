@@ -77,8 +77,8 @@ class PassportController extends Controller
 
         $user_input = [
             "empid" => $input["emp_id"],
-            "email" => $input["userid"],
-            "userid" => $input["emp_email"],
+            "userid" => $input["userid"],
+            "email" => $input["emp_email"],
             "password" => bcrypt($input['password'])
         ];
 
