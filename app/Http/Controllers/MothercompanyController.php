@@ -30,6 +30,48 @@ class MothercompanyController extends Controller
     {
         $mothercompany = $request->isMethod('put') ? Mothercompany::findOrFail($request->company_id) : new Mothercompany;
 
+        if($request->isMethod('put'))
+        {
+            $validator = Validator::make($request->all(), 
+                [
+                    'company_id' => 'required|integer', 
+                    'company_name' => 'required', 
+                    'feedback_day' => 'integer|nullable',
+                    'company_email' => 'string|email|max:100|nullable',
+                    'company_address' => 'required|string',
+                    'company_pin' => 'required|integer|max:7',
+                    'company_city' => 'required|integer',
+                    'company_state' => 'required|integer',
+                    'company_country' => 'required|integer',
+                    'company_gstinno' => 'string|nullable'
+                ]
+            );
+
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->errors()->getMessages()], 401);
+            }
+        }
+        else
+        {
+            $validator = Validator::make($request->all(), 
+                [
+                    'company_name' => 'required', 
+                    'feedback_day' => 'integer|nullable',
+                    'company_email' => 'string|email|max:100|nullable',
+                    'company_address' => 'required|string',
+                    'company_pin' => 'required|integer|max:7',
+                    'company_city' => 'required|integer',
+                    'company_state' => 'required|integer',
+                    'company_country' => 'required|integer',
+                    'company_gstinno' => 'string|nullable'
+                ]
+            );
+
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->errors()->getMessages()], 401);
+            }
+        }
+
         $mothercompany->m_company_id = $request->input('company_id');
         $mothercompany->m_company_name = $request->input('company_name');
         $mothercompany->m_avg_feedback_day = $request->input('feedback_day');

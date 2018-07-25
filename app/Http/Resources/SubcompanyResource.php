@@ -3,9 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
-use Illuminate\Http\Response;
 
-class MothercompanyResource extends Resource
+class SubcompanyResource extends Resource
 {
     /**
      * Transform the resource into an array.
@@ -15,21 +14,20 @@ class MothercompanyResource extends Resource
      */
     public function toArray($request)
     {
-        
         return 
         [
-            'id' => $this->m_company_id,
-            'name' => $this->m_company_name,
-            'feedbackday' => $this->m_avg_feedback_day,
-            'email' => $this->m_company_email,
-            'address' => $this->m_company_address,
-            'pin' => $this->m_company_pin,
-            'city' => $this->m_company_city,
+            'id' => $this->s_company_id,
+            'name' => $this->s_company_name,
+            'feedbackday' => $this->s_avg_feedback_day,
+            'email' => $this->s_company_email,
+            'address' => $this->s_company_address,
+            'pin' => $this->s_company_pin,
+            'city' => $this->s_company_city,
             'state_id' => $this->state->state_id,
             'state' => $this->state->state_name,
             'country_id' => $this->country->country_id,
             'country' => $this->country->country_name,
-            'gstinno' => $this->m_company_GSTIN,
+            'gstinno' => $this->s_company_GSTIN,
         ];
     }
 
@@ -48,5 +46,4 @@ class MothercompanyResource extends Resource
             "message" => $message
         ];
     }
-
 }
