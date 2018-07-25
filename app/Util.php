@@ -10,7 +10,8 @@ Class Util
 
     public static function addMinutes($dateTime,$noOfMinutes)
     {
-        return date('Y-m-d H:i:s', strtotime('+' . $noOfMinutes . ' minutes',$dateTime));
+        $time = strtotime($dateTime);
+        return date('Y-m-d H:i:s', strtotime('+' . $noOfMinutes . ' minutes',$time));
     }
 }
 
