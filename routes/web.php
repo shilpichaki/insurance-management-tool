@@ -18,6 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => 'auth'],function(){
 Route::get('mothercompany','MothercompanyController@index');
 Route::get('mothercompany/{id}','MothercompanyController@show');
 Route::post('mothercompany','MothercompanyController@store');
@@ -28,3 +30,4 @@ Route::get('subcompany','SubcompanyController@index');
 Route::get('subcompany/{id}','SubcompanyController@show');
 Route::post('subcompany','SubcompanyController@store');
 Route::put('subcompany','SubcompanyController@store');
+});
