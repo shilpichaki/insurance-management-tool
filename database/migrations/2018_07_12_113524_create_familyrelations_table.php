@@ -27,6 +27,6 @@ class CreateFamilyrelationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_Family_Relation_Mast');
+        Schema::dropIfExists('tbl_family_relation_mast');
     }
 }

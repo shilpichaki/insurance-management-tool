@@ -27,6 +27,6 @@ class CreateDesignationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_Designation_Mast');
+        Schema::dropIfExists('tbl_designation_mast');
     }
 }

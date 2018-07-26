@@ -38,6 +38,6 @@ class CreateBrokercompaniesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_Broker_Company_Mast');
+        Schema::dropIfExists('tbl_broker_company_mast');
     }
 }

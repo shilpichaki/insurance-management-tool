@@ -17,7 +17,8 @@ class MothercompanyController extends Controller
     public function index()
     {
         $motherCompanyList = Mothercompany::paginate(15);
-        return MothercompanyResource::collection($motherCompanyList);
+        // return MothercompanyResource::collection($motherCompanyList);
+        return view('mothercompany.index', ['motherCompanyList' => $motherCompanyList]);
     }
 
     /**

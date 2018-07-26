@@ -14,3 +14,17 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('mothercompany','MothercompanyController@index');
+Route::get('mothercompany/{id}','MothercompanyController@show');
+Route::post('mothercompany','MothercompanyController@store');
+Route::put('mothercompany','MothercompanyController@store');
+
+//Sub Company Routes
+Route::get('subcompany','SubcompanyController@index');
+Route::get('subcompany/{id}','SubcompanyController@show');
+Route::post('subcompany','SubcompanyController@store');
+Route::put('subcompany','SubcompanyController@store');

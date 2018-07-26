@@ -38,6 +38,6 @@ class CreateMothercompaniesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_Mother_Company_Mast');
+        Schema::dropIfExists('tbl_mother_company_mast');
     }
 }

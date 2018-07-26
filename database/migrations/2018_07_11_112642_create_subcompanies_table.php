@@ -38,6 +38,6 @@ class CreateSubcompaniesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_Sub_Company_Mast');
+        Schema::dropIfExists('tbl_sub_company_mast');
     }
 }

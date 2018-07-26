@@ -39,6 +39,6 @@ class CreateEmployeesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_Employee_Mast');
+        Schema::dropIfExists('tbl_employee_mast');
     }
 }

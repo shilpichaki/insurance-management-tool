@@ -20,17 +20,18 @@ Route::group(['middleware' => 'auth:api'],function(){
     Route::post('get-details','Api\PassportController@getEmployeeDetails');
 
     //Mother Company Routes
-    Route::get('mothercompany','MothercompanyController@index');
-    Route::get('mothercompany/{id}','MothercompanyController@show');
-    Route::post('mothercompany','MothercompanyController@store');
-    Route::put('mothercompany','MothercompanyController@store');
+    // Route::get('mothercompany','MothercompanyController@index');
+    // Route::get('mothercompany/{id}','MothercompanyController@show');
+    // Route::post('mothercompany','MothercompanyController@store');
+    // Route::put('mothercompany','MothercompanyController@store');
 
-    //Sub Company Routes
-    Route::get('subcompany','SubcompanyController@index');
-    Route::get('subcompany/{id}','SubcompanyController@show');
-    Route::post('subcompany','SubcompanyController@store');
-    Route::put('subcompany','SubcompanyController@store');
+    // //Sub Company Routes
+    // Route::get('subcompany','SubcompanyController@index');
+    // Route::get('subcompany/{id}','SubcompanyController@show');
+    // Route::post('subcompany','SubcompanyController@store');
+    // Route::put('subcompany','SubcompanyController@store');
 });
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
