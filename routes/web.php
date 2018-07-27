@@ -20,14 +20,18 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'],function(){
-Route::get('mothercompany','MothercompanyController@index');
-Route::get('mothercompany/{id}','MothercompanyController@show');
-Route::post('mothercompany','MothercompanyController@store');
-Route::put('mothercompany','MothercompanyController@store');
+    //Mother Company Routes
+    Route::get('mothercompany','MothercompanyController@index');
+    Route::get('mothercompany/{id}','MothercompanyController@show');
+    Route::post('mothercompany','MothercompanyController@store');
+    Route::put('mothercompany','MothercompanyController@store');
 
-//Sub Company Routes
-Route::get('subcompany','SubcompanyController@index');
-Route::get('subcompany/{id}','SubcompanyController@show');
-Route::post('subcompany','SubcompanyController@store');
-Route::put('subcompany','SubcompanyController@store');
+    //Sub Company Routes
+    Route::get('subcompany','SubcompanyController@index');
+    Route::get('subcompany/{id}','SubcompanyController@show');
+    Route::post('subcompany','SubcompanyController@store');
+    Route::put('subcompany','SubcompanyController@store');
 });
+
+Route::post('msrelation','MothersubcompanyrelationsController@store');
+Route::put('msrelation','MothersubcompanyrelationsController@store');
