@@ -31,7 +31,16 @@ Route::group(['middleware' => 'auth'],function(){
     Route::get('subcompany/{id}','SubcompanyController@show');
     Route::post('subcompany','SubcompanyController@store');
     Route::put('subcompany','SubcompanyController@store');
+
+    //Broker Company Routes
+    Route::get('brokercompany','BrokercompanyController@index');
+    Route::get('brokercompany/{id}','BrokercompanyController@show');
+    Route::post('brokercompany','BrokercompanyController@store');
+    Route::put('brokercompany','BrokercompanyController@store');
+    });
+
 });
 
 Route::post('msrelation','MothersubcompanyrelationsController@store');
 Route::put('msrelation','MothersubcompanyrelationsController@store');
+
