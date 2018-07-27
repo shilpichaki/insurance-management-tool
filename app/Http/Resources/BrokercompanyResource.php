@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Http\Resources;
+
+use Illuminate\Http\Resources\Json\Resource;
+
+class BrokercompanyResource extends Resource
+{
+    /**
+     * Transform the resource into an array.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    public function toArray($request)
+    {
+        return 
+        [
+            'id' => $this->b_company_id,
+            'name' => $this->b_company_name,
+            'feedbackday' => $this->b_avg_feedback_day,
+            'email' => $this->b_company_email,
+            'address' => $this->s_company_address,
+            'pin' => $this->b_company_pin,
+            'city' => $this->b_company_city,
+            'state_id' => $this->state->state_id,
+            'state' => $this->state->state_name,
+            'country_id' => $this->country->country_id,
+            'country' => $this->country->country_name,
+            'gstinno' => $this->b_company_GSTIN,
+        ];
+    }
+
+    public function with($request)
+    {
+        if(empty($this))
+        {
+            $message = "query is not successfull";
+        }
+        else
+        {
+            $message = "query is successfull";
+        }
+        return[
+            "ver" => '1.0.0',
+            "message" => $message
+        ];
+    }
+}

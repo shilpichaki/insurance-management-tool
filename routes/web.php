@@ -30,4 +30,10 @@ Route::get('subcompany','SubcompanyController@index');
 Route::get('subcompany/{id}','SubcompanyController@show');
 Route::post('subcompany','SubcompanyController@store');
 Route::put('subcompany','SubcompanyController@store');
+
+//Broker Company Routes
+Route::get('brokercompany','BrokercompanyController@index');
+Route::get('brokercompany/{id}','BrokercompanyController@show');
+Route::post('brokercompany','BrokercompanyController@store');
+Route::put('brokercompany','BrokercompanyController@store');
 });
