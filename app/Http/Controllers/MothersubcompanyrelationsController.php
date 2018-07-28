@@ -18,7 +18,8 @@ class MothersubcompanyrelationsController extends Controller
      */
     public function index()
     {
-        //
+        $motherSubCompanyRelation = Mothersubcompanyrelations::all()->toArray();
+        return $motherSubCompanyRelation;
     }
 
     /**
@@ -133,7 +134,8 @@ class MothersubcompanyrelationsController extends Controller
      */
     public function show($id)
     {
-        //
+        $motherSubCompanyRelation = Mothersubcompanyrelations::where('company_relation_id',$request->relation_id)->first();
+        return $motherSubCompanyRelation;
     }
 
     /**

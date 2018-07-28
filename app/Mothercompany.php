@@ -3,8 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Http\Controllers\StateController;
-use App\Http\Controllers\CountryController;
 
 class Mothercompany extends Model
 {
