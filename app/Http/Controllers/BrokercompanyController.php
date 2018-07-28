@@ -25,9 +25,13 @@ class BrokercompanyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        return view('Brokercompany.create');
+    }
+    public function edit()
+    {
+        
     }
 
     /**
@@ -118,7 +122,7 @@ class BrokercompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
         //
     }

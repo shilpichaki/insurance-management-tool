@@ -34,13 +34,13 @@ Route::group(['middleware' => 'auth'],function(){
 
     //Broker Company Routes
     Route::get('brokercompany','BrokercompanyController@index');
+    Route::get('brokercompany/create','BrokercompanyController@create');
+    Route::get('brokercompany/edit','BrokercompanyController@edit');
+    Route::get('brokercompany/delete','BrokercompanyController@delete');
     Route::get('brokercompany/{id}','BrokercompanyController@show');
     Route::post('brokercompany','BrokercompanyController@store');
-    Route::put('brokercompany','BrokercompanyController@store');
+    Route::put('brokercompany','BrokercompanyController@store'); 
     });
-
-});
-
 Route::post('msrelation','MothersubcompanyrelationsController@store');
 Route::put('msrelation','MothersubcompanyrelationsController@store');
 
