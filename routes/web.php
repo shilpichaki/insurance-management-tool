@@ -20,6 +20,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'],function(){
+
+    //Company Routes
+    Route::get('company','CompanyController@index');
+    Route::get('company/create','CompanyController@create');
+    Route::get('company/{id}','CompanyController@index');
+    Route::post('company','CompanyController@store');
+    Route::put('company','CompanyController@store');
+
     //Mother Company Routes
     Route::get('mothercompany','MothercompanyController@index');
     Route::get('mothercompany/{id}','MothercompanyController@show');
@@ -40,7 +48,14 @@ Route::group(['middleware' => 'auth'],function(){
     Route::get('brokercompany/{id}','BrokercompanyController@show');
     Route::post('brokercompany','BrokercompanyController@store');
     Route::put('brokercompany','BrokercompanyController@store'); 
+  
+    //Mother and Sub Company Relation
+    Route::get('msrelation','MothersubcompanyrelationsController@index');
+    Route::get('msrelation/{id}','MothersubcompanyrelationsController@show');
+    Route::post('msrelation','MothersubcompanyrelationsController@store');
+    Route::put('msrelation','MothersubcompanyrelationsController@store');
+  
     });
-Route::post('msrelation','MothersubcompanyrelationsController@store');
-Route::put('msrelation','MothersubcompanyrelationsController@store');
+
+});
 
