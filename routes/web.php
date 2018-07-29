@@ -54,8 +54,6 @@ Route::group(['middleware' => 'auth'],function(){
     Route::get('msrelation/{id}','MothersubcompanyrelationsController@show');
     Route::post('msrelation','MothersubcompanyrelationsController@store');
     Route::put('msrelation','MothersubcompanyrelationsController@store');
-  
-    });
 
 });
 
