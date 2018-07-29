@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Employee;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -48,9 +49,18 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'emp_id' => 'required', 
+            'emp_first_name' => 'required', 
+            'emp_middle_name' => 'string|max:100|nullable',
+            'emp_last_name' => 'string|max:100|nullable',
+            'emp_dob' => 'required',
+            'emp_email' => 'required|string|email|max:255',
+            'emp_phno' => 'required',
+            'emp_desg_id' => 'required',
+            'emp_reports_to' => 'required',
+            'emp_status' => 'required',
+            'userid' => 'required|unique:users',
+            'password' => 'required|string|min:6'
         ]);
     }
 
@@ -60,12 +70,35 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create(array $input)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        $employee_input = [
+            'emp_id' => $input["emp_id"], 
+            'emp_first_name' => $input["emp_first_name"], 
+            'emp_middle_name' => $input["emp_middle_name"],
+            'emp_last_name' => $input["emp_last_name"],
+            'emp_dob' => Util::mysqlDateTimeConverter($input["emp_dob"]),
+            'emp_email' => $input["emp_email"],
+            'emp_phno' => $input["emp_phno"],
+            'emp_desg_id' => $input["emp_desg_id"],
+            'emp_reports_to' => $input["emp_reports_to"],
+            'emp_status' => 1
+        ];
+        $employee = Employee::create($employee_input);
+
+        $user_input = [
+            "empid" => $input["emp_id"],
+            "userid" => $input["userid"],
+            "email" => $input["emp_email"],
+            "password" => bcrypt($input['password'])
+        ];
+
+        $user = User::create($user_input);
+        return $user;
+        // return User::create([
+        //     'name' => $data['name'],
+        //     'email' => $data['email'],
+        //     'password' => bcrypt($data['password']),
+        // ]);
     }
 }
