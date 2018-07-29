@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -35,5 +36,14 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    //Login using userid and password instade of Emailid and password
+    protected function credentials(Request $request)
+    {
+        return [
+            'userid' => $request->email,    //Here userid is the database field name and ->email is Login form's field name
+            'password' => $request->password,
+        ];
     }
 }
