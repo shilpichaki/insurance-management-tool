@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Employee;
+use App\Util;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -53,13 +54,12 @@ class RegisterController extends Controller
             'emp_first_name' => 'required', 
             'emp_middle_name' => 'string|max:100|nullable',
             'emp_last_name' => 'string|max:100|nullable',
-            'emp_dob' => 'required',
+            'emp_dob' => 'required|date',
             'emp_email' => 'required|string|email|max:255',
             'emp_phno' => 'required',
             'emp_desg_id' => 'required',
             'emp_reports_to' => 'required',
-            'emp_status' => 'required',
-            'userid' => 'required|unique:users',
+            'userid' => 'required',
             'password' => 'required|string|min:6|confirmed'
         ]);
     }
@@ -97,11 +97,5 @@ class RegisterController extends Controller
         ];
 
         return User::create($user_input);
-        // return $user;
-        // return User::create([
-        //     'name' => $data['name'],
-        //     'email' => $data['email'],
-        //     'password' => bcrypt($data['password']),
-        // ]);
     }
 }
