@@ -60,7 +60,7 @@ class RegisterController extends Controller
             'emp_reports_to' => 'required',
             'emp_status' => 'required',
             'userid' => 'required|unique:users',
-            'password' => 'required|string|min:6'
+            'password' => 'required|string|min:6|confirmed'
         ]);
     }
 
@@ -72,6 +72,9 @@ class RegisterController extends Controller
      */
     protected function create(array $input)
     {
+        $user = new User;
+        $employee = new Employee;
+
         $employee_input = [
             'emp_id' => $input["emp_id"], 
             'emp_first_name' => $input["emp_first_name"], 
@@ -82,9 +85,9 @@ class RegisterController extends Controller
             'emp_phno' => $input["emp_phno"],
             'emp_desg_id' => $input["emp_desg_id"],
             'emp_reports_to' => $input["emp_reports_to"],
-            'emp_status' => 1
+            'emp_status' => '1'
         ];
-        $employee = Employee::create($employee_input);
+        Employee::create($employee_input);
 
         $user_input = [
             "empid" => $input["emp_id"],
@@ -93,8 +96,8 @@ class RegisterController extends Controller
             "password" => bcrypt($input['password'])
         ];
 
-        $user = User::create($user_input);
-        return $user;
+        return User::create($user_input);
+        // return $user;
         // return User::create([
         //     'name' => $data['name'],
         //     'email' => $data['email'],

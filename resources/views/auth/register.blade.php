@@ -6,7 +6,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
-
+                
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
@@ -68,7 +68,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('emp_dob') ? ' has-error' : '' }}">
-                            <label for="emp_dob" class="col-md-4 control-label">Name</label>
+                            <label for="emp_dob" class="col-md-4 control-label">DOB</label>
 
                             <div class="col-md-6">
                                 <input id="emp_dob" type="text" class="form-control" name="emp_dob" value="{{ old('emp_dob') }}" required autofocus>
