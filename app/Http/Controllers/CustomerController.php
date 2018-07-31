@@ -47,7 +47,7 @@ class CustomerController extends Controller
                 [
                     'customer_id' => 'required|integer', 
                     'customer_name' => 'required|string|max:100', 
-                    'customer_dob' => 'required|date',
+                    'customer_dob' => 'required',
                     'customer_phno' => 'string|max:15',
                     'customer_address' => 'required|string|max:100'
                 ]
@@ -62,7 +62,7 @@ class CustomerController extends Controller
             $validator = Validator::make($request->all(), 
                 [
                     'customer_name' => 'required|string|max:100', 
-                    'customer_dob' => 'required|date',
+                    'customer_dob' => 'required',
                     'customer_phno' => 'string|max:15',
                     'customer_address' => 'required|string|max:100'
                 ]

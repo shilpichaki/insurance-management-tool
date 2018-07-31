@@ -55,5 +55,27 @@ Route::group(['middleware' => 'auth'],function(){
     Route::post('msrelation','MothersubcompanyrelationsController@store');
     Route::put('msrelation','MothersubcompanyrelationsController@store');
 
+    //Customer data save Routes
+    Route::get('customer','CustomerController@index');
+    Route::get('customer/{id}','CustomerController@show');
+    Route::post('customer','CustomerController@store');
+    Route::put('customer','CustomerController@store');
+
+    //Policy Master Routes
+    Route::get('policy','PolicyController@index');
+    Route::get('policy/{id}','PolicyController@show');
+    Route::post('policy','PolicyController@store');
+    Route::put('policy','PolicyController@store');
+
+    //Policy Status Routes
+    Route::get('policystatus','PolicystatusController@index');
+    Route::get('policystatus/{id}','PolicystatusController@show');
+    Route::post('policystatus','PolicystatusController@store');
+    Route::put('policystatus','PolicystatusController@store');
+
 });
 
+Route::get('policyorder','PolicyorderController@index');
+    Route::get('policyorder/{id}','PolicyorderController@show');
+    Route::post('policyorder','PolicyorderController@store');
+    Route::put('policyorder','PolicyorderController@store');

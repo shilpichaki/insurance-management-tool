@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\PolicyStatus;
+use Validator;
 
 class PolicystatusController extends Controller
 {
@@ -13,7 +15,8 @@ class PolicystatusController extends Controller
      */
     public function index()
     {
-        //
+        $policyStatus = PolicyStatus::all()->toArray();
+        return $policyStatus;
     }
 
     /**
@@ -34,7 +37,44 @@ class PolicystatusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $policyStatus = $request->isMethod('put') ? PolicyStatus::findOrFail($request->policy_status_id) : new PolicyStatus;
+
+        if($request->isMethod('put'))
+        {
+            $validator = Validator::make($request->all(), 
+                [
+                    'policy_status_id' => 'required|integer', 
+                    'policy_status_name' => 'required|string|max:50', 
+                    'policy_status_des' => 'required|string'
+                ]
+            );
+
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->errors()->getMessages()], 401);
+            }
+        }
+        else
+        {
+            $validator = Validator::make($request->all(), 
+                [
+                    'policy_status_name' => 'required|string|max:50', 
+                    'policy_status_des' => 'required|string'
+                ]
+            );
+
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->errors()->getMessages()], 401);
+            }
+        }
+
+        $policyStatus->policy_status_id = $request->input('policy_status_id');
+        $policyStatus->policy_status_name = $request->input('policy_status_name');
+        $policyStatus->policy_status_des = $request->input('policy_status_des');
+
+        if($policyStatus->save())
+        {
+            return $policyStatus;
+        }
     }
 
     /**
@@ -45,7 +85,8 @@ class PolicystatusController extends Controller
      */
     public function show($id)
     {
-        //
+        $policyStatus = PolicyStatus::findOrFail($id);
+        return $policyStatus;
     }
 
     /**
