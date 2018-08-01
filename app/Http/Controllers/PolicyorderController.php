@@ -16,7 +16,8 @@ class PolicyorderController extends Controller
      */
     public function index()
     {
-        //
+        $policyOrder = PolicyOrder::all()->toArray();
+        return $policyOrder;
     }
 
     /**
@@ -145,7 +146,8 @@ class PolicyorderController extends Controller
      */
     public function show($id)
     {
-        //
+        $policyOrder = PolicyOrder::findOrFail($id);
+        return $policyOrder;
     }
 
     /**

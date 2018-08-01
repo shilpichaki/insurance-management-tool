@@ -73,9 +73,10 @@ Route::group(['middleware' => 'auth'],function(){
     Route::post('policystatus','PolicystatusController@store');
     Route::put('policystatus','PolicystatusController@store');
 
-});
-
-Route::get('policyorder','PolicyorderController@index');
+    //Policy Order Routes 
+    Route::get('policyorder','PolicyorderController@index');
     Route::get('policyorder/{id}','PolicyorderController@show');
     Route::post('policyorder','PolicyorderController@store');
     Route::put('policyorder','PolicyorderController@store');
+});
+
