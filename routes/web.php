@@ -80,3 +80,5 @@ Route::group(['middleware' => 'auth'],function(){
     Route::put('policyorder','PolicyorderController@store');
 });
 
+Route::get('orderstatement/create','OrderStatementController@create')->name('orderstatement.create');
+Route::post('orderstatement','OrderStatementController@showform')->name('orderstatement');

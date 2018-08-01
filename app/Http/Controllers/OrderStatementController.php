@@ -34,6 +34,7 @@ class OrderStatementController extends Controller
         $subCompanyList = DB::select('select scm.s_company_id,scm.s_company_name from tbl_sub_company_mast scm INNER JOIN (select DISTINCT(s_company_id) as s_company_id from tbl_mother_sub_company_relation) rs on rs.s_company_id = scm.s_company_id');
 
         //Create view and and Send these two variables in order to show the datas
+        return view('orderstatement.showform',['mothercompanylist' => $motherCompanyList, 'subcompanylist' => $subCompanyList]);
     }
 
     /**
@@ -42,9 +43,9 @@ class OrderStatementController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function showform(Request $request)
     {
-        //
+        return $request;
     }
 
     /**
