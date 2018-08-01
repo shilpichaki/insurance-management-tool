@@ -30,8 +30,8 @@ class CreatePolicyOrdersTable extends Migration
             $table->dateTime('nominee_dob');
             $table->integer('nominee_relation_id');
             $table->enum('handover_to_company_type', ['mother', 'sub']);
-            $table->integer('handover_to_mother_company_id');
-            $table->integer('handover_to_sub_company_id');
+            $table->integer('handover_to_mother_company_id')->nullable();
+            $table->integer('handover_to_sub_company_id')->nullable();
             $table->dateTime('handover_date')->nullable();
             $table->boolean('plvc');
             $table->integer('policy_status_id');
