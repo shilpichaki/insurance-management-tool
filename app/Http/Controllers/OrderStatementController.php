@@ -45,7 +45,50 @@ class OrderStatementController extends Controller
      */
     public function showform(Request $request)
     {
-        return $request;
+        // return $request;
+        $statement = [];
+        $companyType = $request->input('company_type');
+        switch($companyType)
+        {
+            case 'mother':
+                $motherCompanyId = $request->input('m_company_id');
+                $startDate = strtotime($request->input('start_date'));
+                $endDate = strtotime($request->input('end_date'));
+                if($startDate<$endDate)
+                {
+                    $statement = DB::select("select po.application_no,(SELECT cm.customer_name from tbl_customer_mast cm where cm.customer_id = po.customer_id) as 'customer_name', (SELECT mcm.m_company_name from tbl_mother_company_mast mcm where mcm.m_company_id = po.handover_to_mother_company_id) as 'company_name', (SELECT pm.policy_name from tbl_policy_mast pm where pm.policy_id = po.policy_id) as 'policy_name', po.amount from tbl_policy_order po where po.handover_to_company_type = ? and po.handover_to_mother_company_id = ? and po.order_date between ? AND ?", [$companyType,$motherCompanyId,date('Y-m-d H:i:s', $startDate),date('Y-m-d H:i:s', $endDate)]);
+                    return $statement;
+                }
+                else
+                {
+
+                }
+            break;
+            case 'sub':
+                $subCompanyId = $request->input('s_company_id');
+                $motherCompanyId = $request->input('m_company_id');
+                $startDate = strtotime($request->input('start_date'));
+                $endDate = strtotime($request->input('end_date'));
+                if(($startDate)<($endDate))
+                {
+                    if(is_null($motherCompanyId))
+                    {
+                        $statement = DB::select("select po.application_no,(SELECT cm.customer_name from tbl_customer_mast cm where cm.customer_id = po.customer_id) as 'customer_name', (SELECT scm.s_company_name from tbl_sub_company_mast scm where scm.s_company_id = po.handover_to_sub_company_id) as 'company_name', (SELECT pm.policy_name from tbl_policy_mast pm where pm.policy_id = po.policy_id) as 'policy_name', po.amount from tbl_policy_order po where po.handover_to_company_type = ? and po.handover_to_sub_company_id = ? and po.order_date between ? AND ?", [$companyType,$subCompanyId,date('Y-m-d H:i:s', $startDate),date('Y-m-d H:i:s', $endDate)]);
+                        return $statement;
+                    }
+                    else
+                    {
+                        $statement = DB::select("select po.application_no,(SELECT cm.customer_name from tbl_customer_mast cm where cm.customer_id = po.customer_id) as 'customer_name', (SELECT scm.s_company_name from tbl_sub_company_mast scm where scm.s_company_id = po.handover_to_sub_company_id) as 'company_name', (SELECT pm.policy_name from tbl_policy_mast pm where pm.policy_id = po.policy_id) as 'policy_name', po.amount from tbl_policy_order po where po.handover_to_company_type = ? and po.handover_to_sub_company_id = ? and po.handover_to_mother_company_id = ? and po.order_date between ? AND ?", [$companyType,$subCompanyId,$motherCompanyId,date('Y-m-d H:i:s', $startDate),date('Y-m-d H:i:s', $endDate)]);
+                        return $statement;
+                    }
+                }
+                else
+                {
+                    
+                }
+            break;
+            default:
+        }
     }
 
     /**
