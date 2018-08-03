@@ -52,8 +52,8 @@ Route::group(['middleware' => 'auth'],function(){
     //Mother and Sub Company Relation
     Route::get('msrelation','MothersubcompanyrelationsController@index');
     Route::get('msrelation/{id}','MothersubcompanyrelationsController@show');
-    Route::post('msrelation','MothersubcompanyrelationsController@store');
-    Route::put('msrelation','MothersubcompanyrelationsController@store');
+    Route::post('msrelation','MothersubcompanyrelationsController@store')->name('msrelation.store');
+    Route::put('msrelation','MothersubcompanyrelationsController@store')->name('msrelation.update');
 
     //Customer data save Routes
     Route::get('customer','CustomerController@index');
@@ -78,7 +78,9 @@ Route::group(['middleware' => 'auth'],function(){
     Route::get('policyorder/{id}','PolicyorderController@show');
     Route::post('policyorder','PolicyorderController@store');
     Route::put('policyorder','PolicyorderController@store');
+
+    //Order statementRoutes
+    Route::get('orderstatement/create','OrderStatementController@create')->name('orderstatement.create');
+    Route::post('orderstatement','OrderStatementController@showform')->name('orderstatement');
 });
 
-Route::get('orderstatement/create','OrderStatementController@create')->name('orderstatement.create');
-Route::post('orderstatement','OrderStatementController@showform')->name('orderstatement');

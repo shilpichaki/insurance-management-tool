@@ -56,8 +56,9 @@ class OrderStatementController extends Controller
                 $endDate = strtotime($request->input('end_date'));
                 if($startDate<$endDate)
                 {
-                    $statement = DB::select("select po.application_no,(SELECT cm.customer_name from tbl_customer_mast cm where cm.customer_id = po.customer_id) as 'customer_name', (SELECT mcm.m_company_name from tbl_mother_company_mast mcm where mcm.m_company_id = po.handover_to_mother_company_id) as 'company_name', (SELECT pm.policy_name from tbl_policy_mast pm where pm.policy_id = po.policy_id) as 'policy_name', po.amount from tbl_policy_order po where po.handover_to_company_type = ? and po.handover_to_mother_company_id = ? and po.order_date between ? AND ?", [$companyType,$motherCompanyId,date('Y-m-d H:i:s', $startDate),date('Y-m-d H:i:s', $endDate)]);
-                    // return $statement;
+                    $dealPercent = DB::select("select deal_percentage from tbl_mother_sub_company_relation where s_company_id is null and m_company_id = ? order by percent_created_at desc limit 1", [$motherCompanyId]);
+                    $statement = DB::select("select po.order_date,po.application_no,(SELECT cm.customer_name from tbl_customer_mast cm where cm.customer_id = po.customer_id) as 'customer_name', (SELECT mcm.m_company_name from tbl_mother_company_mast mcm where mcm.m_company_id = po.handover_to_mother_company_id) as 'company_name', (SELECT pm.policy_name from tbl_policy_mast pm where pm.policy_id = po.policy_id) as 'policy_name', po.amount, ROUND((po.amount*" . $dealPercent[0]->deal_percentage . ")/100,2) as profit from tbl_policy_order po where po.handover_to_company_type = ? and po.handover_to_mother_company_id = ? and po.order_date between ? AND ?", [$companyType,$motherCompanyId,date('Y-m-d H:i:s', $startDate),date('Y-m-d H:i:s', $endDate)]);
+                    
                 }
                 else
                 {
@@ -73,13 +74,15 @@ class OrderStatementController extends Controller
                 {
                     if(is_null($motherCompanyId))
                     {
-                        $statement = DB::select("select po.application_no,(SELECT cm.customer_name from tbl_customer_mast cm where cm.customer_id = po.customer_id) as 'customer_name', (SELECT scm.s_company_name from tbl_sub_company_mast scm where scm.s_company_id = po.handover_to_sub_company_id) as 'company_name', (SELECT pm.policy_name from tbl_policy_mast pm where pm.policy_id = po.policy_id) as 'policy_name', po.amount from tbl_policy_order po where po.handover_to_company_type = ? and po.handover_to_sub_company_id = ? and po.order_date between ? AND ?", [$companyType,$subCompanyId,date('Y-m-d H:i:s', $startDate),date('Y-m-d H:i:s', $endDate)]);
-                        // return $statement;
+                        $dealPercent = DB::select("select deal_percentage from tbl_mother_sub_company_relation where s_company_id = ? order by percent_created_at desc limit 1", [$subCompanyId]);
+                        $statement = DB::select("select po.order_date,po.application_no,(SELECT cm.customer_name from tbl_customer_mast cm where cm.customer_id = po.customer_id) as 'customer_name', (SELECT scm.s_company_name from tbl_sub_company_mast scm where scm.s_company_id = po.handover_to_sub_company_id) as 'company_name', (SELECT pm.policy_name from tbl_policy_mast pm where pm.policy_id = po.policy_id) as 'policy_name', po.amount, ROUND((po.amount*" . $dealPercent[0]->deal_percentage . ")/100,2) as profit from tbl_policy_order po where po.handover_to_company_type = ? and po.handover_to_sub_company_id = ? and po.order_date between ? AND ?", [$companyType,$subCompanyId,date('Y-m-d H:i:s', $startDate),date('Y-m-d H:i:s', $endDate)]);
+                        
                     }
                     else
                     {
-                        $statement = DB::select("select po.application_no,(SELECT cm.customer_name from tbl_customer_mast cm where cm.customer_id = po.customer_id) as 'customer_name', (SELECT scm.s_company_name from tbl_sub_company_mast scm where scm.s_company_id = po.handover_to_sub_company_id) as 'company_name', (SELECT pm.policy_name from tbl_policy_mast pm where pm.policy_id = po.policy_id) as 'policy_name', po.amount from tbl_policy_order po where po.handover_to_company_type = ? and po.handover_to_sub_company_id = ? and po.handover_to_mother_company_id = ? and po.order_date between ? AND ?", [$companyType,$subCompanyId,$motherCompanyId,date('Y-m-d H:i:s', $startDate),date('Y-m-d H:i:s', $endDate)]);
-                        // return $statement;
+                        $dealPercent = DB::select("select deal_percentage from tbl_mother_sub_company_relation where s_company_id = ? and m_company_id = ? order by percent_created_at desc limit 1", [$subCompanyId,$motherCompanyId]);
+                        $statement = DB::select("select po.order_date,po.application_no,(SELECT cm.customer_name from tbl_customer_mast cm where cm.customer_id = po.customer_id) as 'customer_name', (SELECT scm.s_company_name from tbl_sub_company_mast scm where scm.s_company_id = po.handover_to_sub_company_id) as 'company_name', (SELECT pm.policy_name from tbl_policy_mast pm where pm.policy_id = po.policy_id) as 'policy_name', po.amount, ROUND((po.amount*" . $dealPercent[0]->deal_percentage . ")/100,2) as profit from tbl_policy_order po where po.handover_to_company_type = ? and po.handover_to_sub_company_id = ? and po.handover_to_mother_company_id = ? and po.order_date between ? AND ?", [$companyType,$subCompanyId,$motherCompanyId,date('Y-m-d H:i:s', $startDate),date('Y-m-d H:i:s', $endDate)]);
+                        
                     }
                 }
                 else
@@ -89,6 +92,10 @@ class OrderStatementController extends Controller
             break;
             default:
         }
+
+        //Have to make a complex query about how to fetch the deal percent The below query will check
+        //and make the profit based on current deal percent only
+                
 
         return view('orderstatement.showstatement',['statements' => $statement]);
     }
