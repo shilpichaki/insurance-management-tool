@@ -36,7 +36,7 @@
         </div> --}}
 
         <div class="form-group{{ $errors->has('m_company_id') ? ' has-error' : '' }}">
-            <label for="m_company_id" class="col-md-4 control-label">Deal Percent</label>
+            <label for="m_company_id" class="col-md-4 control-label">Mother Company ID</label>
 
             <div class="col-md-6">
                 <input id="m_company_id" type="text" class="form-control" name="m_company_id" value="{{ old('m_company_id') }}" required autofocus>
@@ -50,7 +50,7 @@
         </div>
 
         <div class="form-group{{ $errors->has('s_company_id') ? ' has-error' : '' }}">
-            <label for="s_company_id" class="col-md-4 control-label">Deal Percent</label>
+            <label for="s_company_id" class="col-md-4 control-label">Sub Company ID</label>
 
             <div class="col-md-6">
                 <input id="s_company_id" type="text" class="form-control" name="s_company_id" value="{{ old('s_company_id') }}" required autofocus>
