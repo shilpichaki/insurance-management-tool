@@ -52,6 +52,7 @@ Route::group(['middleware' => 'auth'],function(){
     //Mother and Sub Company Relation
     Route::get('msrelation','MothersubcompanyrelationsController@index');
     Route::get('msrelation/create','MothersubcompanyrelationsController@create');
+    Route::get('msrelation/edit/{id}','MothersubcompanyrelationsController@edit');
     Route::get('msrelation/{id}','MothersubcompanyrelationsController@show');
     Route::post('msrelation','MothersubcompanyrelationsController@store')->name('msrelation.store');
     Route::put('msrelation','MothersubcompanyrelationsController@store')->name('msrelation.update');

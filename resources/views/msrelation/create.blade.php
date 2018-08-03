@@ -39,7 +39,7 @@
             <label for="m_company_id" class="col-md-4 control-label">Mother Company ID</label>
 
             <div class="col-md-6">
-                <input id="m_company_id" type="text" class="form-control" name="m_company_id" value="{{ old('m_company_id') }}" required autofocus>
+                <input id="m_company_id" type="text" class="form-control" name="m_company_id" value="{{ old('m_company_id') }}" autofocus>
 
                 @if ($errors->has('m_company_id'))
                     <span class="help-block">
@@ -53,7 +53,7 @@
             <label for="s_company_id" class="col-md-4 control-label">Sub Company ID</label>
 
             <div class="col-md-6">
-                <input id="s_company_id" type="text" class="form-control" name="s_company_id" value="{{ old('s_company_id') }}" required autofocus>
+                <input id="s_company_id" type="text" class="form-control" name="s_company_id" value="{{ old('s_company_id') }}" autofocus>
 
                 @if ($errors->has('s_company_id'))
                     <span class="help-block">
@@ -88,7 +88,7 @@
         <div class="form-group{{ $errors->has('percent_updated') ? ' has-error' : '' }}">
             <label for="percent_updated" class="col-md-4 control-label">Percent Updation Date</label>
             <div class="col-md-6">
-                <input id="percent_updated" type="date" class="form-control" name="percent_updated" value="{{ old('percent_updated') }}" required autofocus>
+                <input id="percent_updated" type="date" class="form-control" name="percent_updated" value="{{ old('percent_updated') }}" autofocus>
             </div>
         </div>
     

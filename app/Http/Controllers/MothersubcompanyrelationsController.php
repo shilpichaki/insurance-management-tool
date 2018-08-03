@@ -47,8 +47,8 @@ class MothersubcompanyrelationsController extends Controller
             $validator = Validator::make($request->all(), 
                 [
                     'relation_id' => 'required|integer', 
-                    'm_company_id' => 'required_without:s_company_id|integer', 
-                    's_company_id' => 'required_without:m_company_id|integer',
+                    'm_company_id' => 'required_without:s_company_id|integer|nullable', 
+                    's_company_id' => 'required_without:m_company_id|integer|nullable',
                     'deal_percentage' => 'required|integer|max:100',
 
                     //More precisely below 2 fields can be called as Deal percent issue date and Deal percent update date
@@ -69,7 +69,7 @@ class MothersubcompanyrelationsController extends Controller
                     'm_company_id' => $request->input('m_company_id'),
                     's_company_id' => $request->input('s_company_id'),
                     'deal_percentage' => $request->input('deal_percentage'),
-                    'percent_created' => Util::mysqlDateTimeConverter($request->input('percent_created'))
+                    'percent_created_at' => Util::mysqlDateTimeConverter($request->input('percent_created'))
                 ];
             }
             else
@@ -78,8 +78,8 @@ class MothersubcompanyrelationsController extends Controller
                     'm_company_id' => $request->input('m_company_id'),
                     's_company_id' => $request->input('s_company_id'),
                     'deal_percentage' => $request->input('deal_percentage'),
-                    'percent_created' => Util::mysqlDateTimeConverter($request->input('percent_created')),
-                    'percent_updated' => Util::mysqlDateTimeConverter($request->input('percent_updated'))
+                    'percent_created_at' => Util::mysqlDateTimeConverter($request->input('percent_created')),
+                    'percent_updated_at' => Util::mysqlDateTimeConverter($request->input('percent_updated'))
                 ];
             }
             DB::table('tbl_mother_sub_company_relation')
@@ -90,8 +90,8 @@ class MothersubcompanyrelationsController extends Controller
         {
             $validator = Validator::make($request->all(), 
                 [
-                    'm_company_id' => 'required_without:s_company_id|integer', 
-                    's_company_id' => 'required_without:m_company_id|integer',
+                    'm_company_id' => 'required_without:s_company_id|integer|nullable', 
+                    's_company_id' => 'required_without:m_company_id|integer|nullable',
                     'deal_percentage' => 'required|integer|max:100',
 
                     //More precisely below 2 fields can be called as Deal percent issue date and Deal percent update date
@@ -146,7 +146,8 @@ class MothersubcompanyrelationsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $motherSubCompanyRelation = Mothersubcompanyrelations::where('company_relation_id',$id)->first();
+        return view('msrelation.edit',compact('motherSubCompanyRelation','id'));
     }
 
     /**
