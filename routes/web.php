@@ -41,13 +41,14 @@ Route::group(['middleware' => 'auth'],function(){
     Route::put('subcompany','SubcompanyController@store');
 
     //Broker Company Routes
-    Route::get('brokercompany','BrokercompanyController@index');
+    Route::get('brokercompany','BrokercompanyController@index')->name('home');
     Route::get('brokercompany/create','BrokercompanyController@create');
-    Route::get('brokercompany/edit','BrokercompanyController@edit');
-    Route::get('brokercompany/delete','BrokercompanyController@delete');
+    Route::get('brokercompany/edit/{id}','BrokercompanyController@edit')->name('edit');
+    Route::post('brokercompany/update/{id}','BrokercompanyController@update')->name('update');
+    Route::delete('/delete/{id}',array('uses' => 'BrokercompanyController@destroy', 'as' => 'Del.route'));
     Route::get('brokercompany/{id}','BrokercompanyController@show');
     Route::post('brokercompany','BrokercompanyController@store');
-    Route::put('brokercompany','BrokercompanyController@store'); 
+    Route::put('brokercompany','BrokercompanyController@store')->name('store'); 
   
     //Mother and Sub Company Relation
     Route::get('msrelation','MothersubcompanyrelationsController@index');
@@ -56,6 +57,12 @@ Route::group(['middleware' => 'auth'],function(){
     Route::get('msrelation/{id}','MothersubcompanyrelationsController@show');
     Route::post('msrelation','MothersubcompanyrelationsController@store')->name('msrelation.store');
     Route::put('msrelation','MothersubcompanyrelationsController@store')->name('msrelation.update');
+
+    //Broker Company Relation
+    Route::get('brelation','BrokercompanyrelationsController@index');
+    Route::get('brelation/{id}','BrokercompanyrelationsController@show');
+    Route::post('brelation','BrokercompanyrelationsController@store');
+    Route::put('brelation','BrokercompanyrelationsController@store');
 
     //Customer data save Routes
     Route::get('customer','CustomerController@index');

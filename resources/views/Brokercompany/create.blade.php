@@ -2,22 +2,70 @@
 
 @section('content')
 
-     <form action="{{ action('BrokercompanyController@store') }}" method="post" class="form-horizontal" >
-         <h2>Enter Data</h2>
-          <div class="form-group">
-          {{ csrf_field() }}
-           <input type="text" name="company_id" placeholder="company_id"><br/>
-           <input type="text" name="company_name" placeholder="company_name"><br/>
-           <input type="text" name="feedback_day" placeholder="feedback"><br/>
-           <input type="text" name="company_email" placeholder="company_email"><br/>
-           <input type="text" name="company_address" placeholder="company_address"><br/>
-           <input type="text" name="company_pin" placeholder="company_pin"><br/>
-           <input type="text" name="company_city" placeholder="company_city"><br/>
-           <input type="text" name="company_state" placeholder="company_state"><br/>
-           <input type="text" name="company_country" placeholder="company_country"><br/>
-           <input type="text" name="company_gstinno" placeholder="company_gstinno"><br/>
-           <input class="btn btn-primary" type="submit" value="Submit">
-        
-         </div>
+
+ <form action="{{ action('BrokercompanyController@store') }}" method="post" class="form-horizontal" >
+     {{csrf_field()}}
+     <form>
+         <div class="panel panel-default">
+              <div class="panel-heading"><b>Create New Record</b></div>
+              </br>
+              <!-- // Form Body // -->
+
+              <div class="panel-body">
+                 <div class="form-group">
+                     <label for="company_name" class="col-sm-2 col-form-label">company_name</label>
+                     <input type="text" name="company_name" autocomplete="off" class="form-control-plaintext" id="company_name" placeholder="company_name">
+                 </div>
+                 <div class="form-group">
+                     <label for="feedback_day1" class="col-sm-2 col-form-label">feedback_day</label>
+                     <input type="text"  name="feedback_day" autocomplete="off" class="form-control-plaintext" id="feedback_day" placeholder="feedback_day">
+                 </div>
+                 <div class="form-group">
+                     <label for="company_email" class="col-sm-2 col-form-label">company_email</label>
+                     <input type="email" autocomplete="off" name="company_email" class="form-control-plaintext" id="company_email" placeholder="Enter email">
+                 </div>
+                 <div class="form-group">
+                     <label for="company_address" class="col-sm-2 col-form-label">company_address</label>
+                     <input type="text"  name="company_address" autocomplete="off" class="form-control-plaintext" id="company_address" placeholder="company_address">
+                 </div>
+                 <div class="form-group">
+                     <label for="company_pin" class="col-sm-2 col-form-label">company_pin</label>
+                     <input type="text"  name="company_pin"autocomplete="off" class="form-control-plaintext" id="company_piny" placeholder="company_pin">
+                 </div>
+                 <div class="form-group">
+                     <label for="company_city" class="col-sm-2 col-form-label">company_city</label>
+                     <input type="text" name="company_city" autocomplete="off" class="form-control-plaintext" id="company_city" placeholder="company_city">
+                 </div>
+                 <div class="form-group">
+                     <label for="select" class="col-sm-2 col-form-label">select State</label>
+                     <div class="col-sm-2">
+                         <select name='company_state'>
+                            @foreach ($state_data as $state)
+                               <option value="{{ $state->state_id }}">{{ $state->state_name }}</option>
+                            @endforeach
+                         </select>
+                         <br />
+                     </div>
+                     <label for="select" class="col-sm-2 col-form-label">Select Country</label>
+                     <div class="col-sm-2">
+                         <select name='company_country'>
+                            @foreach ( $country_data as $country)
+                               <option value="{{ $country->country_id }}">{{ $country->country_name }}</option>
+                            @endforeach
+                         </select>
+                         <br />
+                     </div>
+               </div>
+                  <div class="form-group">
+                      <label for="company_gstinno" class="col-sm-2 col-form-label">company_gstinno</label>
+                      <input type="text" name="company_gstinno" autocomplete="off" class="form-control-plaintext" id="company_gstinno" placeholder="company_gstinno">
+                  </div>
+
+                  <!-- //End of Form Body // -->
+                  <button type="submit" class="btn btn-primary">Create</button>
+                  <input type="button" class="btn btn-primary" value="Go back" onclick="history.back()">
+             </div>
+        </div>
      </form>
+ </form>
 @endsection
