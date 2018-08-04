@@ -45,7 +45,7 @@ Route::group(['middleware' => 'auth'],function(){
     Route::get('brokercompany/create','BrokercompanyController@create');
     Route::get('brokercompany/edit/{id}','BrokercompanyController@edit')->name('edit');
     Route::post('brokercompany/update/{id}','BrokercompanyController@update')->name('update');
-    Route::delete('/delete/{id}',array('uses' => 'BrokercompanyController@destroy', 'as' => 'Del.route'));
+    Route::delete('brokercompany/delete/{id}',array('uses' => 'BrokercompanyController@destroy', 'as' => 'Del.route'));
     Route::get('brokercompany/{id}','BrokercompanyController@show');
     Route::post('brokercompany','BrokercompanyController@store');
     Route::put('brokercompany','BrokercompanyController@store')->name('store'); 

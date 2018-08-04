@@ -10,7 +10,7 @@
         <input name="_method" type="hidden" value="put">
         <input name="relation_id" type="hidden" value="{{$id}}">
     
-        {{-- <div class="form-group{{ $errors->has('s_company_id') ? ' has-error' : '' }}">
+        <div class="form-group{{ $errors->has('s_company_id') ? ' has-error' : '' }}">
             <label for="s_company_id" class="col-md-4 control-label">Sub Company</label>
 
             <div class="col-md-6">
@@ -19,6 +19,11 @@
                     <option value = "">-Please Select One-</option>
                 @foreach ($subcompanylist as $subcompany)
                     <option value="{{ $subcompany->s_company_id }}">{{ $subcompany->s_company_name }}</option>
+                    @if ($subcompany->s_company_id == $motherSubCompanyRelation->s_company_id)
+                        <option value="{{ $subcompany->s_company_id }}" selected>{{ $subcompany->s_company_name }}</option>
+                    @else
+                        <option value="{{ $subcompany->s_company_id }}">{{ $subcompany->s_company_name }}</option>
+                    @endif
                 @endforeach
                 </select>
             </div>
@@ -32,13 +37,17 @@
                 <select id="m_company_id" class="form-control" name="m_company_id" autofocus>
                     <option value = "">-Please Select One-</option>
                 @foreach ($mothercompanylist as $mothercompany)
-                    <option value="{{ $mothercompany->m_company_id }}">{{ $mothercompany->m_company_name }}</option>
+                    @if ($mothercompany->m_company_id == $motherSubCompanyRelation->m_company_id)
+                        <option value="{{ $mothercompany->m_company_id }}" selected>{{ $mothercompany->m_company_name }}</option>
+                    @else
+                        <option value="{{ $mothercompany->m_company_id }}">{{ $mothercompany->m_company_name }}</option>
+                    @endif
                 @endforeach
                 </select>
             </div>
-        </div> --}}
+        </div>
 
-        <div class="form-group{{ $errors->has('m_company_id') ? ' has-error' : '' }}">
+        {{-- <div class="form-group{{ $errors->has('m_company_id') ? ' has-error' : '' }}">
             <label for="m_company_id" class="col-md-4 control-label">Mother Company ID</label>
 
             <div class="col-md-6">
@@ -64,13 +73,13 @@
                     </span>
                 @endif
             </div>
-        </div>
+        </div> --}}
         
         <div class="form-group{{ $errors->has('deal_percentage') ? ' has-error' : '' }}">
             <label for="deal_percentage" class="col-md-4 control-label">Deal Percent</label>
 
             <div class="col-md-6">
-                <input id="deal_percentage" type="text" class="form-control" name="deal_percentage" value="{{ old('deal_percentage') }}" required autofocus>
+                <input id="deal_percentage" type="text" class="form-control" name="deal_percentage" value="{{ $motherSubCompanyRelation->deal_percentage }}" required autofocus>
 
                 @if ($errors->has('deal_percentage'))
                     <span class="help-block">
@@ -84,14 +93,18 @@
             <label for="percent_created" class="col-md-4 control-label">Percent Creation Date</label>
     
             <div class="col-md-6">
-                <input id="percent_created" type="date" class="form-control" name="percent_created" value="{{ old('percent_created') }}" required autofocus>
+                <input id="percent_created" type="date" class="form-control" name="percent_created" value="{{ date("Y-m-d",strtotime($motherSubCompanyRelation->percent_created_at)) }}" required autofocus>
             </div>
         </div>
     
         <div class="form-group{{ $errors->has('percent_updated') ? ' has-error' : '' }}">
             <label for="percent_updated" class="col-md-4 control-label">Percent Updation Date</label>
             <div class="col-md-6">
-                <input id="percent_updated" type="date" class="form-control" name="percent_updated" value="{{ old('percent_updated') }}" autofocus>
+                @if (!empty($motherSubCompanyRelation->percent_updated_at))
+                    <input id="percent_updated" type="date" class="form-control" name="percent_updated" value="{{ date("Y-m-d",strtotime($motherSubCompanyRelation->percent_updated_at)) }}" autofocus>
+                @else
+                    <input id="percent_updated" type="date" class="form-control" name="percent_updated" autofocus>
+                @endif
             </div>
         </div>
     

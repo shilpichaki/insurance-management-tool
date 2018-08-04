@@ -7,7 +7,7 @@
 
         {{ csrf_field() }}
     
-        {{-- <div class="form-group{{ $errors->has('s_company_id') ? ' has-error' : '' }}">
+        <div class="form-group{{ $errors->has('s_company_id') ? ' has-error' : '' }}">
             <label for="s_company_id" class="col-md-4 control-label">Sub Company</label>
 
             <div class="col-md-6">
@@ -33,9 +33,9 @@
                 @endforeach
                 </select>
             </div>
-        </div> --}}
+        </div>
 
-        <div class="form-group{{ $errors->has('m_company_id') ? ' has-error' : '' }}">
+        {{-- <div class="form-group{{ $errors->has('m_company_id') ? ' has-error' : '' }}">
             <label for="m_company_id" class="col-md-4 control-label">Mother Company ID</label>
 
             <div class="col-md-6">
@@ -61,7 +61,7 @@
                     </span>
                 @endif
             </div>
-        </div>
+        </div> --}}
         
         <div class="form-group{{ $errors->has('deal_percentage') ? ' has-error' : '' }}">
             <label for="deal_percentage" class="col-md-4 control-label">Deal Percent</label>

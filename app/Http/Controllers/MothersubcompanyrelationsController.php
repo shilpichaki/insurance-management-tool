@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mothersubcompanyrelations;
+// use App\Mothercompany;
+// use App\Subcompany;
 use Validator;
 use DB;
 
@@ -29,7 +31,9 @@ class MothersubcompanyrelationsController extends Controller
      */
     public function create()
     {
-        return view('msrelation.create');
+        $mothercompanylist = DB::select("select m_company_id,m_company_name from tbl_mother_company_mast");
+        $subcompanylist = DB::select("select s_company_id,s_company_name from tbl_sub_company_mast");
+        return view('msrelation.create',compact('mothercompanylist','subcompanylist'));
     }
 
     /**
@@ -103,6 +107,25 @@ class MothersubcompanyrelationsController extends Controller
             if ($validator->fails()) {
                 return response()->json(['error' => $validator->errors()->getMessages()], 401);
             }
+
+            if(empty($request->input('s_company_id')))
+            {
+                $relationAlreadyExists = DB::select("select company_relation_id from tbl_mother_sub_company_relation where m_company_id = ?",[$request->input('m_company_id')]);
+                if(!empty($relationAlreadyExists))
+                {
+                    return $relationAlreadyExists;
+                }
+
+            }
+            else
+            {
+                $relationAlreadyExists = DB::select("select company_relation_id from tbl_mother_sub_company_relation where m_company_id = ? and s_company_id = ?",[$request->input('m_company_id'),$request->input('s_company_id')]);
+                if(!empty($relationAlreadyExists))
+                {
+                    return $relationAlreadyExists;
+                }
+            }
+
             //Getting the general values
             $mothersubcompanyrelations->company_relation_id = Mothersubcompanyrelations::max('company_relation_id') + 1;
             $mothersubcompanyrelations->m_company_id = $request->input('m_company_id');
@@ -146,8 +169,12 @@ class MothersubcompanyrelationsController extends Controller
      */
     public function edit($id)
     {
+        // $motherCompanyList = Mothercompany::all()->toArray();
+        // $subCompanyList = Subcompany::all()->toArray();
+        $mothercompanylist = DB::select("select m_company_id,m_company_name from tbl_mother_company_mast");
+        $subcompanylist = DB::select("select s_company_id,s_company_name from tbl_sub_company_mast");
         $motherSubCompanyRelation = Mothersubcompanyrelations::where('company_relation_id',$id)->first();
-        return view('msrelation.edit',compact('motherSubCompanyRelation','id'));
+        return view('msrelation.edit',compact('mothercompanylist','subcompanylist','motherSubCompanyRelation','id'));
     }
 
     /**
