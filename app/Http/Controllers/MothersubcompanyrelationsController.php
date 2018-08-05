@@ -64,6 +64,24 @@ class MothersubcompanyrelationsController extends Controller
             if ($validator->fails()) {
                 return response()->json(['error' => $validator->errors()->getMessages()], 401);
             }
+
+            if(empty($request->input('s_company_id')))
+            {
+                $relationAlreadyExists = DB::select("select company_relation_id from tbl_mother_sub_company_relation where m_company_id = ?",[$request->input('m_company_id')]);
+                if(!empty($relationAlreadyExists))
+                {
+                    return $relationAlreadyExists;
+                }
+
+            }
+            else
+            {
+                $relationAlreadyExists = DB::select("select company_relation_id from tbl_mother_sub_company_relation where m_company_id = ? and s_company_id = ?",[$request->input('m_company_id'),$request->input('s_company_id')]);
+                if(!empty($relationAlreadyExists))
+                {
+                    return $relationAlreadyExists;
+                }
+            }
             
             $mothersubcompanyrelations->company_relation_id = $request->input('relation_id');
             
@@ -108,6 +126,7 @@ class MothersubcompanyrelationsController extends Controller
                 return response()->json(['error' => $validator->errors()->getMessages()], 401);
             }
 
+            //Validating if there is any duplicate relation or not
             if(empty($request->input('s_company_id')))
             {
                 $relationAlreadyExists = DB::select("select company_relation_id from tbl_mother_sub_company_relation where m_company_id = ?",[$request->input('m_company_id')]);
