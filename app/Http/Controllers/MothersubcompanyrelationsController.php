@@ -21,7 +21,7 @@ class MothersubcompanyrelationsController extends Controller
     public function index()
     {
         $motherSubCompanyRelation = Mothersubcompanyrelations::all()->toArray();
-        return $motherSubCompanyRelation;
+        return view('msrelation.index',compact('motherSubCompanyRelation'));
     }
 
     /**
