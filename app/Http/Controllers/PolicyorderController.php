@@ -16,8 +16,8 @@ class PolicyorderController extends Controller
      */
     public function index()
     {
-        $policyOrder = PolicyOrder::all()->toArray();
-        return $policyOrder;
+        $policyOrder = PolicyOrder::all();
+        return view('policyorder.index')->with(['policyOrders' => $policyOrder]);
     }
 
     /**

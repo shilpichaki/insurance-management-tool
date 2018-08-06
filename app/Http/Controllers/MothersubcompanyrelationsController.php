@@ -20,8 +20,8 @@ class MothersubcompanyrelationsController extends Controller
      */
     public function index()
     {
-        $motherSubCompanyRelation = Mothersubcompanyrelations::all()->toArray();
-        return view('msrelation.index',compact('motherSubCompanyRelation'));
+        $motherSubCompanyRelation = Mothersubcompanyrelations::all();
+        return view('msrelation.index')->with(['motherSubCompanyRelation' => $motherSubCompanyRelation]);
     }
 
     /**
@@ -70,7 +70,10 @@ class MothersubcompanyrelationsController extends Controller
                 $relationAlreadyExists = DB::select("select company_relation_id from tbl_mother_sub_company_relation where m_company_id = ?",[$request->input('m_company_id')]);
                 if(!empty($relationAlreadyExists))
                 {
-                    return $relationAlreadyExists;
+                    if($relationAlreadyExists[0]->company_relation_id != $request->input('relation_id'))
+                    {
+                        return $request->input('relation_id');
+                    }
                 }
 
             }
@@ -79,7 +82,10 @@ class MothersubcompanyrelationsController extends Controller
                 $relationAlreadyExists = DB::select("select company_relation_id from tbl_mother_sub_company_relation where m_company_id = ? and s_company_id = ?",[$request->input('m_company_id'),$request->input('s_company_id')]);
                 if(!empty($relationAlreadyExists))
                 {
-                    return $relationAlreadyExists;
+                    if($relationAlreadyExists[0]->company_relation_id != $request->input('relation_id'))
+                    {
+                        return $request->input('relation_id');
+                    }
                 }
             }
             
@@ -104,9 +110,14 @@ class MothersubcompanyrelationsController extends Controller
                     'percent_updated_at' => Util::mysqlDateTimeConverter($request->input('percent_updated'))
                 ];
             }
-            DB::table('tbl_mother_sub_company_relation')
+            $returnData = DB::table('tbl_mother_sub_company_relation')
             ->where('company_relation_id', $request->input('relation_id'))
             ->update($array_requested);
+
+            if($returnData)
+            {
+                return redirect('/msrelation')->with('success', 'Realation has been updated!!');
+            }
         }
         else
         {
@@ -158,7 +169,7 @@ class MothersubcompanyrelationsController extends Controller
             //Saving the model
             if($mothersubcompanyrelations->save())
             {
-                return $mothersubcompanyrelations;
+                return redirect('/msrelation')->with('success', 'Realation has been created!!');
             }
             else
             {

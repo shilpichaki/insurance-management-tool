@@ -4,7 +4,7 @@
 <div class="row">
    <div class="col-md-12">
       <div class="panel panel-default">
-          <div class="panel-heading"><b>Mother Sub Company Details</b></div>
+          <div class="panel-heading"><b>Policy Order Details</b></div>
           <div class="panel-body">
              @if($message = Session::get('success'))
                 <div class="alert alert-success">
@@ -12,7 +12,7 @@
                </div>
              @endif
             <div>
-               <a href="msrelation/create" class="btn btn-primary">Create New</a>
+               <a href="policyorder/create" class="btn btn-primary">Create New</a>
                <br />
                <br />
                <br/>

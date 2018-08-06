@@ -57,7 +57,17 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->employee->emp_first_name }} 
+
+                                    @if(Auth::user()->employee->emp_middle_name != "")
+                                        {{" " . Auth::user()->employee->emp_middle_name}}
+                                    @endif
+
+                                    @if(Auth::user()->employee->emp_last_name != "")
+                                        {{" " . Auth::user()->employee->emp_last_name}}
+                                    @endif
+
+                                    <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">

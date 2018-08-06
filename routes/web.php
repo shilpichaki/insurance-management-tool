@@ -84,9 +84,11 @@ Route::group(['middleware' => 'auth'],function(){
 
     //Policy Order Routes 
     Route::get('policyorder','PolicyorderController@index');
+    Route::get('policyorder/create','PolicyorderController@create');
+    Route::get('policyorder/edit/{id}','PolicyorderController@edit');
     Route::get('policyorder/{id}','PolicyorderController@show');
-    Route::post('policyorder','PolicyorderController@store');
-    Route::put('policyorder','PolicyorderController@store');
+    Route::post('policyorder','PolicyorderController@store')->name('policyorder.store');
+    Route::put('policyorder','PolicyorderController@store')->name('policyorder.update');
 
     //Order statementRoutes
     Route::get('orderstatement/create','OrderStatementController@create')->name('orderstatement.create');

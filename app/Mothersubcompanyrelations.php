@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Mothersubcompanyrelations extends Model
 {
     Protected $table = "tbl_mother_sub_company_relation";
+    public $primaryKey = "company_relation_id";
     public $timestamps = true;
 
     public function motherCompany()
