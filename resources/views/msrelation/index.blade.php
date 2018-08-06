@@ -37,8 +37,10 @@
                  <tbody>
                    @foreach($motherSubCompanyRelation as $relation)<!--//Fetch Records to show ///-->
                      <tr>
-                        <td align="center">{{$relation->motherCompany->m_company_name}}</td>
-                        <td align="center">{{$relation->subCompany->s_company_name}}</td>
+                        {{-- <td align="center">{{$relation->motherCompany->m_company_name}}</td>
+                        <td align="center">{{$relation->subCompany->s_company_name}}</td> --}}
+                        <td align="center">{{$relation['m_company_id']}}</td>
+                        <td align="center">{{$relation['s_company_id']}}</td>
                         <td align="center">{{$relation['deal_percentage']}}</td>
                         <td align="center">{{$relation['percent_created_at']}}</td>
                         <td align="center">{{$relation['percent_updated_at']}}</td>
