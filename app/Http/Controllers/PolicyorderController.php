@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\PolicyOrder;
 use Validator;
 use App\Util;
+use DB;
 
 class PolicyorderController extends Controller
 {
@@ -27,7 +28,10 @@ class PolicyorderController extends Controller
      */
     public function create()
     {
-        //
+        $policyMaster = DB::select("select policy_id,policy_name from tbl_policy_mast");
+        $nomineeRelationMaster = DB::select("select relation_code,relation_name from tbl_family_relation_mast");
+        $policyStatusMaster = DB::select("select policy_status_id,policy_status_name from tbl_policy_status");
+        return view('policyorder.create')->with(['policyMaster' => $policyMaster, 'nomineeRelationMaster' => $nomineeRelationMaster, 'policyStatusMaster' => $policyStatusMaster]);
     }
 
     /**
@@ -49,8 +53,8 @@ class PolicyorderController extends Controller
                     'application_no' => 'required|string',
                     'customer_id' => 'required|integer',
                     'case_taker_type' => 'string|required',
-                    'd_case_taker_id' => 'required_without:i_case_taker_id|string',
-                    'i_case_taker_id' => 'required_without:d_case_taker_id|integer',
+                    'd_case_taker_id' => 'required_without:i_case_taker_id|string|nullable',
+                    'i_case_taker_id' => 'required_without:d_case_taker_id|integer|nullable',
                     'policy_id' => 'integer|required',
                     'amount' => 'required|regex:/^\d{1,18}(\.\d{1,2})?$/',
                     'payment_mode' => 'string|required',
@@ -60,8 +64,8 @@ class PolicyorderController extends Controller
                     'nominee_dob' => 'required|string',
                     'nominee_relation_id' => 'required|integer',
                     'handover_to_company_type' => 'required|string',
-                    'handover_to_mother_company_id' => 'required_without:handover_to_sub_company_id|integer',
-                    'handover_to_sub_company_id' => 'required_without:handover_to_mother_company_id|integer',
+                    'handover_to_mother_company_id' => 'required_without:handover_to_sub_company_id|integer|nullable',
+                    'handover_to_sub_company_id' => 'required_without:handover_to_mother_company_id|integer|nullable',
                     'handover_date' => 'string',
                     'plvc' => 'integer',
                     'policy_status_id' => 'integer|required',
@@ -82,8 +86,8 @@ class PolicyorderController extends Controller
                     'application_no' => 'required|string',
                     'customer_id' => 'required|integer',
                     'case_taker_type' => 'string|required',
-                    'd_case_taker_id' => 'required_without:i_case_taker_id|string',
-                    'i_case_taker_id' => 'required_without:d_case_taker_id|integer',
+                    'd_case_taker_id' => 'required_without:i_case_taker_id|string|nullable',
+                    'i_case_taker_id' => 'required_without:d_case_taker_id|integer|nullable',
                     'policy_id' => 'integer|required',
                     'amount' => 'required|regex:/^\d{1,18}(\.\d{1,2})?$/',
                     'payment_mode' => 'string|required',
@@ -93,8 +97,8 @@ class PolicyorderController extends Controller
                     'nominee_dob' => 'required|string',
                     'nominee_relation_id' => 'required|integer',
                     'handover_to_company_type' => 'required|string',
-                    'handover_to_mother_company_id' => 'required_without:handover_to_sub_company_id|integer',
-                    'handover_to_sub_company_id' => 'required_without:handover_to_mother_company_id|integer',
+                    'handover_to_mother_company_id' => 'required_without:handover_to_sub_company_id|integer|nullable',
+                    'handover_to_sub_company_id' => 'required_without:handover_to_mother_company_id|integer|nullable',
                     'handover_date' => 'string',
                     'plvc' => 'integer',
                     'policy_status_id' => 'integer|required',
