@@ -33,22 +33,24 @@
                      <input type="text"  name="company_pin"autocomplete="off" class="form-control-plaintext" id="company_piny" placeholder="company_pin">
                  </div>
                  <div class="form-group">
-                     <label for="company_city" class="col-sm-2 col-form-label">company_city</label>
+                     <label for="company_city" class="col-sm-2 col-form-label" >company_city</label>
                      <input type="text" name="company_city" autocomplete="off" class="form-control-plaintext" id="company_city" placeholder="company_city">
                  </div>
                  <div class="form-group">
-                     <label for="select" class="col-sm-2 col-form-label">select State</label>
+                     <label for="select" class="col-sm-2 col-form-label" id="select_state">select State</label>
                      <div class="col-sm-2">
                          <select name='company_state'>
+                         <option value = "">-Please Select One-</option>
                             @foreach ($state_data as $state)
                                <option value="{{ $state->state_id }}">{{ $state->state_name }}</option>
                             @endforeach
                          </select>
                          <br />
                      </div>
-                     <label for="select" class="col-sm-2 col-form-label">Select Country</label>
+                     <label for="select" class="col-sm-2 col-form-label" id="select_country"> Select Country</label>
                      <div class="col-sm-2">
                          <select name='company_country'>
+                         <option value = "">-Please Select One-</option>
                             @foreach ( $country_data as $country)
                                <option value="{{ $country->country_id }}">{{ $country->country_name }}</option>
                             @endforeach

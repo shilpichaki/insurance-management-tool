@@ -3,42 +3,49 @@
 @section('content')
 
   <div class="panel panel-default">
+
      <div class="panel-heading"><b>Update Details</b></div>
-        </br>
+
         <!-- // Form Body // -->
-
         <div class="panel-body">
-            <form  class="form-horizontal"  action="{{ route('store') }}" method="post">
-            {{csrf_field()}}
-                {{csrf_field()}}
-                <fieldset>
-
-              <div class="form-group">
-                  <label for="company_name" class="col-sm-2 col-form-label">company_name</label>
-                  <input type="text" name="company_name" class="form-control-plaintext" id="company_name" value ="{{$brokercompany->b_company_name}}">
+             <form method="post" action="{{ route('update' , $brokercompany->b_company_id)}}" > 
+            {{ csrf_field()}}
+            <input type="hidden"  name='_method' value="PUT">       
+               
+              <fieldset>
+              
+                  <div class="form-group">
+                        <label for="company_name" class="col-sm-2 col-form-label">company_name</label>
+                        <input type="text" name="company_name" class="form-control-plaintext" id="company_name" value ="{{$brokercompany->b_company_name}}">
                   </div>
+
                   <div class="form-group">
                      <label for="feedback_day1" class="col-sm-2 col-form-label">feedback_day</label>
                      <input type="text"  name="feedback_day" class="form-control-plaintext" id="feedback_day" value ="{{$brokercompany->b_avg_feedback_day}}" >
                   </div>
+
                   <div class="form-group">
                      <label for="company_email" class="col-sm-2 col-form-label">company_email</label>
                      <input type="email"  name="company_email" class="form-control-plaintext" id="company_email" value ="{{$brokercompany->b_company_email }}">
                   </div>
+
                   <div class="form-group">
                      <label for="company_address" class="col-sm-2 col-form-label">company_address</label>
                      <input type="text"  name="company_address" class="form-control-plaintext" id="company_address" value ="{{$brokercompany->b_company_address}}">
                   </div>
+
                   <div class="form-group">
                      <label for="company_pin" class="col-sm-2 col-form-label">company_pin</label>
                      <input type="text"  name="company_pin"  class="form-control-plaintext" id="company_pin" value ="{{$brokercompany->b_company_pin}}">
                   </div>
+
                   <div class="form-group">
                      <label for="company_city" class="col-sm-2 col-form-label">company_city</label>
                      <input type="text" name="company_city" class="form-control-plaintext" id="company_city" value ="{{$brokercompany->b_company_city}}">
                   </div>
+
                   <div class="form-group"><!-- /// Select Dynamically states and country /// -->
-                     <label for="select" class="col-sm-2 col-form-label">select State</label>
+                     <label for="select" class="col-sm-2 col-form-label" id="select_state" autofocus>select State</label>
                      <div class="col-sm-2">
                          <select name='company_state'>
                             @foreach ($state_data as $state)
@@ -47,7 +54,7 @@
                          </select>
                          <br />
                      </div>
-                     <label for="select" class="col-sm-2 col-form-label">Select Country</label>
+                     <label for="select" class="col-sm-2 col-form-label"  id="select_country" autofocus>Select Country</label>
                      <div class="col-sm-2">
                          <select name='company_country'>
                             @foreach ( $country_data as $country)
@@ -56,6 +63,7 @@
                          </select>
                          <br />
                      </div>
+
                    </div> <br /><br /> <!-- /// End Dynamically states and country /// -->
                    <div class="form-group">
                       <label for="company_gstinno" class="col-sm-2 col-form-label">company_gstinno</label>
@@ -65,10 +73,11 @@
                   <!-- //End of Form Body // -->
                   <button type="submit" class="btn btn-primary">Update</button>
                   <input type="button" class="btn btn-primary" value="Cancel" onclick="history.back('')">
-             </div>
-             </fieldset>
-          </form>
+             </fielset>
+         </form>
+
        </div>
+
  </div>  
 
 @endsection

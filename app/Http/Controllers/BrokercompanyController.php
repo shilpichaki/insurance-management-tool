@@ -48,45 +48,7 @@ class BrokercompanyController extends Controller
         $state_data =DB::table('states')->select('state_id','state_name')->get();
         return view('Brokercompany.edit',compact('brokercompany','id','state_data','country_data'));
     }
-   
-    /**
-     * Show the form for updating the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
-     public function update(Request $request, $id)
-     { 
-          $this->validate($request,[
-             'company_id' => 'required|integer', 
-             'company_name' => 'required', 
-             'feedback_day' => 'integer|nullable',
-             'company_email' => 'string|email|max:100|nullable',
-             'company_address' => 'required|string',
-             'company_pin' => 'required|string|min:5',
-             'company_city' => 'required',
-             'company_state' => 'required|integer',
-             'company_country' => 'required|integer',
-             'company_gstinno' => 'string|nullable'
-          ]);
-         
-          $brokercompany = Brokercompany::find($id);
-          $brokercompany->b_company_id = $request->company_id;
-          $brokercompany->b_company_name = $request->company_name;
-          $brokercompany->b_avg_feedback_day = $request->feedback_day;
-          $brokercompany->b_company_email = $request->company_email;
-          $brokercompany->b_company_address = $request->company_address;
-          $brokercompany->b_company_pin = $request->company_pin;
-          $brokercompany->b_company_city = $request->company_city;
-          $brokercompany->b_company_state = $request->company_state;
-          $brokercompany->b_company_country = $request->company_country;
-          $brokercompany->b_company_GSTIN = $request->company_gstinno;
-          $brokercompany->save();
-          return redirect(route('home'))->with('success','update successfull');
-     }
-
-    /**
+   /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -156,6 +118,26 @@ class BrokercompanyController extends Controller
         {
             return new BrokercompanyResource($brokercompany);
         }
+    }
+
+    public function update(Request $request, $id)
+    {
+        $brokercompany = Brokercompany::find($id);
+
+        $brokercompany->b_company_name = $request->company_name;
+        $brokercompany->b_avg_feedback_day = $request->feedback_day;
+        $brokercompany->b_company_email = $request->company_email;
+        $brokercompany->b_company_address = $request->company_address;
+        $brokercompany->b_company_pin = $request->company_pin;
+        $brokercompany->b_company_city = $request->company_city;
+        $brokercompany->b_company_state = $request->company_state;
+        $brokercompany->b_company_country = $request->company_country;
+        $brokercompany->b_company_GSTIN = $request->company_gstinno;
+
+        $brokercompany->save();
+        return redirect()->route('home');
+        
+
     }
 
     /**
