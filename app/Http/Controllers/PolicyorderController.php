@@ -162,7 +162,12 @@ class PolicyorderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $policyMaster = DB::select("select policy_id,policy_name from tbl_policy_mast");
+        $nomineeRelationMaster = DB::select("select relation_code,relation_name from tbl_family_relation_mast");
+        $policyStatusMaster = DB::select("select policy_status_id,policy_status_name from tbl_policy_status");
+        $policyOrder = PolicyOrder::where('order_id',$id)->first();
+
+        return view('policyorder.edit')->with(['policyMaster' => $policyMaster, 'nomineeRelationMaster' => $nomineeRelationMaster, 'policyStatusMaster' => $policyStatusMaster, 'policyOrder' => $policyOrder]);
     }
 
     /**
