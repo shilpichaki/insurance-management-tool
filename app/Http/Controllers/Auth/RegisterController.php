@@ -98,4 +98,10 @@ class RegisterController extends Controller
 
         return User::create($user_input);
     }
+
+    public function showRegistrationForm()
+    {
+        // return "Stay Here!";
+        return view("auth.register");
+    }
 }

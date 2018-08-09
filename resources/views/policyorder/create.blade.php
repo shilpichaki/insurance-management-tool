@@ -40,7 +40,7 @@
             <label for="order_date" class="col-md-4 control-label">Order Date</label>
 
             <div class="col-md-6">
-                <input id="order_date" type="text" class="form-control" name="order_date" value="{{ old('order_date') }}" autofocus>
+                <input id="order_date" type="date" class="form-control" name="order_date" value="{{ old('order_date') }}" autofocus>
 
                 @if ($errors->has('order_date'))
                     <span class="help-block">
@@ -113,8 +113,12 @@
             <label for="i_case_taker_id" class="col-md-4 control-label">Broker Company ID</label>
 
             <div class="col-md-6">
-                <input id="i_case_taker_id" type="text" class="form-control" name="i_case_taker_id" value="{{ old('i_case_taker_id') }}" autofocus>
-
+                <select id="i_case_taker_id" class="form-control" name="i_case_taker_id" autofocus>
+                    <option value = "">-Please Select One-</option>
+                @foreach ($brokercompanylist as $brokercompany)
+                    <option value="{{ $brokercompany->b_company_id }}">{{ $brokercompany->b_company_name }}</option>
+                @endforeach
+                </select>
                 @if ($errors->has('i_case_taker_id'))
                     <span class="help-block">
                         <strong>{{ $errors->first('i_case_taker_id') }}</strong>
@@ -193,7 +197,7 @@
             <label for="instrument_date" class="col-md-4 control-label">Instrument Date</label>
 
             <div class="col-md-6">
-                <input id="instrument_date" type="text" class="form-control" name="instrument_date" value="{{ old('instrument_date') }}" autofocus>
+                <input id="instrument_date" type="date" class="form-control" name="instrument_date" value="{{ old('instrument_date') }}" autofocus>
 
                 @if ($errors->has('instrument_date'))
                     <span class="help-block">
@@ -221,7 +225,7 @@
             <label for="nominee_dob" class="col-md-4 control-label">Nominee DOB</label>
 
             <div class="col-md-6">
-                <input id="nominee_dob" type="text" class="form-control" name="nominee_dob" value="{{ old('nominee_dob') }}" autofocus>
+                <input id="nominee_dob" type="date" class="form-control" name="nominee_dob" value="{{ old('nominee_dob') }}" autofocus>
 
                 @if ($errors->has('nominee_dob'))
                     <span class="help-block">
@@ -269,10 +273,15 @@
         </div>
 
         <div class="form-group{{ $errors->has('handover_to_mother_company_id') ? ' has-error' : '' }}">
-            <label for="handover_to_mother_company_id" class="col-md-4 control-label">Handover To Company</label>
+            <label for="handover_to_mother_company_id" class="col-md-4 control-label">Mother Company Name</label>
 
             <div class="col-md-6">
-                <input id="handover_to_mother_company_id" type="text" class="form-control" name="handover_to_mother_company_id" value="{{ old('handover_to_mother_company_id') }}" autofocus>
+                <select id="handover_to_mother_company_id" class="form-control" name="handover_to_mother_company_id" autofocus>
+                    <option value = "">-Please Select One-</option>
+                @foreach ($mothercompanylist as $mothercompany)
+                    <option value="{{ $mothercompany->m_company_id }}">{{ $mothercompany->m_company_name }}</option>
+                @endforeach
+                </select>
 
                 @if ($errors->has('handover_to_mother_company_id'))
                     <span class="help-block">
@@ -283,10 +292,15 @@
         </div>
 
         <div class="form-group{{ $errors->has('handover_to_sub_company_id') ? ' has-error' : '' }}">
-            <label for="handover_to_sub_company_id" class="col-md-4 control-label">Handover To Company</label>
+            <label for="handover_to_sub_company_id" class="col-md-4 control-label">Sub Company Name</label>
 
             <div class="col-md-6">
-                <input id="handover_to_sub_company_id" type="text" class="form-control" name="handover_to_sub_company_id" value="{{ old('handover_to_sub_company_id') }}" autofocus>
+                <select id="handover_to_sub_company_id" class="form-control" name="handover_to_sub_company_id" autofocus>
+                    <option value = "">-Please Select One-</option>
+                @foreach ($subcompanylist as $subcompany)
+                    <option value="{{ $subcompany->s_company_id }}">{{ $subcompany->s_company_name }}</option>
+                @endforeach
+                </select>
 
                 @if ($errors->has('handover_to_sub_company_id'))
                     <span class="help-block">
@@ -300,7 +314,7 @@
             <label for="handover_date" class="col-md-4 control-label">Handover Date</label>
 
             <div class="col-md-6">
-                <input id="handover_date" type="text" class="form-control" name="handover_date" value="{{ old('handover_date') }}" autofocus>
+                <input id="handover_date" type="date" class="form-control" name="handover_date" value="{{ old('handover_date') }}" autofocus>
 
                 @if ($errors->has('handover_date'))
                     <span class="help-block">
@@ -367,7 +381,7 @@
             <label for="issuence_date" class="col-md-4 control-label">Issuence Date</label>
 
             <div class="col-md-6">
-                <input id="issuence_date" type="text" class="form-control" name="issuence_date" value="{{ old('issuence_date') }}" autofocus>
+                <input id="issuence_date" type="date" class="form-control" name="issuence_date" value="{{ old('issuence_date') }}" autofocus>
 
                 @if ($errors->has('issuence_date'))
                     <span class="help-block">

@@ -28,10 +28,14 @@ class PolicyorderController extends Controller
      */
     public function create()
     {
+        $mothercompanylist = DB::select("select m_company_id,m_company_name from tbl_mother_company_mast");
+        $subcompanylist = DB::select("select s_company_id,s_company_name from tbl_sub_company_mast");
+        $brokercompanylist = DB::select("select b_company_id,b_company_name from tbl_broker_company_mast");
         $policyMaster = DB::select("select policy_id,policy_name from tbl_policy_mast");
         $nomineeRelationMaster = DB::select("select relation_code,relation_name from tbl_family_relation_mast");
         $policyStatusMaster = DB::select("select policy_status_id,policy_status_name from tbl_policy_status");
-        return view('policyorder.create')->with(['policyMaster' => $policyMaster, 'nomineeRelationMaster' => $nomineeRelationMaster, 'policyStatusMaster' => $policyStatusMaster]);
+
+        return view('policyorder.create')->with(['policyMaster' => $policyMaster, 'nomineeRelationMaster' => $nomineeRelationMaster, 'policyStatusMaster' => $policyStatusMaster, 'mothercompanylist' => $mothercompanylist, 'subcompanylist' => $subcompanylist, 'brokercompanylist' => $brokercompanylist]);
     }
 
     /**
@@ -162,12 +166,15 @@ class PolicyorderController extends Controller
      */
     public function edit($id)
     {
+        $mothercompanylist = DB::select("select m_company_id,m_company_name from tbl_mother_company_mast");
+        $subcompanylist = DB::select("select s_company_id,s_company_name from tbl_sub_company_mast");
+        $brokercompanylist = DB::select("select b_company_id,b_company_name from tbl_broker_company_mast");
         $policyMaster = DB::select("select policy_id,policy_name from tbl_policy_mast");
         $nomineeRelationMaster = DB::select("select relation_code,relation_name from tbl_family_relation_mast");
         $policyStatusMaster = DB::select("select policy_status_id,policy_status_name from tbl_policy_status");
         $policyOrder = PolicyOrder::where('order_id',$id)->first();
 
-        return view('policyorder.edit')->with(['policyMaster' => $policyMaster, 'nomineeRelationMaster' => $nomineeRelationMaster, 'policyStatusMaster' => $policyStatusMaster, 'policyOrder' => $policyOrder]);
+        return view('policyorder.edit')->with(['id'=> $id,'policyMaster' => $policyMaster, 'nomineeRelationMaster' => $nomineeRelationMaster, 'policyStatusMaster' => $policyStatusMaster, 'policyOrder' => $policyOrder, 'mothercompanylist' => $mothercompanylist, 'subcompanylist' => $subcompanylist, 'brokercompanylist' => $brokercompanylist]);
     }
 
     /**

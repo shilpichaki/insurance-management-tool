@@ -43,7 +43,7 @@
                             <label for="emp_middle_name" class="col-md-4 control-label">Middle Name</label>
 
                             <div class="col-md-6">
-                                <input id="emp_middle_name" type="text" class="form-control" name="emp_middle_name" value="{{ old('emp_middle_name') }}" required autofocus>
+                                <input id="emp_middle_name" type="text" class="form-control" name="emp_middle_name" value="{{ old('emp_middle_name') }}" autofocus>
 
                                 @if ($errors->has('emp_middle_name'))
                                     <span class="help-block">
@@ -57,7 +57,7 @@
                             <label for="emp_last_name" class="col-md-4 control-label">Last Name</label>
 
                             <div class="col-md-6">
-                                <input id="emp_last_name" type="text" class="form-control" name="emp_last_name" value="{{ old('emp_last_name') }}" required autofocus>
+                                <input id="emp_last_name" type="text" class="form-control" name="emp_last_name" value="{{ old('emp_last_name') }}" autofocus>
 
                                 @if ($errors->has('emp_last_name'))
                                     <span class="help-block">
@@ -71,7 +71,7 @@
                             <label for="emp_dob" class="col-md-4 control-label">DOB</label>
 
                             <div class="col-md-6">
-                                <input id="emp_dob" type="text" class="form-control" name="emp_dob" value="{{ old('emp_dob') }}" required autofocus>
+                                <input id="emp_dob" type="date" class="form-control" name="emp_dob" value="{{ old('emp_dob') }}" required autofocus>
 
                                 @if ($errors->has('emp_dob'))
                                     <span class="help-block">

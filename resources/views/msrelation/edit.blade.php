@@ -18,7 +18,6 @@
                 <select id="s_company_id" class="form-control" name="s_company_id" autofocus>
                     <option value = "">-Please Select One-</option>
                 @foreach ($subcompanylist as $subcompany)
-                    <option value="{{ $subcompany->s_company_id }}">{{ $subcompany->s_company_name }}</option>
                     @if ($subcompany->s_company_id == $motherSubCompanyRelation->s_company_id)
                         <option value="{{ $subcompany->s_company_id }}" selected>{{ $subcompany->s_company_name }}</option>
                     @else

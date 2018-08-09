@@ -14,7 +14,7 @@
             <label for="order_date" class="col-md-4 control-label">Order Date</label>
 
             <div class="col-md-6">
-                <input id="order_date" type="date" class="form-control" name="order_date" value="{{ $policyOrder->order_date }}" autofocus>
+                <input id="order_date" type="date" class="form-control" name="order_date" value="{{ date("Y-m-d",strtotime($policyOrder->order_date)) }}" autofocus>
 
                 @if ($errors->has('order_date'))
                     <span class="help-block">
@@ -28,7 +28,7 @@
             <label for="application_no" class="col-md-4 control-label">Application No</label>
 
             <div class="col-md-6">
-                <input id="application_no" type="text" class="form-control" name="application_no" value="{{ $policyOrder->order_date }}" autofocus>
+                <input id="application_no" type="text" class="form-control" name="application_no" value="{{ $policyOrder->application_no }}" autofocus>
 
                 @if ($errors->has('application_no'))
                     <span class="help-block">
@@ -57,9 +57,9 @@
 
             <div class="col-md-6">
                 <select id="case_taker_type" class="form-control" name="case_taker_type" autofocus>
-                    <option value = "">-Please Select One-</option>
-                    <option value = "direct">Employee</option>
-                    <option value = "indirect">Broker Company</option>
+                    <option value = "" @if($policyOrder->case_taker_type == "") selected @endif>-Please Select One-</option>
+                    <option value = "direct" @if($policyOrder->case_taker_type == "direct") selected @endif>Employee</option>
+                    <option value = "indirect" @if($policyOrder->case_taker_type == "indirect") selected @endif>Broker Company</option>
                 </select>
                 @if ($errors->has('case_taker_type'))
                     <span class="help-block">
@@ -87,7 +87,16 @@
             <label for="i_case_taker_id" class="col-md-4 control-label">Broker Company ID</label>
 
             <div class="col-md-6">
-                <input id="i_case_taker_id" type="text" class="form-control" name="i_case_taker_id" value="{{ old('i_case_taker_id') }}" autofocus>
+                <select id="i_case_taker_id" class="form-control" name="i_case_taker_id" autofocus>
+                    <option value = "">-Please Select One-</option>
+                @foreach ($brokercompanylist as $brokercompany)
+                    @if ($brokercompany->b_company_id == $policyOrder->i_case_taker_id)
+                        <option value="{{ $brokercompany->b_company_id }}" selected>{{ $brokercompany->b_company_name }}</option>
+                    @else
+                        <option value="{{ $brokercompany->b_company_id }}">{{ $brokercompany->b_company_name }}</option>
+                    @endif
+                @endforeach
+                </select>
 
                 @if ($errors->has('i_case_taker_id'))
                     <span class="help-block">
@@ -104,6 +113,10 @@
                 <select id="policy_id" class="form-control" name="policy_id" autofocus>
                     <option value = "">-Please Select One-</option>
                 @foreach ($policyMaster as $policy)
+                    @if($policy->policy_id == $policyOrder->policy_id)
+                        <option value="{{ $policy->policy_id }}" selected>{{ $policy->policy_name }}</option>
+                        <?php continue;?>
+                    @endif
                     <option value="{{ $policy->policy_id }}">{{ $policy->policy_name }}</option>
                 @endforeach
                 </select>
@@ -136,10 +149,10 @@
             <div class="col-md-6">
                 
                 <select id="payment_mode" class="form-control" name="payment_mode" autofocus>
-                    <option value = "">-Please Select One-</option>
-                    <option value = "cheque">Cheque</option>
-                    <option value = "dd">Demand Draft</option>
-                    <option value = "cash">Cash</option>
+                    <option value = "" @if($policyOrder->payment_mode == "") selected @endif>-Please Select One-</option>
+                    <option value = "cheque" @if($policyOrder->payment_mode == "cheque") selected @endif>Cheque</option>
+                    <option value = "dd" @if($policyOrder->payment_mode == "dd") selected @endif>Demand Draft</option>
+                    <option value = "cash" @if($policyOrder->payment_mode == "cash") selected @endif>Cash</option>
                 </select>
                 @if ($errors->has('payment_mode'))
                     <span class="help-block">
@@ -167,7 +180,7 @@
             <label for="instrument_date" class="col-md-4 control-label">Instrument Date</label>
 
             <div class="col-md-6">
-                <input id="instrument_date" type="date" class="form-control" name="instrument_date" value="{{ $policyOrder->instrument_date }}" autofocus>
+                <input id="instrument_date" type="date" class="form-control" name="instrument_date" value="{{ date("Y-m-d",strtotime($policyOrder->instrument_date)) }}" autofocus>
 
                 @if ($errors->has('instrument_date'))
                     <span class="help-block">
@@ -181,7 +194,7 @@
             <label for="nominee_name" class="col-md-4 control-label">Nominee Name</label>
 
             <div class="col-md-6">
-                <input id="nominee_name" type="text" class="form-control" name="nominee_name" value="{{ $policyMaster->nominee_name }}" autofocus>
+                <input id="nominee_name" type="text" class="form-control" name="nominee_name" value="{{ $policyOrder->nominee_name }}" autofocus>
 
                 @if ($errors->has('nominee_name'))
                     <span class="help-block">
@@ -195,7 +208,7 @@
             <label for="nominee_dob" class="col-md-4 control-label">Nominee DOB</label>
 
             <div class="col-md-6">
-                <input id="nominee_dob" type="text" class="form-control" name="nominee_dob" value="{{ $policyOrder->nominee_dob }}" autofocus>
+                <input id="nominee_dob" type="date" class="form-control" name="nominee_dob" value="{{ date("Y-m-d",strtotime($policyOrder->nominee_dob)) }}" autofocus>
 
                 @if ($errors->has('nominee_dob'))
                     <span class="help-block">
@@ -212,6 +225,10 @@
                 <select id="nominee_relation_id" class="form-control" name="nominee_relation_id" autofocus>
                     <option value = "">-Please Select One-</option>
                 @foreach ($nomineeRelationMaster as $relation)
+                    @if($relation->relation_code == $policyOrder->nominee_relation_id)
+                        <option value="{{ $relation->relation_code }}" selected>{{ $relation->relation_name }}</option>
+                        <?php continue;?>
+                    @endif
                     <option value="{{ $relation->relation_code }}">{{ $relation->relation_name }}</option>
                 @endforeach
                 </select>
@@ -231,8 +248,13 @@
                 
                 <select id="handover_to_company_type" class="form-control" name="handover_to_company_type" autofocus>
                     <option value = "">-Please Select One-</option>
-                    <option value = "mother">Mother Company</option>
-                    <option value = "sub">Sub Company</option>
+                    @if($policyOrder->handover_to_company_type == "mother")
+                        <option value = "mother" selected>Mother Company</option>
+                        <option value = "sub">Sub Company</option>
+                    @elseif($policyOrder->handover_to_company_type == "sub")
+                        <option value = "mother">Mother Company</option>
+                        <option value = "sub" selected>Sub Company</option>
+                    @endif
                 </select>
                 @if ($errors->has('handover_to_company_type'))
                     <span class="help-block">
@@ -243,11 +265,18 @@
         </div>
 
         <div class="form-group{{ $errors->has('handover_to_mother_company_id') ? ' has-error' : '' }}">
-            <label for="handover_to_mother_company_id" class="col-md-4 control-label">Handover To Company</label>
-
+            <label for="handover_to_mother_company_id" class="col-md-4 control-label">Mother Company Name</label>
             <div class="col-md-6">
-                <input id="handover_to_mother_company_id" type="text" class="form-control" name="handover_to_mother_company_id" value="{{ old('handover_to_mother_company_id') }}" autofocus>
-
+                <select id="handover_to_mother_company_id" class="form-control" name="handover_to_mother_company_id" autofocus>
+                    <option value = "">-Please Select One-</option>
+                @foreach ($mothercompanylist as $mothercompany)
+                    @if ($mothercompany->m_company_id == $policyOrder->handover_to_mother_company_id)
+                        <option value="{{ $mothercompany->m_company_id }}" selected>{{ $mothercompany->m_company_name }}</option>
+                    @else
+                        <option value="{{ $mothercompany->m_company_id }}">{{ $mothercompany->m_company_name }}</option>
+                    @endif
+                @endforeach
+                </select>
                 @if ($errors->has('handover_to_mother_company_id'))
                     <span class="help-block">
                         <strong>{{ $errors->first('handover_to_mother_company_id') }}</strong>
@@ -257,10 +286,19 @@
         </div>
 
         <div class="form-group{{ $errors->has('handover_to_sub_company_id') ? ' has-error' : '' }}">
-            <label for="handover_to_sub_company_id" class="col-md-4 control-label">Handover To Company</label>
+            <label for="handover_to_sub_company_id" class="col-md-4 control-label">Sub Company Name</label>
 
             <div class="col-md-6">
-                <input id="handover_to_sub_company_id" type="text" class="form-control" name="handover_to_sub_company_id" value="{{ old('handover_to_sub_company_id') }}" autofocus>
+                <select id="handover_to_sub_company_id" class="form-control" name="handover_to_sub_company_id" autofocus>
+                    <option value = "">-Please Select One-</option>
+                @foreach ($subcompanylist as $subcompany)
+                    @if ($subcompany->s_company_id == $policyOrder->handover_to_sub_company_id)
+                        <option value="{{ $subcompany->s_company_id }}" selected>{{ $subcompany->s_company_name }}</option>
+                    @else
+                        <option value="{{ $subcompany->s_company_id }}">{{ $subcompany->s_company_name }}</option>
+                    @endif
+                @endforeach
+                </select>
 
                 @if ($errors->has('handover_to_sub_company_id'))
                     <span class="help-block">
@@ -274,7 +312,7 @@
             <label for="handover_date" class="col-md-4 control-label">Handover Date</label>
 
             <div class="col-md-6">
-                <input id="handover_date" type="text" class="form-control" name="handover_date" value="{{ $policyOrder->handover_date }}" autofocus>
+                <input id="handover_date" type="date" class="form-control" name="handover_date" value="{{ date("Y-m-d",strtotime($policyOrder->handover_date)) }}" autofocus>
 
                 @if ($errors->has('handover_date'))
                     <span class="help-block">
@@ -290,8 +328,13 @@
             <div class="col-md-6">
                 <select id="plvc" class="form-control" name="plvc" autofocus>
                     <option value = "">-Please Select One-</option>
-                    <option value = "0">Active</option>
-                    <option value = "1">Inacive</option>
+                    @if($policyOrder->plvc == 0)
+                        <option value = "0" selected>Active</option>
+                        <option value = "1">Inactive</option>
+                    @else
+                        <option value = "0">Active</option>
+                        <option value = "1" selected>Inactive</option>
+                    @endif
                 </select>
                 @if ($errors->has('handover_date'))
                     <span class="help-block">
@@ -308,6 +351,10 @@
                 <select id="policy_status_id" class="form-control" name="policy_status_id" autofocus>
                     <option value = "">-Please Select One-</option>
                 @foreach ($policyStatusMaster as $status)
+                    @if($status->policy_status_id == $policyOrder->policy_status_id)
+                        <option value="{{ $status->policy_status_id }}" selected>{{ $status->policy_status_name }}</option>
+                        <?php continue;?>
+                    @endif
                     <option value="{{ $status->policy_status_id }}">{{ $status->policy_status_name }}</option>
                 @endforeach
                 </select>
@@ -326,8 +373,13 @@
             <div class="col-md-6">
                 <select id="recovered" class="form-control" name="recovered" autofocus>
                     <option value = "">-Please Select One-</option>
-                    <option value = "0">Active</option>
-                    <option value = "1">Inacive</option>
+                    @if($policyOrder->recovered == 0)
+                        <option value = "0" selected>No</option>
+                        <option value = "1">Yes</option>
+                    @else
+                        <option value = "0">No</option>
+                        <option value = "1" selected>Yes</option>
+                    @endif
                 </select>
                 @if ($errors->has('recovered'))
                     <span class="help-block">
@@ -341,7 +393,7 @@
             <label for="issuence_date" class="col-md-4 control-label">Issuence Date</label>
 
             <div class="col-md-6">
-                <input id="issuence_date" type="date" class="form-control" name="issuence_date" value="{{ $policyOrder->issuence_date }}" autofocus>
+                <input id="issuence_date" type="date" class="form-control" name="issuence_date" value="{{ date("Y-m-d",strtotime($policyOrder->issuence_date)) }}" autofocus>
 
                 @if ($errors->has('issuence_date'))
                     <span class="help-block">
