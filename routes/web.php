@@ -29,6 +29,11 @@ Route::group(['middleware' => 'auth'],function(){
     Route::put('company','CompanyController@store');
 
     //Mother Company Routes
+    Route::get('mothercompany','MothercompanyController@index')->name('Mhome');
+    Route::get('mothercompany/create','MothercompanyController@create');
+    Route::get('mothercompany/edit/{id}','MothercompanyController@edit')->name('edit');
+    Route::put('mothercompany/edit/{id}','MothercompanyController@update')->name('Mupdate');
+    Route::delete('mothercompany/delete/{id}','MothercompanyController@destroy');
     Route::get('mothercompany','MothercompanyController@index');
     Route::get('mothercompany/{id}','MothercompanyController@show');
     Route::post('mothercompany','MothercompanyController@store');
