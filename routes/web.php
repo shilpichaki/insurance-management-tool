@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['middleware' => 'auth'],function(){
+Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin']],function(){
 
     //Company Routes
     Route::get('company','CompanyController@index');

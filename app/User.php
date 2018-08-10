@@ -37,11 +37,12 @@ class User extends Authenticatable
 	{
 		return $this->hasOne('App\Role', 'id', 'role_id');
 	}
+
 	public function hasRole($roles)
 	{
 		$this->have_role = $this->getUserRole();
 		// Check if the user is a root account
-		if($this->have_role->name == 'Root') {
+		if($this->have_role->name == 'Admin') {
 			return true;
 		}
 		if(is_array($roles)){
@@ -55,12 +56,14 @@ class User extends Authenticatable
 		}
 		return false;
 	}
+
 	private function getUserRole()
 	{
 		return $this->role()->getResults();
 	}
+	
 	private function checkIfUserHasRole($need_role)
 	{
-		return (strtolower($need_role)==strtolower($this->have_role->name)) ? true : false;
+		return (strtolower($need_role) == strtolower($this->have_role->name)) ? true : false;
 	}
 }

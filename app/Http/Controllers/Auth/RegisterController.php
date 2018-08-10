@@ -8,6 +8,7 @@ use App\Util;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use DB;
 
 class RegisterController extends Controller
 {
@@ -60,7 +61,8 @@ class RegisterController extends Controller
             'emp_desg_id' => 'required',
             'emp_reports_to' => 'required',
             'userid' => 'required',
-            'password' => 'required|string|min:6|confirmed'
+            'password' => 'required|string|min:6|confirmed',
+            'role' => 'required|exists:roles,id'
         ]);
     }
 
@@ -93,7 +95,8 @@ class RegisterController extends Controller
             "empid" => $input["emp_id"],
             "userid" => $input["userid"],
             "email" => $input["emp_email"],
-            "password" => bcrypt($input['password'])
+            "password" => bcrypt($input['password']),
+            "role_id" => $input["role"]
         ];
 
         return User::create($user_input);
@@ -101,7 +104,8 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        // return "Stay Here!";
-        return view("auth.register");
+        $rolelist = DB::select("select id,name from roles");
+        $designationlist = DB::select("select designation_id,designation_name from tbl_designation_mast");
+        return view("auth.register", compact('rolelist', 'designationlist'));
     }
 }

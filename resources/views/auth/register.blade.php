@@ -113,7 +113,13 @@
                             <label for="emp_desg_id" class="col-md-4 control-label">Designation</label>
 
                             <div class="col-md-6">
-                                <input id="emp_desg_id" type="text" class="form-control" name="emp_desg_id" value="{{ old('emp_desg_id') }}" required autofocus>
+                                    <select id="role" class="form-control" name="role" autofocus>
+                                        
+                                        <option value = "0">-Please Select One-</option>
+                                        @foreach ($designationlist as $designation)
+                                            <option value="{{ $designation->designation_id }}" {{ (old("role") == $designation->designation_id ? "selected":"") }}>{{ $designation->designation_name }}</option>
+                                        @endforeach
+                                    </select>
 
                                 @if ($errors->has('emp_desg_id'))
                                     <span class="help-block">
@@ -149,6 +155,25 @@
                                 @if ($errors->has('userid'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('userid') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
+                            <label for="role" class="col-md-4 control-label">User Role</label>
+
+                            <div class="col-md-6">
+                                <select id="role" class="form-control" name="role" autofocus>
+                                    <option value = "0">-Please Select One-</option>
+                                    @foreach ($rolelist as $role)
+                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                    @endforeach
+                                </select>
+
+                                @if ($errors->has('role'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('role') }}</strong>
                                     </span>
                                 @endif
                             </div>
