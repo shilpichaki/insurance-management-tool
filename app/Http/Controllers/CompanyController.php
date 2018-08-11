@@ -128,7 +128,10 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $statelist = DB::select("select state_id, state_name from states");
+        $countrylist = DB::select("select country_id,country_name from countries");
+        $company = Company::where('company_id',$id)->first();
+        return view('company.edit', compact('id','statelist','countrylist', 'company'));
     }
 
     /**

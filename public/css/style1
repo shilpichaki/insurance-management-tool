@@ -1,0 +1,32 @@
+.contact_header{
+margin-top: 80px;
+    margin-left: 80px;
+margin-bottom: 20px;
+color: #4b8ac6;
+font-family: "Raleway", Helvetica, Arial, sans-serif;
+font-size: 35px;
+border-bottom-width: 1px;
+border-botom-color: rgb(142,181,219);
+border-bottom-style: solid;
+padding-bottom: 20px;
+}
+.contact_header span{
+color: #193651;
+}
+.contact_info{
+    margin-left: 80px;
+    font-family: sans-serif;
+}
+.contact_info strong{
+    color: darkturquoise;
+}
+.container col-sm-7 contact_info ul,li{
+    list-style-type: none;
+    margin-left: 100px;
+}
+.contact_form{
+    
+    margin-left: 130px;
+    position: relative;
+    
+}

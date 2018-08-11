@@ -1,67 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
+<link rel="stylesheet" href="css/styles.css">
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">User ID</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+            <div _ngcontent-c3="" class="login_form"><a _ngcontent-c3="" href=""><img _ngcontent-c3="" rcdk="" alt="" src="logo.jpg"></a><h3 _ngcontent-c3="">Login</h3>
+                <form class="ng-pristine ng-invalid ng-touched" method="POST" action="{{ route('login') }}">
+                    
+                    {{ csrf_field() }}
+                    
+                    <div _ngcontent-c3="" class="form-group">
+                        <input _ngcontent-c3="" class="form-control ng-pristine ng-invalid ng-touched" name="email" ngmodel="" placeholder="Email" required="" type="text" ng-reflect-required="" ng-reflect-name="email" ng-reflect-model="">
+                    </div>
+                    <div _ngcontent-c3="" class="form-group">
+                        <input _ngcontent-c3="" class="form-control ng-untouched ng-pristine ng-invalid" name="password" ngmodel="" placeholder="Password" required="" type="password" ng-reflect-required="" ng-reflect-name="password" ng-reflect-model="">
+                    </div>
+                    <div _ngcontent-c3="" class="form-group">
+                        <button _ngcontent-c3="" class="btn btn-success">Login</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
