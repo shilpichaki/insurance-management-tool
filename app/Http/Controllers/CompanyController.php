@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Company;
 use Validator;
+use DB;
 
 class CompanyController extends Controller
 {
@@ -26,7 +27,9 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view('company.create');
+        $statelist = DB::select("select state_id, state_name from states");
+        $countrylist = DB::select("select country_id,country_name from countries");
+        return view('company.create', compact('statelist','countrylist'));
     }
 
     /**
