@@ -15,7 +15,7 @@ class CountryController extends Controller
      */
     public function index()
     {
-        return Util::employeeHierarchyListBasedOnEmpID("A001");
+        return json_encode(Util::employeeHierarchyListBasedOnEmpID("A001"));
     }
 
     /**

@@ -122,6 +122,7 @@ class PolicyorderController extends Controller
         $policyOrder->customer_id = $request->input('customer_id');
         $policyOrder->case_taker_type = $request->input('case_taker_type');
         $policyOrder->d_case_taker_id = $request->input('d_case_taker_id');
+        $policyOrder->current_employee_hirearchy = json_encode(Util::employeeHierarchyListBasedOnEmpID($request->input('d_case_taker_id')));
         $policyOrder->i_case_taker_id = $request->input('i_case_taker_id');
         $policyOrder->policy_id = $request->input('policy_id');
         $policyOrder->amount = $request->input('amount');
