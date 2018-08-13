@@ -20,7 +20,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin']],function(){
-
     //Company Routes
     Route::get('company','CompanyController@index');
     Route::get('company/create','CompanyController@create');
@@ -28,6 +27,9 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin']],function()
     Route::get('company/{id}','CompanyController@index');
     Route::post('company','CompanyController@store')->name('company.store');
     Route::put('company','CompanyController@store')->name('company.update');
+});
+
+Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator']],function(){
 
     //Mother Company Routes
     Route::get('mothercompany','MothercompanyController@index')->name('Mhome');
@@ -101,18 +103,6 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin']],function()
     //Order statementRoutes
     Route::get('orderstatement/create','OrderStatementController@create')->name('orderstatement.create');
     Route::post('orderstatement','OrderStatementController@showform')->name('orderstatement');
-});
-
-Route::group(['middleware' => ['auth','roles'], 'roles' => ['modarator']],function(){
-    
-    //Policy Order Routes 
-    Route::get('policyorder','PolicyorderController@index');
-    Route::get('policyorder/create','PolicyorderController@create');
-    Route::get('policyorder/edit/{id}','PolicyorderController@edit');
-    Route::get('policyorder/{id}','PolicyorderController@show');
-    Route::post('policyorder','PolicyorderController@store')->name('policyorder.store');
-    Route::put('policyorder','PolicyorderController@store')->name('policyorder.update');
-
 });
 
 Route::group(['middleware' => ['auth','roles'], 'roles' => ['viewer']],function(){
