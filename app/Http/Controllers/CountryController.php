@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Country;
+use App\Util;
 
 class CountryController extends Controller
 {
@@ -14,7 +15,7 @@ class CountryController extends Controller
      */
     public function index()
     {
-        //
+        return Util::employeeHierarchyListBasedOnEmpID("A001");
     }
 
     /**

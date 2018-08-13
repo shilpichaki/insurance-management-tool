@@ -103,6 +103,8 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator'
     //Order statementRoutes
     Route::get('orderstatement/create','OrderStatementController@create')->name('orderstatement.create');
     Route::post('orderstatement','OrderStatementController@showform')->name('orderstatement');
+
+    Route::get('country','CountryController@index');
 });
 
 Route::group(['middleware' => ['auth','roles'], 'roles' => ['viewer']],function(){
