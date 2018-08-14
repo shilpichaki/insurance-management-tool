@@ -14,7 +14,7 @@ class AddCurrentEmployeeHirearchyToTblPolicyOrder extends Migration
     public function up()
     {
         Schema::table('tbl_policy_order', function (Blueprint $table) {
-            $table->json('current_employee_hirearchy')->after('d_case_taker_id');
+            $table->longText('current_employee_hirearchy')->after('d_case_taker_id')->nullable();
         });
     }
 

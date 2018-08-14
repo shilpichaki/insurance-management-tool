@@ -119,18 +119,18 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset("images/favicon.png")}}">
     <title>Ela - Bootstrap Admin Dashboard Template</title>
     <!-- Bootstrap Core CSS -->
-    <link href="dashboard/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset("dashboard/css/lib/bootstrap/bootstrap.min.css")}}" rel="stylesheet">
     <!-- Custom CSS -->
 
-    <link href="dashboard/css/lib/calendar2/semantic.ui.min.css" rel="stylesheet">
-    <link href="dashboard/css/lib/calendar2/pignose.calendar.min.css" rel="stylesheet">
-    <link href="dashboard/css/lib/owl.carousel.min.css" rel="stylesheet" />
-    <link href="dashboard/css/lib/owl.theme.default.min.css" rel="stylesheet" />
-    <link href="dashboard/css/helper.css" rel="stylesheet">
-    <link href="dashboard/css/style.css" rel="stylesheet">
+    <link href="{{asset("dashboard/css/lib/calendar2/semantic.ui.min.css")}}" rel="stylesheet">
+    <link href="{{asset("dashboard/css/lib/calendar2/pignose.calendar.min.css")}}" rel="stylesheet">
+    <link href="{{asset("dashboard/css/lib/owl.carousel.min.css")}}" rel="stylesheet" />
+    <link href="{{asset("dashboard/css/lib/owl.theme.default.min.css")}}" rel="stylesheet" />
+    <link href="{{asset("dashboard/css/helper.css")}}" rel="stylesheet">
+    <link href="{{asset("dashboard/css/style.css")}}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
     <!--[if lt IE 9]>
@@ -154,7 +154,7 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="index.html">
                     <!-- Logo icon -->
-                    <b><img src="images/logo1.png" alt="homepage" class="dark-logo" /></b>
+                    <b><img src="{{asset("images/logo1.png")}}" alt="homepage" class="dark-logo" /></b>
                     <!--End Logo icon -->
                     <!-- Logo text -->
                 <span>RCDK
@@ -247,28 +247,28 @@
                                         <div class="message-center">
                                             <!-- Message -->
                                             <a href="#">
-                                                <div class="user-img"> <img src="images/users/5.jpg" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
+                                                <div class="user-img"> <img src="{{asset("images/users/5.jpg")}}" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
                                                 <div class="mail-contnet">
                                                     <h5>Michael Qin</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30 AM</span>
                                                 </div>
                                             </a>
                                             <!-- Message -->
                                             <a href="#">
-                                                <div class="user-img"> <img src="images/users/2.jpg" alt="user" class="img-circle"> <span class="profile-status busy pull-right"></span> </div>
+                                                <div class="user-img"> <img src="{{asset("images/users/2.jpg")}}" alt="user" class="img-circle"> <span class="profile-status busy pull-right"></span> </div>
                                                 <div class="mail-contnet">
                                                     <h5>John Doe</h5> <span class="mail-desc">I've sung a song! See you at</span> <span class="time">9:10 AM</span>
                                                 </div>
                                             </a>
                                             <!-- Message -->
                                             <a href="#">
-                                                <div class="user-img"> <img src="images/users/3.jpg" alt="user" class="img-circle"> <span class="profile-status away pull-right"></span> </div>
+                                                <div class="user-img"> <img src="{{asset("images/users/3.jpg")}}" alt="user" class="img-circle"> <span class="profile-status away pull-right"></span> </div>
                                                 <div class="mail-contnet">
                                                     <h5>Mr. John</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08 AM</span>
                                                 </div>
                                             </a>
                                             <!-- Message -->
                                             <a href="#">
-                                                <div class="user-img"> <img src="images/users/4.jpg" alt="user" class="img-circle"> <span class="profile-status offline pull-right"></span> </div>
+                                                <div class="user-img"> <img src="{{asset("images/users/4.jpg")}}" alt="user" class="img-circle"> <span class="profile-status offline pull-right"></span> </div>
                                                 <div class="mail-contnet">
                                                     <h5>Michael Qin</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span>
                                                 </div>
@@ -389,41 +389,41 @@
 </div>
 <!-- End Wrapper -->
 <!-- All Jquery -->
-<script src="dashboard/js/lib/jquery/jquery.min.js"></script>
+<script src="{{asset("dashboard/js/lib/jquery/jquery.min.js")}}"></script>
 <!-- Bootstrap tether Core JavaScript -->
-<script src="dashboard/js/lib/bootstrap/js/popper.min.js"></script>
-<script src="dashboard/js/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="{{asset("dashboard/js/lib/bootstrap/js/popper.min.js")}}"></script>
+<script src="{{asset("dashboard/js/lib/bootstrap/js/bootstrap.min.js")}}"></script>
 <!-- slimscrollbar scrollbar JavaScript -->
-<script src="dashboard/js/jquery.slimscroll.js"></script>
+<script src="{{asset("dashboard/js/jquery.slimscroll.js")}}"></script>
 <!--Menu sidebar -->
-<script src="dashboard/js/sidebarmenu.js"></script>
+<script src="{{asset("dashboard/js/sidebarmenu.js")}}"></script>
 <!--stickey kit -->
-<script src="dashboard/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
+<script src="{{asset("dashboard/js/lib/sticky-kit-master/dist/sticky-kit.min.js")}}"></script>
 <!--Custom JavaScript -->
 
 
 <!-- Amchart -->
-<script src="dashboard/js/lib/morris-chart/raphael-min.js"></script>
-<script src="dashboard/js/lib/morris-chart/morris.js"></script>
-<script src="dashboard/js/lib/morris-chart/dashboard1-init.js"></script>
+<script src="{{asset("dashboard/js/lib/morris-chart/raphael-min.js")}}"></script>
+<script src="{{asset("dashboard/js/lib/morris-chart/morris.js")}}"></script>
+<script src="{{asset("dashboard/js/lib/morris-chart/dashboard1-init.js")}}"></script>
 
 
-<script src="dashboard/js/lib/calendar-2/moment.latest.min.js"></script>
+<script src="{{asset("dashboard/js/lib/calendar-2/moment.latest.min.js")}}"></script>
 <!-- scripit init-->
-<script src="dashboard/js/lib/calendar-2/semantic.ui.min.js"></script>
+<script src="{{asset("dashboard/js/lib/calendar-2/semantic.ui.min.js")}}"></script>
 <!-- scripit init-->
-<script src="dashboard/js/lib/calendar-2/prism.min.js"></script>
+<script src="{{asset("dashboard/js/lib/calendar-2/prism.min.js")}}"></script>
 <!-- scripit init-->
-<script src="dashboard/js/lib/calendar-2/pignose.calendar.min.js"></script>
+<script src="{{asset("dashboard/js/lib/calendar-2/pignose.calendar.min.js")}}"></script>
 <!-- scripit init-->
-<script src="dashboard/js/lib/calendar-2/pignose.init.js"></script>
+<script src="{{asset("dashboard/js/lib/calendar-2/pignose.init.js")}}"></script>
 
-<script src="dashboard/js/lib/owl-carousel/owl.carousel.min.js"></script>
-<script src="dashboard/js/lib/owl-carousel/owl.carousel-init.js"></script>
-<script src="dashboard/js/scripts.js"></script>
+<script src="{{asset("dashboard/js/lib/owl-carousel/owl.carousel.min.js")}}"></script>
+<script src="{{asset("dashboard/js/lib/owl-carousel/owl.carousel-init.js")}}"></script>
+<script src="{{asset("dashboard/js/scripts.js")}}"></script>
 <!-- scripit init-->
 
-<script src="dashboard/js/custom.min.js"></script>
+<script src="{{asset("dashboard/js/custom.min.js")}}"></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>

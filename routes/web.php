@@ -106,11 +106,12 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator'
 
     Route::get('country','CountryController@index');
 });
+Route::get('orderstatement/hierarchy/{orderid}/{empid}','OrderStatementController@hierarchy')->name('orderstatement.hierarchy');
 
-Route::group(['middleware' => ['auth','roles'], 'roles' => ['viewer']],function(){
+// Route::group(['middleware' => ['auth','roles'], 'roles' => ['viewer']],function(){
     
-    //Order statementRoutes
-    Route::get('orderstatement/create','OrderStatementController@create')->name('orderstatement.create');
-    Route::post('orderstatement','OrderStatementController@showform')->name('orderstatement');
+//     //Order statementRoutes
+//     Route::get('orderstatement/create','OrderStatementController@create')->name('orderstatement.create');
+//     Route::post('orderstatement','OrderStatementController@showform')->name('orderstatement');
     
-});
+// });
