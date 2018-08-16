@@ -138,7 +138,7 @@ $(function() {
     $('.tell_index td').hover(function () {
         var td_index = $(this).index();
         var tr_index = $(this).closest('tr').index();
-        console.log("current position: ", '( ',tr_index, ', ' , td_index, ' )');
+        // console.log("current position: ", '( ',tr_index, ', ' , td_index, ' )');
 
         $('.tell_index td').removeClass('highlight_coordinate_td');
         $('.tell_index th').removeClass('highlight_coordinate_td');
@@ -152,5 +152,11 @@ $(function() {
         for (i = 0; i <= td_index; i++) {
             $(this).closest('tr').find('td:eq('+i+')').addClass('highlight_coordinate_td');
         }
+    });
+    $('.my_table').mouseleave(function() {
+        $('.tell_index td').removeClass('highlight_coordinate_td');
+        $('.tell_index th').removeClass('highlight_coordinate_td');
+        $('.tell_index td').removeClass('highlight_coordinate_th');
+        $('.tell_index th').removeClass('highlight_coordinate_th');
     });
 });

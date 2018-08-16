@@ -113,7 +113,7 @@
                             <label for="emp_desg_id" class="col-md-4 control-label">Designation</label>
 
                             <div class="col-md-6">
-                                    <select id="role" class="form-control" name="role" autofocus>
+                                    <select id="emp_desg_id" class="form-control" name="emp_desg_id" autofocus>
                                         
                                         <option value = "0">-Please Select One-</option>
                                         @foreach ($designationlist as $designation)

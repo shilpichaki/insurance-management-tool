@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="css/rcdknewstyle.css">
-  <!--<link rel="stylesheet" type="text/css" href="css/style1.css">-->
+  <!--<link rel="stylesheet" href="css/style1.css">-->
   <!-- <link rel="stylesheet" href="css/animate.css"> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -43,7 +43,7 @@
       <li class="l_nav"><a href=""><img src="img/logo.jpg"></a></li>
       <div class="m_nav_d">
         <li class="m_nav"><a href="index.html">home</a></li>
-        <li class="m_nav active"><a href="company.html">About</a></li>
+        <li class="m_nav"><a href="company.html">About</a></li>
         <li class="m_nav dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">services<span class="caret"></span></a>
          <ul class="dropdown-menu">
           <li><a href="investment.html">Investment Planning</a></li>
@@ -54,7 +54,7 @@
         </li>
         <li class="m_nav"><a href="policies.html">policies</a></li>
 
-        <li class="m_nav"><a href="contact.html">contact</a></li>
+        <li class="m_nav active"><a href="contact.html">contact</a></li>
       </div>
       <li class="p_nav"><a href=""><span class="glyphicon glyphicon-earphone"></span> 9836513953</a></li>
     </ul>
@@ -76,57 +76,78 @@ function myFunction() {
 </script>
 <div class="carousel-inner">
         <div class="item active">
-          <img src="img/slider/Untitled-1.jpg" alt="RCDK">
+          <img src="img/slider/contact.jpg" alt="RCDK">
           <div class="carousel-caption">
-            <h3 class="fadeInDown">About Us</h3>
+            <h3 class="fadeInDown">Contact Us</h3>
           </div>
         </div>
       </div>
-  <div class="container">
-    <div class="col-md-8">
-      <div class="row">
-        <div class="contact_header col-sm-12" style="margin-top: 80px">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+  <h1 style="margin-top: 80px; color: #047304;">
+    Contact Us
+  </h1>
+</div>
+</div>
+</div>
+  <div class="cf">
 
-          <h2 class="maven_pro_ff"><span>A</span>BOUT</h2>
+    <div class="ctext col-md-8 col-md-offset-2">
+      <p>Email us with any question or inquiries or call 9836513953. We would be happy to answer your questions and set up a meeting with you.
+      </p>
+    </div>
+    <br>
+    <div class="col-md-8 col-md-offset-2 enquiry_form">
+      <form action="http://superfixit.in/sendmail" method="post">
+        <div class="col-sm-12">
+          <div class="row form_item_rows">
+            <div class="col-sm-3 form_label"><label for="" style="border-radius: 20px;">Name</label></div>
+            <div class="col-sm-9 form_fields"><input name="name" id="fi_name" type="text" class="form-control" required style="border-radius: 20px;"></div>
+          </div>
         </div>
-  <div class="col-sm-12 contact_info">
-    <p>
-      RCDK is about more than assets growing strategies. It’s about quality of life, richness of experience, setting goals and planning your dreams. It is our objective to positively influence the financial future of our clients, to assist in establishing and
-      designing an appropriate financial plan that is in alignment with their goals. We offer professional Portfolio Management Services (PMS) to HNIs who seek customized solutions to realize their investment goals. PMS is a customised offering, providing
-      a range of investment options best suited for you in the current market scenario. Our Portfolio Managers are equipped to create an investment portfolio across various investment avenues to meet your unique needs.
-    </p>
-    <p>
-      No financial planning is complete without life insurance. RCDK offer an array of life insurance products like Term Plan, Endowment Plan, Money back Plan, Children Life Insurance Plan and ULIP Plan to meet your individual insurance requirements. Even a
-      seasoned investor knows that effective timing of markets is not possible. Therefore, professional and expert advice is essential to generate superior returns. Supported by a highly specialized and dedicated research team, we follow a client-centric
-      approach to offer customized solutions. We offer you investment advisory services with ternary objective of superior returns, risk minimization and portfolio diversification.
-    </p>
-    <p>
-      At RCDK we provide unbiased and independent advice, disciplined investment management and a commitment to exceptional service. We strive to build client relationships for a lifetime. Often times, our clients become our friends and our friends become our
-      clients.
-    </p>
-  </div>
-</div>
-</div>
- 
-  
-<div class="col-sm-4 quick_menu_con">
-  <ul class="list-group quick_menu" style="margin-top: 80px">
-        <li class="list-group-item" style="background-color: #ef7e7e;"><a href="autoinsurance.html">Auto Insurance</a></li>
-        <li class="list-group-item" style="background-color: #f9f97a;"><a href="travelinsurance.html">Travel Insurance</a></li>
-        <li class="list-group-item" style="background-color: #a9ebff;"><a href="healthinsurance.html">Health Insurance</a></li>
-        <li class="list-group-item" style="background-color: #a0ec92;"><a href="propertyinsurance.html">Property Insurance</a></li>
-        <li class="list-group-item" style="background-color: #fbc3fb;"><a href="otherinsurance.html">Other Insurance</a></li>
-      </ul>
+        <div class="col-sm-12">
+          <div class="row form_item_rows">
+            <div class="col-sm-3 form_label"><label for="" style="border-radius: 20px;">Email</label></div>
+            <div class="col-sm-9 form_fields"><input name="email" id="fi_email" type="text" class="form-control" required style="border-radius: 20px;"></div>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="row form_item_rows">
+            <div class="col-sm-3 form_label"><label for="" style="border-radius: 20px;">Subject</label></div>
+            <div class="col-sm-9 form_fields"><input name="subject" id="fi_subject" type="text" class="form-control" required style="border-radius: 20px;"></div>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="row form_item_rows">
+            <div class="col-sm-3 form_label"><label for="" style="border-radius: 20px;">Message</label></div>
+            <div class="col-sm-9 form_fields"><textarea name="msg" id="fi_message" cols="30" rows="6" class="form-control" required style="border-radius: 20px;"></textarea></div>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="row form_item_rows">
+            <div class="col-sm-3 form_label"></div>
+            <div class="col-sm-9 form_fields">
+              <button type="submit" style="border-radius: 20px;">submit</button>
+              <input type="hidden" name="_token" value="D8MqOyrKirSnRsTOf1itP684ylDH3m1DJItGMxXr">
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
-
- 
+  <br><br><br>
+  <div class="ready_to_help">
+    <div class="container">
+      <h1>Over <span>500</span> of representatives are ready to help.</h1>
+    </div>
+  </div>
   <section>   
-<div class="container-fluid" style="margin-top: 20px; box-shadow: 2px 2px 3px #dedcdc;">
+<div class="container-fluid">
   <div class="row contact-form">
 
     <div class="col-lg-6">
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1842.034708417372!2d88.43330560411133!3d22.5765069129715!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0275a580a9b8b9%3A0x9b90289f303376bc!2sMatrix+Tower%2C+DN+Block%2C+Sector+V%2C+Salt+Lake+City%2C+Kolkata%2C+West+Bengal+700091!5e0!3m2!1sen!2sin!4v1529930685287" width="100%" height="390px" frameborder="0" style="border:0;" allowfullscreen></iframe>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1842.034708417372!2d88.43330560411133!3d22.5765069129715!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0275a580a9b8b9%3A0x9b90289f303376bc!2sMatrix+Tower%2C+DN+Block%2C+Sector+V%2C+Salt+Lake+City%2C+Kolkata%2C+West+Bengal+700091!5e0!3m2!1sen!2sin!4v1529930685287" width="100%" height="392px" frameborder="0" style="border:0;" allowfullscreen></iframe>
 </div>
 <div class="col-lg-6 contact-form">
   
@@ -143,7 +164,6 @@ function myFunction() {
 </div>
 </div>
 </section>
-  </section>
   <section>
     <div class="container-fluid">
       <div class="row">

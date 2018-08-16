@@ -12,7 +12,7 @@
     
             <div class="col-md-6">
     
-                <select id="company_type" class="form-control" name="company_type" required autofocus>
+                <select id="company_type" class="form-control" name="company_type" autofocus>
                     <option value = "">-Please Select One-</option>
                     <option value="mother">Mother</option>
                     <option value="sub">Sub</option>

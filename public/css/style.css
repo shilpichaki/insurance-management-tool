@@ -737,14 +737,14 @@ a:focus{
   .carousel-caption a{
     font-weight: 100;
     text-shadow: none;
-    background-color: rgba(255,255,255,.3);
+    background-color: rgba(57,253,90,.85);
     padding: 12px 35px;
     display: inline-block;
     margin: 15px auto;
     margin-top: 25px;
     font-size: 20px;
-    border: 2px solid #fff;
-    color: #6393ff;
+    border: 2px solid #63ec53;
+    color:#3a3737;
     border-radius: 25px;
   }
    

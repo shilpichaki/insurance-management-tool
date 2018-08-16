@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Mothercompany;
 use Validator;
 use App\Http\Resources\MothercompanyResource;
+use DB;
 
 class MothercompanyController extends Controller
 {
@@ -19,6 +20,13 @@ class MothercompanyController extends Controller
         $motherCompanyList = Mothercompany::paginate(15);
         // return MothercompanyResource::collection($motherCompanyList);
         return view('mothercompany.index', ['motherCompanyList' => $motherCompanyList]);
+    }
+
+    public function create()
+    {
+        $country_data =DB::table('countries')->select('country_id','country_name')->get();
+        $state_data =DB::table('states')->select('state_id','state_name')->get();
+        return view('mothercompany.create',compact('state_data','country_data'));
     }
 
     /**

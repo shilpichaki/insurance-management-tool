@@ -119,8 +119,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset("images/favicon.png")}}">
-    <title>Ela - Bootstrap Admin Dashboard Template</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset("images/logo.png")}}">
+    <title>RCDK</title>
     <!-- Bootstrap Core CSS -->
     <link href="{{asset("dashboard/css/lib/bootstrap/bootstrap.min.css")}}" rel="stylesheet">
     <!-- Custom CSS -->
