@@ -100,18 +100,14 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator'
     Route::post('policyorder','PolicyorderController@store')->name('policyorder.store');
     Route::put('policyorder','PolicyorderController@store')->name('policyorder.update');
 
+    Route::get('country','CountryController@index');
+});
+
+Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator', 'viewer']],function(){
+    
     //Order statementRoutes
     Route::get('orderstatement/create','OrderStatementController@create')->name('orderstatement.create');
     Route::post('orderstatement','OrderStatementController@showform')->name('orderstatement');
-
-    Route::get('country','CountryController@index');
+    Route::get('orderstatement/hierarchy/{orderid}','OrderStatementController@hierarchy')->name('orderstatement.hierarchy');
+    
 });
-Route::get('orderstatement/hierarchy/{orderid}/{empid}','OrderStatementController@hierarchy')->name('orderstatement.hierarchy');
-
-// Route::group(['middleware' => ['auth','roles'], 'roles' => ['viewer']],function(){
-    
-//     //Order statementRoutes
-//     Route::get('orderstatement/create','OrderStatementController@create')->name('orderstatement.create');
-//     Route::post('orderstatement','OrderStatementController@showform')->name('orderstatement');
-    
-// });

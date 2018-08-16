@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 
 class OrderStatementController extends Controller
 {
@@ -57,7 +58,7 @@ class OrderStatementController extends Controller
                 if($startDate<$endDate)
                 {
                     $dealPercent = DB::select("select deal_percentage from tbl_mother_sub_company_relation where s_company_id is null and m_company_id = ? order by percent_created_at desc limit 1", [$motherCompanyId]);
-                    $statement = DB::select("select po.order_id,po.order_date,po.application_no,(SELECT cm.customer_name from tbl_customer_mast cm where cm.customer_id = po.customer_id) as 'customer_name', po.d_case_taker_id, (SELECT mcm.m_company_name from tbl_mother_company_mast mcm where mcm.m_company_id = po.handover_to_mother_company_id) as 'company_name', (SELECT pm.policy_name from tbl_policy_mast pm where pm.policy_id = po.policy_id) as 'policy_name', po.amount, ROUND((po.amount*" . $dealPercent[0]->deal_percentage . ")/100,2) as profit from tbl_policy_order po where po.handover_to_company_type = ? and po.handover_to_mother_company_id = ? and po.order_date between ? AND ?", [$companyType,$motherCompanyId,date('Y-m-d H:i:s', $startDate),date('Y-m-d H:i:s', $endDate)]);
+                    $statement = DB::select("select po.order_id,po.order_date,po.application_no,(SELECT cm.customer_name from tbl_customer_mast cm where cm.customer_id = po.customer_id) as 'customer_name', po.d_case_taker_id, (SELECT concat(em.emp_first_name, IFNULL(concat(' ',  em.emp_middle_name),''), IFNULL(concat(' ',  em.emp_last_name),'') from tbl_employee_mast em where em.emp_id = po.d_case_taker_id) as emp_name, (SELECT mcm.m_company_name from tbl_mother_company_mast mcm where mcm.m_company_id = po.handover_to_mother_company_id) as 'company_name', (SELECT pm.policy_name from tbl_policy_mast pm where pm.policy_id = po.policy_id) as 'policy_name', po.amount, ROUND((po.amount*" . $dealPercent[0]->deal_percentage . ")/100,2) as profit from tbl_policy_order po where po.handover_to_company_type = ? and po.handover_to_mother_company_id = ? and po.order_date between ? AND ?", [$companyType,$motherCompanyId,date('Y-m-d H:i:s', $startDate),date('Y-m-d H:i:s', $endDate)]);
                     
                 }
                 else
@@ -75,13 +76,13 @@ class OrderStatementController extends Controller
                     if(is_null($motherCompanyId))
                     {
                         $dealPercent = DB::select("select deal_percentage from tbl_mother_sub_company_relation where s_company_id = ? order by percent_created_at desc limit 1", [$subCompanyId]);
-                        $statement = DB::select("select po.order_id,po.order_date,po.application_no,(SELECT cm.customer_name from tbl_customer_mast cm where cm.customer_id = po.customer_id) as 'customer_name', po.d_case_taker_id, (SELECT scm.s_company_name from tbl_sub_company_mast scm where scm.s_company_id = po.handover_to_sub_company_id) as 'company_name', (SELECT pm.policy_name from tbl_policy_mast pm where pm.policy_id = po.policy_id) as 'policy_name', po.amount, ROUND((po.amount*" . $dealPercent[0]->deal_percentage . ")/100,2) as profit from tbl_policy_order po where po.handover_to_company_type = ? and po.handover_to_sub_company_id = ? and po.order_date between ? AND ?", [$companyType,$subCompanyId,date('Y-m-d H:i:s', $startDate),date('Y-m-d H:i:s', $endDate)]);
+                        $statement = DB::select("select po.order_id,po.order_date,po.application_no,(SELECT cm.customer_name from tbl_customer_mast cm where cm.customer_id = po.customer_id) as 'customer_name', po.d_case_taker_id, (SELECT concat(em.emp_first_name, IFNULL(concat(' ',  em.emp_middle_name),''), IFNULL(concat(' ',  em.emp_last_name),'') from tbl_employee_mast em where em.emp_id = po.d_case_taker_id) as emp_name, (SELECT scm.s_company_name from tbl_sub_company_mast scm where scm.s_company_id = po.handover_to_sub_company_id) as 'company_name', (SELECT pm.policy_name from tbl_policy_mast pm where pm.policy_id = po.policy_id) as 'policy_name', po.amount, ROUND((po.amount*" . $dealPercent[0]->deal_percentage . ")/100,2) as profit from tbl_policy_order po where po.handover_to_company_type = ? and po.handover_to_sub_company_id = ? and po.order_date between ? AND ?", [$companyType,$subCompanyId,date('Y-m-d H:i:s', $startDate),date('Y-m-d H:i:s', $endDate)]);
                         
                     }
                     else
                     {
                         $dealPercent = DB::select("select deal_percentage from tbl_mother_sub_company_relation where s_company_id = ? and m_company_id = ? order by percent_created_at desc limit 1", [$subCompanyId,$motherCompanyId]);
-                        $statement = DB::select("select po.order_id,po.order_date,po.application_no,(SELECT cm.customer_name from tbl_customer_mast cm where cm.customer_id = po.customer_id) as 'customer_name', po.d_case_taker_id, (SELECT scm.s_company_name from tbl_sub_company_mast scm where scm.s_company_id = po.handover_to_sub_company_id) as 'company_name', (SELECT pm.policy_name from tbl_policy_mast pm where pm.policy_id = po.policy_id) as 'policy_name', po.amount, ROUND((po.amount*" . $dealPercent[0]->deal_percentage . ")/100,2) as profit from tbl_policy_order po where po.handover_to_company_type = ? and po.handover_to_sub_company_id = ? and po.handover_to_mother_company_id = ? and po.order_date between ? AND ?", [$companyType,$subCompanyId,$motherCompanyId,date('Y-m-d H:i:s', $startDate),date('Y-m-d H:i:s', $endDate)]);
+                        $statement = DB::select("select po.order_id,po.order_date,po.application_no,(SELECT cm.customer_name from tbl_customer_mast cm where cm.customer_id = po.customer_id) as 'customer_name', po.d_case_taker_id, (SELECT concat(em.emp_first_name, IFNULL(concat(' ',  em.emp_middle_name),''), IFNULL(concat(' ',  em.emp_last_name),'') from tbl_employee_mast em where em.emp_id = po.d_case_taker_id) as emp_name, (SELECT scm.s_company_name from tbl_sub_company_mast scm where scm.s_company_id = po.handover_to_sub_company_id) as 'company_name', (SELECT pm.policy_name from tbl_policy_mast pm where pm.policy_id = po.policy_id) as 'policy_name', po.amount, ROUND((po.amount*" . $dealPercent[0]->deal_percentage . ")/100,2) as profit from tbl_policy_order po where po.handover_to_company_type = ? and po.handover_to_sub_company_id = ? and po.handover_to_mother_company_id = ? and po.order_date between ? AND ?", [$companyType,$subCompanyId,$motherCompanyId,date('Y-m-d H:i:s', $startDate),date('Y-m-d H:i:s', $endDate)]);
                         
                     }
                 }
@@ -100,16 +101,25 @@ class OrderStatementController extends Controller
         return view('orderstatement.showstatement',['statements' => $statement]);
     }
 
-    public function hierarchy($orderid, $empid) 
+    public function hierarchy($orderid) 
     {
-        
-        $hierarchyJSON = DB::select("select current_employee_hirearchy from tbl_policy_order where order_id = ? and current_employee_hirearchy like '%?%'",[$orderid,$empid]);
+        $empid = Auth::user()->empid;
+        $hierarchyJSON = DB::table('tbl_policy_order')->select('current_employee_hirearchy')->where('order_id','=',$orderid)->where('current_employee_hirearchy','like',"%{$empid}%")->get();
         $hierarchy = json_decode($hierarchyJSON[0]->current_employee_hirearchy);
+        $hierarchyReturnJSON = [];
         foreach($hierarchy as $emp)
         {
-            
+            if($emp->empid == $empid)
+            {
+                $emp->isCurrent = "1";
+            }
+            else
+            {
+                $emp->isCurrent = "0";
+            }
+            array_push($hierarchyReturnJSON,$emp);
         }
-        return response()->json(['orderid' => $orderid, 'empid' => $empid]);
+        return $hierarchyReturnJSON;
     }
 
     /**
