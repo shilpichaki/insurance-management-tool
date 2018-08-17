@@ -178,6 +178,12 @@ class PolicyorderController extends Controller
         return view('policyorder.edit')->with(['id'=> $id,'policyMaster' => $policyMaster, 'nomineeRelationMaster' => $nomineeRelationMaster, 'policyStatusMaster' => $policyStatusMaster, 'policyOrder' => $policyOrder, 'mothercompanylist' => $mothercompanylist, 'subcompanylist' => $subcompanylist, 'brokercompanylist' => $brokercompanylist]);
     }
 
+    public function policydetails(Request $request)
+    {
+        $policyDetails = DB::select("select policy_id,amount,m_company_id from tbl_policy_mast where policy_id = ?",[$request->input('PolicyID')]);
+        return $policyDetails;
+    }
+
     /**
      * Update the specified resource in storage.
      *

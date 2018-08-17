@@ -15,32 +15,11 @@ $(document).ready(function () {
 	
 	$(".tell_index").click(function(){
 		var order_id = $(this).attr("data-orderid");
-        //var data_empid = $(this).find(".td_emp_id").attr("data-empid");
         console.log(order_id);
-        //console.log(data_empid);
-
-        //var url = "http://localhost:8000/orderstatement/hierarchy/"+order_id+"/"+data_empid;
         var myUrl = "http://localhost:8000/orderstatement/hierarchy/"+order_id;
         console.log(myUrl);
 
         $.ajax({url: myUrl, success: function(result){
-            /*var dataArray = [
-                {
-                    empid: "A003",
-                    empdesg: "Director",
-                    isCurrent: "1"
-                },
-                {
-                    empid: "A002",
-                    empdesg: "RM",
-                    isCurrent: "0"
-                },
-                {
-                    empid: "A001",
-                    empdesg: "TSO",
-                    isCurrent: "0"
-                }
-            ];*/
 			var dataArray = result;
 			
 			console.log(result);

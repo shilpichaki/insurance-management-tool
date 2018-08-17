@@ -72,3 +72,24 @@ function paymentmode(obj)
             $('#instrument_no').parents('.form-group').hide();
     }
 }
+
+$('#policy_id').change(function(){ 
+    var policyId = $(this).val();
+    if(policyId == "")
+    {
+
+    }
+    else
+    {
+        // $.post({url: "http://localhost:8000/policyorder/policydetails/" + policyId, success: function(result){
+        //     console.log(result);
+        // }});
+        $.post("http://localhost:8000/policyorder/policydetails",
+        {
+            PolicyID: policyId
+        },
+        function(data, status){
+            console.log(data);
+        });
+    }
+});
