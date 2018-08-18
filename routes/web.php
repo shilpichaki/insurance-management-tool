@@ -95,7 +95,7 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator'
     //Policy Order Routes 
     Route::get('policyorder','PolicyorderController@index');
     Route::get('policyorder/create','PolicyorderController@create');
-    Route::post('policyorder/policydetails','PolicyorderController@policydetails');
+    Route::get('policyorder/policydetails/{id}','PolicyorderController@policydetails');
     Route::get('policyorder/edit/{id}','PolicyorderController@edit');
     Route::get('policyorder/{id}','PolicyorderController@show');
     Route::post('policyorder','PolicyorderController@store')->name('policyorder.store');

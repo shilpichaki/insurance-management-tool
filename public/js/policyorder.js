@@ -41,11 +41,9 @@ function handovertocompanytype(obj)
             $('#handover_to_sub_company_id').parents('.form-group').hide();
         break;
         case "sub":
-            $('#handover_to_mother_company_id').parents('.form-group').hide();
             $('#handover_to_sub_company_id').parents('.form-group').show();
         break;
         default:
-            $('#handover_to_mother_company_id').parents('.form-group').hide();
             $('#handover_to_sub_company_id').parents('.form-group').hide();
     }
 }
@@ -81,15 +79,10 @@ $('#policy_id').change(function(){
     }
     else
     {
-        // $.post({url: "http://localhost:8000/policyorder/policydetails/" + policyId, success: function(result){
-        //     console.log(result);
-        // }});
-        $.post("http://localhost:8000/policyorder/policydetails",
-        {
-            PolicyID: policyId
-        },
-        function(data, status){
-            console.log(data);
-        });
+        $.ajax({url: "http://localhost:8000/policyorder/policydetails/" + policyId, success: function(result){
+            $('#amount').val(result[0].amount);
+            $("#handover_to_mother_company_id option[value='" + result[0].companyId + "']").attr("selected","selected");
+            console.log(result[0].amount + '  ' + result[0].companyId);
+        }});
     }
 });

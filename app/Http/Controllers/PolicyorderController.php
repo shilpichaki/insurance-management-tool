@@ -7,6 +7,7 @@ use App\PolicyOrder;
 use Validator;
 use App\Util;
 use DB;
+use Auth;
 
 class PolicyorderController extends Controller
 {
@@ -178,9 +179,13 @@ class PolicyorderController extends Controller
         return view('policyorder.edit')->with(['id'=> $id,'policyMaster' => $policyMaster, 'nomineeRelationMaster' => $nomineeRelationMaster, 'policyStatusMaster' => $policyStatusMaster, 'policyOrder' => $policyOrder, 'mothercompanylist' => $mothercompanylist, 'subcompanylist' => $subcompanylist, 'brokercompanylist' => $brokercompanylist]);
     }
 
-    public function policydetails(Request $request)
+    public function policydetails($id)
     {
-        $policyDetails = DB::select("select policy_id,amount,m_company_id from tbl_policy_mast where policy_id = ?",[$request->input('PolicyID')]);
+        $roleID = Auth::user()->role_id;
+        if($roleID == 1 || $roleID == 2)
+            $policyDetails = DB::select("select policy_id as id,amount,m_company_id as companyId from tbl_policy_mast where policy_id = ?",[$id]);
+        else
+            $policyDetails = "Not Accessable";
         return $policyDetails;
     }
 
