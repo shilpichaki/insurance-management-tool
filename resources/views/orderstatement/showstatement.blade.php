@@ -33,8 +33,8 @@ $totalProfit = 0;
         @endforeach
     
         <tr class="tell_total">
-            <td colspan="5" class="text-right">Total Profit</td>
-            <td colspan="3" class="text-left"><?php echo number_format($totalProfit,2);?></td>
+            <td colspan="6" class="text-right">Total Profit</td>
+            <td colspan="2" class="text-left"><?php echo number_format($totalProfit,2);?></td>
         </tr>
     </tbody>
 </table>
