@@ -9,27 +9,36 @@ $totalProfit = 0;
     <tbody>
         <tr class="tell_index">
             <th>Application No</th>
-            <th>Customer Name</th>
+            {{-- <th>Customer Name</th> --}}
             <th>Company Name</th>
-            <th>Employee Name</th>
             <th>Policy Name</th>
             <th>Policy Amount</th>
-            <th>Profit</th>
-            <th>Order Date</th>
+            <th>Gross Profit</th>
+            <th>Employee Name</th>
+            <th>Broker Company</th>
+            <th>Payment</th>
+            <th>Net Profit</th>
+            {{-- <th>Order Date</th> --}}
         </tr>
         
         @foreach($statements as $statement)
+            <?php 
+                $totalProfit = (float)$totalProfit + (float)$statement->profit;
+                
+            ?>
             <tr data-orderid = "{{$statement->order_id}}" class="tell_index">
                 <td>{{$statement->application_no}}</td>
-                <td>{{$statement->customer_name}}</td>
+                {{-- <td>{{$statement->customer_name}}</td> --}}
                 <td>{{$statement->company_name}}</td>
-                <td id = "{{$statement->d_case_taker_id}}">{{$statement->emp_name}}</td>
                 <td>{{$statement->policy_name}}</td>
                 <td align="right">{{$statement->amount}}</td>
                 <td align="right">{{$statement->profit}}</td>
-                <td>{{date("d/m/Y",strtotime($statement->order_date))}}</td>
+                <td id = "{{$statement->d_case_taker_id}}">{{$statement->emp_name}}</td>
+                <td>{{$statement->broker_company_name}}</td>
+                <td>{{$statement->broker_payment}}</td>
+                <td></td>
+                {{-- <td>{{date("d/m/Y",strtotime($statement->order_date))}}</td> --}}
             </tr>
-            <?php $totalProfit = (float)$totalProfit + (float)$statement->profit;?>
         @endforeach
     
         <tr class="tell_total">
