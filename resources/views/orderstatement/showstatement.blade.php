@@ -2,6 +2,9 @@
 
 @section('content')
 <?php
+$grossProfit = 0;
+$brokerPayment = 0;
+$netProfit = 0;
 $totalProfit = 0;
 ?>
 <div class="card">
@@ -23,8 +26,15 @@ $totalProfit = 0;
         
         @foreach($statements as $statement)
             <?php 
-                $totalProfit = (float)$totalProfit + (float)$statement->profit;
-                
+                $grossProfit = (float)$grossProfit + (float)$statement->profit;
+                if(isset($statement->broker_payment))
+                {    
+                    $statement->broker_payment = 0;
+                    $statement->broker_company_name = "";
+                    $brokerPayment = (float)$brokerPayment + 0;
+                    $netProfit = (float)$statement->profit - 0;
+                }
+                $totalProfit = (float)$totalProfit + (float)$netProfit;
             ?>
             <tr data-orderid = "{{$statement->order_id}}" class="tell_index">
                 <td>{{$statement->application_no}}</td>
@@ -34,16 +44,16 @@ $totalProfit = 0;
                 <td align="right">{{$statement->amount}}</td>
                 <td align="right">{{$statement->profit}}</td>
                 <td id = "{{$statement->d_case_taker_id}}">{{$statement->emp_name}}</td>
-                <td>{{$statement->broker_company_name}}</td>
-                <td>{{$statement->broker_payment}}</td>
-                <td></td>
+                <td>{{@if isset($statement->broker_company_name) @endif}}</td>
+                <td align="right">{{@if isset($statement->broker_payment) @endif}}</td>
+                <td align="right">{{number_format($netProfit,2)}}</td>
                 {{-- <td>{{date("d/m/Y",strtotime($statement->order_date))}}</td> --}}
             </tr>
         @endforeach
     
         <tr class="tell_total">
-            <td colspan="6" class="text-right">Total Profit</td>
-            <td colspan="2" class="text-left"><?php echo number_format($totalProfit,2);?></td>
+            <td colspan="8" class="text-right">Total Profit</td>
+            <td colspan="1" class="text-left"><?php echo number_format($totalProfit,2);?></td>
         </tr>
     </tbody>
 </table>
