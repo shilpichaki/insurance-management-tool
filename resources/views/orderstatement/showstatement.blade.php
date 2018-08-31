@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <?php
 $grossProfit = 0;
 $brokerPayment = 0;
@@ -27,12 +28,16 @@ $totalProfit = 0;
         @foreach($statements as $statement)
             <?php 
                 $grossProfit = (float)$grossProfit + (float)$statement->profit;
-                if(isset($statement->broker_payment))
+                if(!isset($statement->broker_payment))
                 {    
                     $statement->broker_payment = 0;
                     $statement->broker_company_name = "";
                     $brokerPayment = (float)$brokerPayment + 0;
                     $netProfit = (float)$statement->profit - 0;
+                }
+                else 
+                {
+                    $netProfit = (float)$statement->profit - $statement->broker_payment;
                 }
                 $totalProfit = (float)$totalProfit + (float)$netProfit;
             ?>
@@ -44,8 +49,8 @@ $totalProfit = 0;
                 <td align="right">{{$statement->amount}}</td>
                 <td align="right">{{$statement->profit}}</td>
                 <td id = "{{$statement->d_case_taker_id}}">{{$statement->emp_name}}</td>
-                <td>{{@if isset($statement->broker_company_name) @endif}}</td>
-                <td align="right">{{@if isset($statement->broker_payment) @endif}}</td>
+                <td>@if (isset($statement->broker_company_name)) {{$statement->broker_company_name}} @endif</td>
+                <td align="right">@if (isset($statement->broker_payment)) {{$statement->broker_payment}} @endif</td>
                 <td align="right">{{number_format($netProfit,2)}}</td>
                 {{-- <td>{{date("d/m/Y",strtotime($statement->order_date))}}</td> --}}
             </tr>
