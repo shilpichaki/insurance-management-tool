@@ -3,11 +3,11 @@
 @section('content')
 
 
-<form action="{{ action('MothercompanyController@store') }}" method="post" class="form-horizontal" >
+<form action="{{route('mothercompany.store')}}" method="post" class="form-horizontal" >
     {{csrf_field()}}
     <div class="panel panel-default">
         <div class="panel-heading"><b>Create New Mother Company</b></div>
-        </br>
+
         <!-- // Form Body // -->
 
         <div class="panel-body">

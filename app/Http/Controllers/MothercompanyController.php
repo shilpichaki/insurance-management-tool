@@ -111,6 +111,15 @@ class MothercompanyController extends Controller
         return new MothercompanyResource($motherCompanyList);
     }
 
+    public function edit($id)
+    {
+        // $motherCompanyList = Mothercompany::all()->toArray();
+        // $subCompanyList = Subcompany::all()->toArray();
+        $country_data =DB::table('countries')->select('country_id','country_name')->get();
+        $state_data =DB::table('states')->select('state_id','state_name')->get();
+        return view('mothercompany.edit',compact('state_data','country_data'));
+    }
+
     /**
      * Remove the specified resource from storage.
      *
