@@ -49,7 +49,7 @@ class MothercompanyController extends Controller
                     'company_email' => 'string|email|max:100|nullable',
                     'company_address' => 'required|string',
                     'company_pin' => 'required|string|max:7',
-                    'company_city' => 'required|integer',
+                    'company_city' => 'required|string',
                     'company_state' => 'required|integer',
                     'company_country' => 'required|integer',
                     'company_gstinno' => 'string|nullable'
@@ -69,7 +69,7 @@ class MothercompanyController extends Controller
                     'company_email' => 'string|email|max:100|nullable',
                     'company_address' => 'required|string',
                     'company_pin' => 'required|string|max:7',
-                    'company_city' => 'required|integer',
+                    'company_city' => 'required|string',
                     'company_state' => 'required|integer',
                     'company_country' => 'required|integer',
                     'company_gstinno' => 'string|nullable'
@@ -117,7 +117,8 @@ class MothercompanyController extends Controller
         // $subCompanyList = Subcompany::all()->toArray();
         $country_data =DB::table('countries')->select('country_id','country_name')->get();
         $state_data =DB::table('states')->select('state_id','state_name')->get();
-        return view('mothercompany.edit',compact('state_data','country_data'));
+        $mothercompany = Mothercompany::findOrFail($id);
+        return view('mothercompany.edit',compact('state_data','country_data','mothercompany','id'));
     }
 
     /**

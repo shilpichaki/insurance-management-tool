@@ -101,8 +101,6 @@ class BrokercompanyController extends Controller
             }
         }
 
-        return $request;
-
         $brokercompany->b_company_id = $request->input('company_id');
         $brokercompany->b_company_name = $request->input('company_name');
         $brokercompany->b_avg_feedback_day = $request->input('feedback_day');
@@ -116,7 +114,7 @@ class BrokercompanyController extends Controller
 
         if($brokercompany->save())
         {
-            return new BrokercompanyResource($brokercompany);
+            return redirect()->route('brokercompany.home');
         }
     }
 
@@ -135,7 +133,7 @@ class BrokercompanyController extends Controller
         $brokercompany->b_company_GSTIN = $request->company_gstinno;
 
         $brokercompany->save();
-        return redirect()->route('home');
+        return redirect()->route('brokercompany.home');
         
 
     }

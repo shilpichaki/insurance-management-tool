@@ -29,7 +29,8 @@ class BrokercompanyrelationsController extends Controller
      */
     public function create()
     {
-        //
+        $brokercompanylist = DB::select("select b_company_id,b_company_name from tbl_broker_company_mast");
+        return view('brelation.create',compact('brokercompanylist'));
     }
 
 
@@ -136,7 +137,9 @@ class BrokercompanyrelationsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $brokercompanylist = DB::select("select b_company_id,b_company_name from tbl_broker_company_mast");
+        $brokerCompanyRelation = Brokercompanyrelations::where('company_relation_id',$request->relation_id)->first();
+        return view('bsrelation.edit',compact('brokercompanylist','brokerCompanyRelation','id'));
     }
 
     /**
