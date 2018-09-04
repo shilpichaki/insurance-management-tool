@@ -3,7 +3,7 @@
 @section('content')
 
 
-<form action="{{route('policymaster.store')}}" method="post" class="form-horizontal" >
+<form action="{{route('policymaster.update')}}" method="post" class="form-horizontal" >
     {{csrf_field()}}
     <div class="panel panel-default">
         <div class="panel-heading"><b>Create New Policy</b></div>

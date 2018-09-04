@@ -5,7 +5,6 @@
 
 <form action="{{ action('BrokercompanyController@store') }}" method="post" class="form-horizontal" >
     {{csrf_field()}}
-    <form>
         <div class="panel panel-default">
             <div class="panel-heading"><b>Create New Broker Company</b></div>
             <!-- // Form Body // -->
@@ -83,6 +82,5 @@
                 <input type="button" class="btn btn-primary" value="Go back" onclick="history.back()">
             </div>
         </div>
-    </form>
 </form>
 @endsection

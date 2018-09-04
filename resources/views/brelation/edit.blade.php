@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="cotainer">
-    <form class="form-horizontal" method="POST" action="{{ route('brelation.store') }}">
+    <form class="form-horizontal" method="POST" action="{{ route('brelation.update') }}">
 
         {{ csrf_field() }}
 

@@ -53,8 +53,8 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator'
     Route::put('brokercompany/edit/{id}','BrokercompanyController@update')->name('update');
     Route::delete('/delete/{id}',array('uses' => 'BrokercompanyController@destroy', 'as' => 'Del.route'));
     Route::get('brokercompany/{id}','BrokercompanyController@show');
-    Route::post('brokercompany','BrokercompanyController@store');
-    Route::put('brokercompany','BrokercompanyController@store')->name('brokercompany.store');
+    Route::post('brokercompany','BrokercompanyController@store')->name('brokercompany.store');
+    Route::put('brokercompany','BrokercompanyController@store')->name('brokercompany.update');
   
     //Mother and Sub Company Relation
     Route::get('msrelation','MothersubcompanyrelationsController@index')->name('msrelation.store');
@@ -70,7 +70,7 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator'
     Route::get('brelation/edit/{id}','BrokercompanyrelationsController@edit');
     Route::get('brelation/{id}','BrokercompanyrelationsController@show');
     Route::post('brelation','BrokercompanyrelationsController@store')->name('brelation.store');
-    Route::put('brelation','BrokercompanyrelationsController@store')->name('brelation.store');
+    Route::put('brelation','BrokercompanyrelationsController@store')->name('brelation.upadte');
 
     //Customer data save Routes
     Route::get('customer','CustomerController@index')->name('customer.home');

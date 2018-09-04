@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="cotainer">
-    <form class="form-horizontal" method="POST" action="{{ route('msrelation.store') }}">
+    <form class="form-horizontal" method="POST" action="{{ route('customer.update') }}">
 
         {{ csrf_field() }}
         <input name="_method" type="hidden" value="put">

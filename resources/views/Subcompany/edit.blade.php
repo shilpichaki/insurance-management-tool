@@ -8,7 +8,7 @@
 
         <!-- // Form Body // -->
         <div class="panel-body">
-            <form method="post" action="{{ route('brokercompany.update')}}" > 
+            <form method="post" action="{{ route('subcompany.update')}}" > 
                 {{ csrf_field()}}
                 <input type="hidden"  name='_method' value="PUT">
                 <input type="hidden"  name='company_id' value="{{$id}}">
