@@ -57,7 +57,7 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator'
     Route::put('brokercompany','BrokercompanyController@store')->name('brokercompany.update');
   
     //Mother and Sub Company Relation
-    Route::get('msrelation','MothersubcompanyrelationsController@index')->name('msrelation.store');
+    Route::get('msrelation','MothersubcompanyrelationsController@index')->name('msrelation.home');
     Route::get('msrelation/create','MothersubcompanyrelationsController@create');
     Route::get('msrelation/edit/{id}','MothersubcompanyrelationsController@edit');
     Route::get('msrelation/{id}','MothersubcompanyrelationsController@show');
@@ -78,7 +78,7 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator'
     Route::get('customer/edit/{id}','CustomerController@edit');
     Route::get('customer/{id}','CustomerController@show');
     Route::post('customer','CustomerController@store')->name('customer.store');
-    Route::put('customer','CustomerController@store')->name('customer.store');
+    Route::put('customer','CustomerController@store')->name('customer.update');
 
     //Policy Master Routes
     Route::get('policy','PolicyController@index')->name('policymaster.home');
@@ -86,7 +86,7 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator'
     Route::get('policy/edit/{id}','PolicyController@edit');
     Route::get('policy/{id}','PolicyController@show');
     Route::post('policy','PolicyController@store')->name('policymaster.store');
-    Route::put('policy','PolicyController@store')->name('policymaster.store');
+    Route::put('policy','PolicyController@store')->name('policymaster.update');
 
     //Policy Status Routes
     Route::get('policystatus','PolicystatusController@index');
@@ -95,7 +95,7 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator'
     Route::put('policystatus','PolicystatusController@store');
 
     //Policy Order Routes 
-    Route::get('policyorder','PolicyorderController@index');
+    Route::get('policyorder','PolicyorderController@index')->name('policyorder.home');
     Route::get('policyorder/create','PolicyorderController@create');
     Route::get('policyorder/policydetails/{id}','PolicyorderController@policydetails');
     Route::get('policyorder/edit/{id}','PolicyorderController@edit');
