@@ -42,7 +42,7 @@
             <div class="form-group">
                     <label for="plan_mode" class="col-md-4 control-label">Plan Mode</label>
                     <div class="col-md-6">
-                        <input type="email" autocomplete="off" name="plan_mode" class="form-control" id="plan_mode" placeholder="Yearly/Half-Yearly/etc..">
+                        <input type="text" autocomplete="off" name="plan_mode" class="form-control" id="plan_mode" placeholder="Yearly/Half-Yearly/etc..">
                     </div>
             </div>
 

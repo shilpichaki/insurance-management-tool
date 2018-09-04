@@ -28,7 +28,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('customer.create');
     }
 
     /**
@@ -106,7 +106,8 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $customer = Customer::where('customer_id',$id)->first();
+        return view('customer.edit',compact('customer','id'));
     }
 
     /**

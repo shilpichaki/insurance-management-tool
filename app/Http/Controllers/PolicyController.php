@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Policy;
 use Validator;
+use DB;
 
 class PolicyController extends Controller
 {
@@ -26,7 +27,8 @@ class PolicyController extends Controller
      */
     public function create()
     {
-        //
+        $mothercompanylist = DB::select("select m_company_id,m_company_name from tbl_mother_company_mast");
+        return view('policymaster.create',compact('mothercompanylist'));
     }
 
     /**
@@ -112,7 +114,9 @@ class PolicyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $mothercompanylist = DB::select("select m_company_id,m_company_name from tbl_mother_company_mast");
+        $policyMaster = Policy::where('policy_id',$id)->first();
+        return view('policymaster.edit',compact('mothercompanylist','policyMaster','id'));
     }
 
     /**

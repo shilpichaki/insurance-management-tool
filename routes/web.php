@@ -73,16 +73,20 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator'
     Route::put('brelation','BrokercompanyrelationsController@store')->name('brelation.store');
 
     //Customer data save Routes
-    Route::get('customer','CustomerController@index');
+    Route::get('customer','CustomerController@index')->name('customer.home');
+    Route::get('customer/create','CustomerController@create');
+    Route::get('customer/edit/{id}','CustomerController@edit');
     Route::get('customer/{id}','CustomerController@show');
-    Route::post('customer','CustomerController@store');
-    Route::put('customer','CustomerController@store');
+    Route::post('customer','CustomerController@store')->name('customer.store');
+    Route::put('customer','CustomerController@store')->name('customer.store');
 
     //Policy Master Routes
-    Route::get('policy','PolicyController@index');
+    Route::get('policy','PolicyController@index')->name('policymaster.home');
+    Route::get('policy/create','PolicyController@create');
+    Route::get('policy/edit/{id}','PolicyController@edit');
     Route::get('policy/{id}','PolicyController@show');
-    Route::post('policy','PolicyController@store');
-    Route::put('policy','PolicyController@store');
+    Route::post('policy','PolicyController@store')->name('policymaster.store');
+    Route::put('policy','PolicyController@store')->name('policymaster.store');
 
     //Policy Status Routes
     Route::get('policystatus','PolicystatusController@index');
