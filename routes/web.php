@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator'
 
     //Mother Company Routes
     Route::get('mothercompany','MothercompanyController@index')->name('mothercompany.home');
-    Route::get('mothercompany/create','MothercompanyController@create');
+    Route::get('mothercompany/create','MothercompanyController@create')->name('mothercompany.create');
     Route::get('mothercompany/edit/{id}','MothercompanyController@edit')->name('mothercompany.edit');
     Route::delete('mothercompany/delete/{id}','MothercompanyController@destroy');
     Route::post('mothercompany','MothercompanyController@store')->name('mothercompany.store');
@@ -41,8 +41,8 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator'
 
     //Sub Company Routes
     Route::get('subcompany','SubcompanyController@index')->name('subcompany.index');
-    Route::get('mothercompany/create','SubcompanyController@create');
-    Route::get('mothercompany/edit/{id}','SubcompanyController@edit')->name('subcompany.edit');
+    Route::get('subcompany/create','SubcompanyController@create');
+    Route::get('subcompany/edit/{id}','SubcompanyController@edit')->name('subcompany.edit');
     Route::post('subcompany','SubcompanyController@store')->name('subcompany.store');
     Route::put('subcompany','SubcompanyController@store')->name('subrcompany.update');
 

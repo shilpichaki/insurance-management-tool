@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Subcompany;
 use Validator;
 use App\Http\Resources\SubcompanyResource;
+use DB;
 
 class SubcompanyController extends Controller
 {
