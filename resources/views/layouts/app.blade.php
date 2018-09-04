@@ -331,7 +331,7 @@
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="#" class="">Show All</a>
                                 </li>
-                                <li><a href="#" class="">Add</a>
+                                <li><a href="http://localhost:8000/mothercompany/create" class="">Add</a>
                                 </li>
                                 <li><a href="#" class="">Edit</a>
                                 </li>

@@ -7,6 +7,8 @@ $grossProfit = 0;
 $brokerPayment = 0;
 $netProfit = 0;
 $totalProfit = 0;
+//var_dump($statements);
+//die;
 ?>
 <div class="card">
 <table class="table table-bordered my_table" border="1">
@@ -28,7 +30,7 @@ $totalProfit = 0;
         @foreach($statements as $statement)
             <?php 
                 $grossProfit = (float)$grossProfit + (float)$statement->profit;
-                if(!isset($statement->broker_payment))
+                if($statement->broker_payment=="")
                 {    
                     $statement->broker_payment = 0;
                     $statement->broker_company_name = "";

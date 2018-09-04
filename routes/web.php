@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator'
 
     //Mother Company Routes
     Route::get('mothercompany','MothercompanyController@index')->name('mothercompany.home');
-    Route::get('mothercompany/create','MothercompanyController@create')->name('mothercompany.create');
+    Route::get('mothercompany/create','MothercompanyController@create');
     Route::get('mothercompany/edit/{id}','MothercompanyController@edit')->name('mothercompany.edit');
     Route::delete('mothercompany/delete/{id}','MothercompanyController@destroy');
     Route::post('mothercompany','MothercompanyController@store')->name('mothercompany.store');
