@@ -27,7 +27,19 @@ class SubcompanyController extends Controller
      */
     public function create()
     {
-        //
+        $country_data =DB::table('countries')->select('country_id','country_name')->get();
+        $state_data =DB::table('states')->select('state_id','state_name')->get();
+        return view('subcompany.create',compact('state_data','country_data'));
+    }
+
+    public function edit($id)
+    {
+        // $motherCompanyList = Mothercompany::all()->toArray();
+        // $subCompanyList = Subcompany::all()->toArray();
+        $country_data =DB::table('countries')->select('country_id','country_name')->get();
+        $state_data =DB::table('states')->select('state_id','state_name')->get();
+        $subcompany = Subcompany::findOrFail($id);
+        return view('subcompany.edit',compact('state_data','country_data','subcompany','id'));
     }
 
     /**
