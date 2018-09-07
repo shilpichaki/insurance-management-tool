@@ -162,8 +162,6 @@
                     @guest
                         @if(Route::currentRouteName() == "login")
                             Login
-                        @elseif(Route::currentRouteName() == "register")
-                            Register
                         @endif
                     @else
                         {{Auth::user()->role->name}}
@@ -182,7 +180,6 @@
                 <ul class="navbar-nav my-lg-0">
                     @guest
                         <li><a href="{{ route('login') }}">Login</a></li>
-                        <li><a href="{{ route('register') }}">Register</a></li>
                     @else
                         <!-- Comment -->
                         <li class="nav-item dropdown">

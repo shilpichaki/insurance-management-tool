@@ -15,7 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Route::post('login', 'Auth\LoginController@login');
+Route::get('login',  'Auth\LoginController@showLoginForm')->name('login');
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -27,6 +29,10 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin']],function()
     Route::get('company/{id}','CompanyController@index');
     Route::post('company','CompanyController@store')->name('company.store');
     Route::put('company','CompanyController@store')->name('company.update');
+
+    //Registration Route
+    Route::get('register','Auth\RegisterController@showRegistrationForm')->name('register');
+    Route::post('register','Auth\RegisterController@register');
 });
 
 Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator']],function(){
