@@ -323,18 +323,48 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li class="nav-label">EXTRA</li>
+                        <li class="nav-label">MENU</li>
+
+                        <!-- Mother Company Menu-->
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">Mother Company </span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="#" class="">Show All</a>
+                                <li><a href="{{route('mothercompany.index')}}" class="">Show All</a>
                                 </li>
-                                <li><a href="http://localhost:8000/mothercompany/create" class="">Add</a>
-                                </li>
-                                <li><a href="#" class="">Edit</a>
+                                <li><a href="{{route('mothercompany.create')}}" class="">Add</a>
                                 </li>
                             </ul>
                         </li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-map-marker"></i><span class="hide-menu">Maps</span></a>
+
+                        <!-- Sub Company Menu-->
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">Sub Company </span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{route('subcompany.index')}}" class="">Show All</a>
+                                </li>
+                                <li><a href="{{route('subcompany.create')}}" class="">Add</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Broker Company Menu-->
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">Broker Company </span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{route('brokercompany.index')}}" class="">Show All</a>
+                                </li>
+                                <li><a href="{{route('brokercompany.create')}}" class="">Add</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Company Relation Menu-->
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">Mother Sub Company Relation</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{route('msrelation.index')}}" class="">Show All</a>
+                                </li>
+                                <li><a href="{{route('msrelation.create')}}" class="">Add</a>
+                                </li>
+                            </ul>
+                        </li>
+                        {{-- <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-map-marker"></i><span class="hide-menu">Maps</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="map-google.html">Google</a></li>
                                 <li><a href="map-vector.html">Vector</a></li>
@@ -354,7 +384,7 @@
                                 </li>
                                 <li><a href="#">item 1.4</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
