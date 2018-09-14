@@ -18,8 +18,9 @@ class BrokercompanyrelationsController extends Controller
      */
     public function index()
     {
-        $brokerCompanyRelation = Brokercompanyrelations::all()->toArray();
-        return $brokerCompanyRelation;
+        $brokerCompanyRelation = Brokercompanyrelations::all();
+        // return $brokerCompanyRelation;
+        return view('brelation.index')->with(['brokerCompanyRelation' => $brokerCompanyRelation]);
     }
 
      /**
@@ -63,7 +64,7 @@ class BrokercompanyrelationsController extends Controller
                 $array_requested = [
                     'b_company_id' => $request->input('b_company_id'),
                     'deal_percentage' => $request->input('deal_percentage'),
-                    'percent_created' => Util::mysqlDateTimeConverter($request->input('percent_created'))
+                    'percent_created_at' => Util::mysqlDateTimeConverter($request->input('percent_created'))
                 ];
             }
             else
@@ -71,13 +72,14 @@ class BrokercompanyrelationsController extends Controller
                 $array_requested = [
                     'b_company_id' => $request->input('b_company_id'),
                     'deal_percentage' => $request->input('deal_percentage'),
-                    'percent_created' => Util::mysqlDateTimeConverter($request->input('percent_created')),
-                    'percent_updated' => Util::mysqlDateTimeConverter($request->input('percent_updated'))
+                    'percent_created_at' => Util::mysqlDateTimeConverter($request->input('percent_created')),
+                    'percent_updated_at' => Util::mysqlDateTimeConverter($request->input('percent_updated'))
                 ];
             }
             DB::table('tbl_broker_company_relation')
             ->where('company_relation_id', $request->input('relation_id'))
             ->update($array_requested);
+            return redirect('/brelation');
         }
         else
         {
@@ -107,7 +109,7 @@ class BrokercompanyrelationsController extends Controller
             //Saving the model
             if( $brokercompanyrelations->save())
             {
-                return  $brokercompanyrelations;
+                return redirect('/brelation');
             }
             else
             {
@@ -138,8 +140,8 @@ class BrokercompanyrelationsController extends Controller
     public function edit($id)
     {
         $brokercompanylist = DB::select("select b_company_id,b_company_name from tbl_broker_company_mast");
-        $brokerCompanyRelation = Brokercompanyrelations::where('company_relation_id',$request->relation_id)->first();
-        return view('bsrelation.edit',compact('brokercompanylist','brokerCompanyRelation','id'));
+        $brokerCompanyRelation = Brokercompanyrelations::where('company_relation_id',$id)->first();
+        return view('brelation.edit',compact('brokercompanylist','brokerCompanyRelation','id'));
     }
 
     /**

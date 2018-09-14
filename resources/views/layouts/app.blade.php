@@ -325,6 +325,11 @@
                     <ul id="sidebarnav">
                         <li class="nav-label">MENU</li>
 
+
+                        <?php 
+                        if(Auth::user()->role->name == "Admin" || Auth::user()->role->name == "Modarator")
+                        {
+                        ?>
                         <!-- Mother Company Menu-->
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">Mother Company </span></a>
                             <ul aria-expanded="false" class="collapse">
@@ -364,6 +369,51 @@
                                 </li>
                             </ul>
                         </li>
+
+                        <!-- Broker Company Relation -->
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">Broker Company Relation</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{route('brelation.index')}}" class="">Show All</a>
+                                </li>
+                                <li><a href="{{route('brelation.create')}}" class="">Add</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Policy Master -->
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">Policy Master</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{route('policymaster.home')}}" class="">Show All</a>
+                                </li>
+                                <li><a href="{{route('policymaster.create')}}" class="">Add</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Policy Order -->
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">Policy Order</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{route('policyorder.create')}}" class="">Add</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <?php
+                        }
+
+                        else if(Auth::user()->role->name == "Admin" || Auth::user()->role->name == "Modarator" || Auth::user()->role->name == "Viewer")
+                        {
+                        ?>
+
+                        <!-- Order Statement -->
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">Order Statement</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{route('orderstatement.create')}}" class="">Statement Query</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <?php
+                        }
+                        ?>
                         {{-- <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-map-marker"></i><span class="hide-menu">Maps</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="map-google.html">Google</a></li>

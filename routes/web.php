@@ -56,9 +56,6 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator'
     Route::get('brokercompany','BrokercompanyController@index')->name('brokercompany.index');
     Route::get('brokercompany/create','BrokercompanyController@create')->name('brokercompany.create');
     Route::get('brokercompany/edit/{id}','BrokercompanyController@edit')->name('brokercompany.edit');
-    // Route::put('brokercompany/edit/{id}','BrokercompanyController@update')->name('update');
-    // Route::delete('/delete/{id}',array('uses' => 'BrokercompanyController@destroy', 'as' => 'Del.route'));
-    // Route::get('brokercompany/{id}','BrokercompanyController@show');
     Route::post('brokercompany','BrokercompanyController@store')->name('brokercompany.store');
     Route::put('brokercompany','BrokercompanyController@store')->name('brokercompany.update');
   
@@ -72,11 +69,11 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator'
 
     //Broker Company Relation
     Route::get('brelation','BrokercompanyrelationsController@index')->name('brelation.index');
-    Route::get('brelation/create','BrokercompanyrelationsController@create');
+    Route::get('brelation/create','BrokercompanyrelationsController@create')->name('brelation.create');
     Route::get('brelation/edit/{id}','BrokercompanyrelationsController@edit');
     Route::get('brelation/{id}','BrokercompanyrelationsController@show');
     Route::post('brelation','BrokercompanyrelationsController@store')->name('brelation.store');
-    Route::put('brelation','BrokercompanyrelationsController@store')->name('brelation.upadte');
+    Route::put('brelation','BrokercompanyrelationsController@store')->name('brelation.update');
 
     //Customer data save Routes
     Route::get('customer','CustomerController@index')->name('customer.home');
@@ -88,7 +85,7 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator'
 
     //Policy Master Routes
     Route::get('policy','PolicyController@index')->name('policymaster.home');
-    Route::get('policy/create','PolicyController@create');
+    Route::get('policy/create','PolicyController@create')->name('policymaster.create');
     Route::get('policy/edit/{id}','PolicyController@edit');
     Route::get('policy/{id}','PolicyController@show');
     Route::post('policy','PolicyController@store')->name('policymaster.store');
@@ -102,7 +99,7 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator'
 
     //Policy Order Routes 
     Route::get('policyorder','PolicyorderController@index')->name('policyorder.home');
-    Route::get('policyorder/create','PolicyorderController@create');
+    Route::get('policyorder/create','PolicyorderController@create')->name('policyorder.create');
     Route::get('policyorder/policydetails/{id}','PolicyorderController@policydetails');
     Route::get('policyorder/edit/{id}','PolicyorderController@edit');
     Route::get('policyorder/{id}','PolicyorderController@show');

@@ -16,8 +16,9 @@ class PolicyController extends Controller
      */
     public function index()
     {
-        $policy = Policy::all()->toArray();
-        return $policy;
+        $policies = Policy::all();
+        return view('policymaster.index')->with(['policies' => $policies]);
+        // return $policy;
     }
 
     /**
@@ -90,7 +91,7 @@ class PolicyController extends Controller
 
         if($policy->save())
         {
-            return $policy;
+            return redirect('/policy');
         }
     }
 
