@@ -400,7 +400,7 @@
                         <?php
                         }
 
-                        else if(Auth::user()->role->name == "Admin" || Auth::user()->role->name == "Modarator" || Auth::user()->role->name == "Viewer")
+                        if(Auth::user()->role->name == "Admin" || Auth::user()->role->name == "Modarator" || Auth::user()->role->name == "Viewer")
                         {
                         ?>
 
