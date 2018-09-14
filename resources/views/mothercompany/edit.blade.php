@@ -61,12 +61,13 @@
                     <div class="col-md-6">
                         <select id="company_state" class="form-control" name="company_state" autofocus>
                             <option value = "">-Please Select One-</option>
-                        @foreach ($statelist as $state)
-                            @if($state->state_id == $mothercompany->company_state)
+                        @foreach ($state_data as $state)
+                            @if($state->state_id == $mothercompany->m_company_state)
                                 <option value="{{ $state->state_id }}" selected>{{ $state->state_name }}</option>
-                                <?php continue;?>
-                            @endif
+                                
+                            @else
                             <option value="{{ $state->state_id }}">{{ $state->state_name }}</option>
+                            @endif
                         @endforeach
                         </select>
         
@@ -84,12 +85,13 @@
                     <div class="col-md-6">
                         <select id="company_country" class="form-control" name="company_country" autofocus>
                             <option value = "">-Please Select One-</option>
-                        @foreach ($countrylist as $country)
-                            @if($country->country_id == $mothercompany->company_country)
+                        @foreach ($country_data as $country)
+                            @if($country->country_id == $mothercompany->m_company_country)
                                 <option value="{{ $country->country_id }}" selected>{{ $country->country_name }}</option>
-                                <?php continue;?>
-                            @endif
+                                
+                            @else
                             <option value="{{ $country->country_id }}">{{ $country->country_name }}</option>
+                            @endif
                         @endforeach
                         </select>
                         

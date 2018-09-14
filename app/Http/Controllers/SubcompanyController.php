@@ -17,8 +17,9 @@ class SubcompanyController extends Controller
      */
     public function index()
     {
-        $subCompanyList = Subcompany::paginate(15);
-        return SubcompanyResource::collection($subCompanyList);
+        $subCompanyList = Subcompany::all();
+        // return SubcompanyResource::collection($subCompanyList);
+        return view('subcompany.index', ['subCompanyList' => $subCompanyList]);
     }
 
     /**
@@ -108,7 +109,7 @@ class SubcompanyController extends Controller
 
         if($subcompany->save())
         {
-            return new SubcompanyResource($subcompany);
+            return redirect('/subcompany');
         }
     }
 

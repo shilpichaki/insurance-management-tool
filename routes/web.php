@@ -50,7 +50,7 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator'
     Route::get('subcompany/create','SubcompanyController@create')->name('subcompany.create');
     Route::get('subcompany/edit/{id}','SubcompanyController@edit')->name('subcompany.edit');
     Route::post('subcompany','SubcompanyController@store')->name('subcompany.store');
-    Route::put('subcompany','SubcompanyController@store')->name('subrcompany.update');
+    Route::put('subcompany','SubcompanyController@store')->name('subcompany.update');
 
     //Broker Company Routes
     Route::get('brokercompany','BrokercompanyController@index')->name('brokercompany.index');

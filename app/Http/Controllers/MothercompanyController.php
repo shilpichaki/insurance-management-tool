@@ -94,7 +94,7 @@ class MothercompanyController extends Controller
 
         if($mothercompany->save())
         {
-            return new MothercompanyResource($mothercompany);
+            return redirect('/mothercompany');
         }
     }
 

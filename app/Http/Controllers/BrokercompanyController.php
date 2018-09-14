@@ -18,7 +18,7 @@ class BrokercompanyController extends Controller
      */
     public function index()
     {
-        $brokerCompanyList = Brokercompany::all()->toArray();
+        $brokerCompanyList = Brokercompany::all();
         return view('Brokercompany.index',compact('brokerCompanyList'));
     }
 
@@ -114,7 +114,7 @@ class BrokercompanyController extends Controller
 
         if($brokercompany->save())
         {
-            return redirect()->route('brokercompany.home');
+            return redirect()->route('brokercompany.index');
         }
     }
 
@@ -133,7 +133,7 @@ class BrokercompanyController extends Controller
         $brokercompany->b_company_GSTIN = $request->company_gstinno;
 
         $brokercompany->save();
-        return redirect()->route('brokercompany.home');
+        return redirect()->route('brokercompany.index');
         
 
     }

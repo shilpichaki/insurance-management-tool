@@ -17,20 +17,19 @@
                <br />
                <br/>
                  <!-- ///  Table  starts ///  -->
-               <table class="table table-bordered table-striped table-hover">
+                 <div class = "card">
+               <table class="table table-bordered my_table" border="1">
                  <!-- ///  Table  Headings ///  -->
                  <thead >
-                    <tr>
-                       <th>company_id</th>
-                       <th>company_name</th>
-                       <th>feedback_day</th>
-                       <th>company_email</th>
-                       <th>company_address</th>
-                       <th>company_pin</th>
-                       <th>company_city</th>
-                       <th>company_state</th>
-                       <th>company_country</th>
-                       <th>company_gstinno</th>
+                    <tr class="tell_index">
+                       <th>Name</th>
+                       <th>Email</th>
+                       <th>Address</th>
+                       <th>PIN</th>
+                       <th>City</th>
+                       <th>State</th>
+                       <th>Country</th>
+                       <th>GSTIN</th>
                        <th  colspan="2">Action</th>
                    </tr>
                  </thead>
@@ -41,28 +40,27 @@
 
                  <tbody>
                    @foreach($brokerCompanyList as $row)<!--//Fetch Records to show ///-->
-                     <tr>
-                        <td align="center">{{$row['b_company_id']}}</td>
+                     <tr class="tell_index">
                         <td align="center">{{$row['b_company_name']}}</td>
-                        <td align="center">{{$row['b_avg_feedback_day']}}</td>
                         <td align="center">{{$row['b_company_email']}}</td>
                         <td align="center">{{$row['b_company_address']}}</td>
                         <td align="center">{{$row['b_company_pin']}}</td>
                         <td align="center">{{$row['b_company_city']}}</td>
-                        <td align="center">{{$row['b_company_state']}}</td>
-                        <td align="center">{{$row['b_company_country']}}</td>
+                        <td align="center">{{$row->state['state_name']}}</td>
+                        <td align="center">{{$row->country['country_name']}}</td>
                         <td align="center">{{$row['b_company_GSTIN']}}</td>
                         <td align="center"><a href="{{action('BrokercompanyController@edit',$row['b_company_id'])}}" class="btn btn-success">Edit</a></td>
-                        <td>
+                        {{-- <td>
                            {{ Form::open(['route' => ['Del.route', $row['b_company_id']], 'method' => 'delete']) }}
                            <button type="submit" class="btn btn-danger">Delete</button>
                            {{ Form::close() }}
-                        </td>
+                        </td> --}}
                     </tr>
                     @endforeach
                  </tbody>
                  <!-- ///  Table  Data ///  -->
               </table> 
+            </div>
               <!-- End of Table -->
              </div>
            </div>
