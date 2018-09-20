@@ -44,6 +44,41 @@ class PaymentRecivedController extends Controller
             //For Create
             $paymentRecivedMain = new PaymentRecived;
             $paymentRecivedDetails = new PaymentRecivedAgainstDetails;
+
+            $validator = Validator::make($request->all(), 
+                [
+                    'company_type' => 'required|string', 
+                    'm_company_id' => 'required_without:s_company_id|string|nullable',
+                    's_company_id' => 'required_without:m_company_id|string|nullable',
+                    'is_gst' => 'required|boolean',
+                    'gst_type' => 'string|nullable',
+                    'tax_percentage' => 'integer|max:100|nullable',
+                    'tax_amount' => 'nullable|regex:/^\d{1,18}(\.\d{1,2})?$/',
+                    'payment_amount' => 'required|regex:/^\d{1,18}(\.\d{1,2})?$/',
+                    'payment_mode' => 'string|required',
+                    'instrument_no' => 'string|nullable',
+                    'instrument_date' => 'required|string'
+                ]
+            );
+
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->errors()->getMessages()], 401);
+            }
+
+            $paymentRecivedMain->company_type = $request->input('order_id');
+            $paymentRecivedMain->m_company_id = $request->input('order_id');
+            $paymentRecivedMain->s_company_id = $request->input('order_id');
+            $paymentRecivedMain->is_gst = $request->input('order_id');
+            $paymentRecivedMain->gst_type = $request->input('order_id');
+            $paymentRecivedMain->tax_percentage = $request->input('order_id');
+            $paymentRecivedMain->tax_amount = $request->input('order_id');
+            $paymentRecivedMain->payment_amount = $request->input('order_id');
+            $paymentRecivedMain->payment_mode = $request->input('order_id');
+            $paymentRecivedMain->instrument_no = $request->input('order_id');
+            $paymentRecivedMain->instrument_date = $request->input('order_id');
+
+             
+
         }
     }
 
