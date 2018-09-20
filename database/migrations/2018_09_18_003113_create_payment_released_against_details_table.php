@@ -14,6 +14,7 @@ class CreatePaymentReleasedAgainstDetailsTable extends Migration
     public function up()
     {
         Schema::create('tbl_payment_released_against_details', function (Blueprint $table) {
+            $table->integer('details_id',11)->autoIncrement();
             $table->integer('payment_id');
             $table->integer('order_id');
             $table->integer('policy_id');

@@ -35,7 +35,16 @@ class PaymentRecivedController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->isMethod('put'))
+        {
+            //For Update
+        }
+        else
+        {
+            //For Create
+            $paymentRecivedMain = new PaymentRecived;
+            $paymentRecivedDetails = new PaymentRecivedAgainstDetails;
+        }
     }
 
     /**
