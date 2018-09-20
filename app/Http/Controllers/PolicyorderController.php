@@ -144,7 +144,7 @@ class PolicyorderController extends Controller
 
         if($policyOrder->save())
         {
-            return $policyOrder;
+            return redirect('/policyorder/create');
         }
     }
 
