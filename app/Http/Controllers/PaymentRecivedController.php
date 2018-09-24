@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\PaymentRecived;
+use App\PaymentRecivedAgainstDetails;
 use Illuminate\Http\Request;
+use DB;
+use Validator;
+use App\Util;
 
 class PaymentRecivedController extends Controller
 {
@@ -65,20 +69,44 @@ class PaymentRecivedController extends Controller
                 return response()->json(['error' => $validator->errors()->getMessages()], 401);
             }
 
-            $paymentRecivedMain->company_type = $request->input('order_id');
-            $paymentRecivedMain->m_company_id = $request->input('order_id');
-            $paymentRecivedMain->s_company_id = $request->input('order_id');
-            $paymentRecivedMain->is_gst = $request->input('order_id');
-            $paymentRecivedMain->gst_type = $request->input('order_id');
-            $paymentRecivedMain->tax_percentage = $request->input('order_id');
-            $paymentRecivedMain->tax_amount = $request->input('order_id');
-            $paymentRecivedMain->payment_amount = $request->input('order_id');
-            $paymentRecivedMain->payment_mode = $request->input('order_id');
-            $paymentRecivedMain->instrument_no = $request->input('order_id');
-            $paymentRecivedMain->instrument_date = $request->input('order_id');
+            DB::beginTransaction();
 
-             
+            try
+            {
+                $maxExistingID = PaymentRecived::max('payment_id') + 1;
 
+                $paymentRecivedMain->payment_id = $maxExistingID;
+                $paymentRecivedMain->company_type = $request->input('company_type');
+                $paymentRecivedMain->m_company_id = $request->input('m_company_id');
+                $paymentRecivedMain->s_company_id = $request->input('s_company_id');
+                $paymentRecivedMain->is_gst = $request->input('is_gst');
+                $paymentRecivedMain->gst_type = $request->input('gst_type');
+                $paymentRecivedMain->tax_percentage = $request->input('tax_percentage');
+                $paymentRecivedMain->tax_amount = $request->input('tax_amount');
+                $paymentRecivedMain->payment_amount = $request->input('payment_amount');
+                $paymentRecivedMain->payment_mode = $request->input('payment_mode');
+                $paymentRecivedMain->instrument_no = $request->input('instrument_no');
+                $paymentRecivedMain->instrument_date = $request->input('instrument_date');
+
+                $paymentDetails = (array) json_decode($request->input('payment_details_json'));
+
+                $paymentRecivedMain->save();
+
+                foreach($paymentDetails as $paymentDetail)
+                {
+                    $paymentRecivedDetails->payment_id = $maxExistingID;
+                    $paymentRecivedDetails->order_id = $paymentDetail->order_id;
+                    $paymentRecivedDetails->policy_id = $paymentDetail->policy_id;
+                    $paymentRecivedDetails->order_amount = $paymentDetail->order_amount;
+
+                    $paymentRecivedDetails->save();
+                }
+                DB::commit();
+            }
+            catch(\Exception $e)
+            {
+                DB::rollback();
+            }
         }
     }
 
