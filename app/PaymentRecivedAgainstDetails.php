@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class PaymentRecivedAgainstDetails extends Model
 {
     Protected $table = "tbl_payment_recived_against_details";
+    public $primaryKey = "details_id";
     public $timestamps = true;
 
     public function payment_details()

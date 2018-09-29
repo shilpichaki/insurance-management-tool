@@ -28,7 +28,9 @@ class PaymentRecivedController extends Controller
      */
     public function create()
     {
-        //
+        $mothercompanylist = DB::select("select m_company_id,m_company_name from tbl_mother_company_mast");
+        $subcompanylist = DB::select("select s_company_id,s_company_name from tbl_sub_company_mast");
+        return view('paymentreceived.create',compact('mothercompanylist','subcompanylist'));
     }
 
     /**
@@ -99,12 +101,16 @@ class PaymentRecivedController extends Controller
                     $paymentRecivedDetails->policy_id = $paymentDetail->policy_id;
                     $paymentRecivedDetails->order_amount = $paymentDetail->order_amount;
 
-                    $paymentRecivedDetails->save();
+                    DB::table('tbl_payment_recived_against_details')->insert(
+                        ['payment_id' => $maxExistingID, 'order_id' => $paymentDetail->order_id, 'policy_id' => $paymentDetail->policy_id, 'order_amount' => $paymentDetail->order_amount]
+                    );
                 }
                 DB::commit();
+                return $paymentRecivedMain;
             }
             catch(\Exception $e)
             {
+                var_dump($e);
                 DB::rollback();
             }
         }
