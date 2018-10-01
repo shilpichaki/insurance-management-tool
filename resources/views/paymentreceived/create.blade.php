@@ -1,5 +1,122 @@
 @extends('layouts.app')
 
+{{-- @section('style')
+<style>
+    table, td, a {
+	color: #000;
+	font: normal normal 12px Verdana, Geneva, Arial, Helvetica, sans-serif
+}
+
+h1 {
+	font: normal normal 18px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	margin: 0 0 5px 0
+}
+
+h2 {
+	font: normal normal 16px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	margin: 0 0 5px 0
+}
+
+h3 {
+	font: normal normal 13px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	color: #008000;
+	margin: 0 0 15px 0
+}
+/* end basic styling                                 */
+
+/* define height and width of scrollable area. Add 16px to width for scrollbar          */
+div.tableContainer {
+	clear: both;
+	border: 1px solid #000;
+	
+	overflow: auto;
+	width: 100%;
+}
+
+/* Reset overflow value to hidden for all non-IE browsers. */
+html>body div.tableContainer {
+	overflow: hidden;
+	width: 100%
+}
+
+/* define width of table. IE browsers only                 */
+div.tableContainer table {
+	float: left;
+	/* width: 740px */
+}
+
+/* define width of table. Add 16px to width for scrollbar.           */
+/* All other non-IE browsers.                                        */
+html>body div.tableContainer table {
+	/* width: 756px */
+}
+
+/* set table header to a fixed position. WinIE 6.x only                                       */
+/* In WinIE 6.x, any element with a position property set to relative and is a child of       */
+/* an element that has an overflow property set, the relative value translates into fixed.    */
+/* Ex: parent element DIV with a class of tableContainer has an overflow property set to auto */
+
+thead.fixedHeader tr {
+	position: relative;
+}
+
+/* set THEAD element to have block level attributes. All other non-IE browsers            */
+/* this enables overflow to work on TBODY element. All other non-IE, non-Mozilla browsers */
+
+/* make the TH elements pretty */
+thead.fixedHeader th {
+	background: #fff;
+	border-left: 1px solid #000;
+	border-right: 1px solid #000;
+	border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+	font-weight: normal;
+	padding: 4px 3px;
+	text-align: left
+}
+
+html>body tbody.scrollContent {
+	display: block;
+	
+	overflow: auto;
+	width: 100%
+}
+
+html>body thead.fixedHeader {
+	display: table;
+	overflow: auto;
+	width: 100%
+}
+
+html>body tbody.scrollContent tr {
+	width: 100%
+}
+
+/* make TD elements pretty. Provide alternating classes for striping the table */
+/* http://www.alistapart.com/articles/zebratables/                             */
+tbody.scrollContent td, tbody.scrollContent tr.normalRow td {
+	background: #FFF;
+	border-bottom: none;
+	border-left: none;
+	border-right: 1px solid #CCC;
+	border-top: 1px solid #DDD;
+	padding: 2px 3px 3px 4px
+}
+
+
+
+tbody.scrollContent tr.alternateRow td {
+	background: #EEE;
+	border-bottom: none;
+	border-left: none;
+	border-right: 1px solid #CCC;
+	border-top: 1px solid #DDD;
+	padding: 2px 3px 3px 4px
+}
+    
+</style>
+@endsection --}}
+
 @section('content')
 
 <div class="cotainer">
@@ -13,8 +130,7 @@
             <div class="col-md-6">
 
                 <select id="company_type" class="form-control" name="company_type" autofocus>
-                    <option value = "">-Please Select One-</option>
-                    <option value="mother">Mother</option>
+                    <option value="mother" selected>Mother</option>
                     <option value="sub">Sub</option>
                 </select>
             </div>
@@ -152,6 +268,111 @@
             </div>
         </div>
 
+        <!--TABLE VIEW OF POLICY ORDERS-->
+
+        <div class = "from-group">
+            <div class="col-md-12">
+                <table class="table table-bordered table-striped table-hover">
+                    <!-- ///  Table  Headings ///  -->
+                    <thead >
+                        <tr>
+                            <th></th>
+                            <th>Application No.</th>
+                            <th>Application Name</th>
+                            <th>KYC</th>
+                            <th>Policy Name</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+    
+                    <!-- ///  End of Table  Headings ///  -->
+    
+                        <!-- ///  Table  Data ///  -->
+    
+                    <tbody>
+                        {{-- <tr>
+                            <td>
+                                <label><input type="checkbox" value=""></label>
+                            </td>
+                            <td>2</td>
+                            <td>Moe</td>
+                            <td>mary@example.com</td>
+                            <td>john@example.com</td>
+                            <td class="la">----------------</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label><input type="checkbox" value=""></label>
+                            </td>
+                            <td>2</td>
+                            <td>Moe</td>
+                            <td>mary@example.com</td>
+                            <td>john@example.com</td>
+                            <td class="la">----------------</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label><input type="checkbox" value=""></label>
+                            </td>
+                            <td>2</td>
+                            <td>Moe</td>
+                            <td>mary@example.com</td>
+                            <td>john@example.com</td>
+                            <td class="la">----------------</td>
+                        </tr> --}}
+                    </tbody>
+                    <!-- ///  Table  Data ///  -->
+
+                    <!-- ///  Table  Foot  Ajax  Part ///  -->
+                    <tfoot>
+                        <tr>
+                            <td colspan="5">
+                                Gross Amount
+                            </td>
+                            <td class="la">----------------</td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:middle">Tax Amount</td>
+                            <td colspan="4">
+                                CGST<br>
+                                SGST
+                            </td>
+                            <td class="la">
+                                ----------------<br>
+                                ----------------
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                Net Amount
+                            </td>
+                            <td class="la">----------------</td>
+                        </tr>
+                    {{-- @foreach($motherSubCompanyRelation as $relation)<!--//Fetch Records to show ///-->
+                        <tr>
+                        <td align="center">{{$relation->motherCompany['m_company_name']}}</td>
+                        <td align="center">{{$relation->subCompany['s_company_name']}}</td>
+                        <td align="center">{{$relation['deal_percentage']}}</td>
+                        <td align="center">{{date("d/m/Y",strtotime($relation['percent_created_at']))}}</td>
+                        <td align="center">
+                            @if($relation['percent_updated_at']!= "")
+                                {{date("d/m/Y",strtotime($relation['percent_updated_at']))}}
+                            @else
+                                {{"Deal has not been updated yet"}}
+                            @endif
+                        </td>
+                        <td align="center"><a href="{{action('MothersubcompanyrelationsController@edit',$relation['company_relation_id'])}}" class="btn btn-success">Edit</a></td>
+                        
+                    </tr>
+                    @endforeach --}}
+                    </tfoot>
+                    <!-- ///  Table  Foot  Ajax  Part ///  -->
+                </table> 
+            </div>
+        </div>
+
+        <!--END OF TABLE VIEW POLICY ORDER-->
+
         <div class="form-group{{ $errors->has('payment_details_json') ? ' has-error' : '' }}">
             <label for="payment_details_json" class="col-md-4 control-label">Payment Details JSON</label>
 
@@ -179,4 +400,8 @@
 
     </div>
 </div>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/paymentreceived.js') }}"></script>
 @endsection

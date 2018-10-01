@@ -102,7 +102,7 @@ class PaymentRecivedController extends Controller
                     $paymentRecivedDetails->order_amount = $paymentDetail->order_amount;
 
                     DB::table('tbl_payment_recived_against_details')->insert(
-                        ['payment_id' => $maxExistingID, 'order_id' => $paymentDetail->order_id, 'policy_id' => $paymentDetail->policy_id, 'order_amount' => $paymentDetail->order_amount]
+                        ['payment_id' => $maxExistingID, 'order_id' => $paymentDetail->order_id, 'policy_id' => $paymentDetail->policy_id, 'order_amount' => $paymentDetail->order_amount, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')]
                     );
                 }
                 DB::commit();
