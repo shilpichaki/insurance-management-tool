@@ -170,9 +170,8 @@ tbody.scrollContent tr.alternateRow td {
             <div class="col-md-6">
 
                 <select id="is_gst" class="form-control" name="is_gst" autofocus>
-                    <option value = "">-Please Select One-</option>
+                    <option value="1" selected>Yes</option>
                     <option value="0">No</option>
-                    <option value="1">Yes</option>
                 </select>
             </div>
         </div>
@@ -184,8 +183,8 @@ tbody.scrollContent tr.alternateRow td {
 
                 <select id="gst_type" class="form-control" name="gst_type" autofocus>
                     <option value = "">-Please Select One-</option>
-                    <option value="state">SGST + CGST</option>
-                    <option value="interstate">IGST</option>
+                    <option value = "state">SGST + CGST</option>
+                    <option value = "interstate">IGST</option>
                 </select>
             </div>
         </div>
@@ -272,13 +271,13 @@ tbody.scrollContent tr.alternateRow td {
 
         <div class = "from-group">
             <div class="col-md-12">
-                <table class="table table-bordered table-striped table-hover">
+                <table id = "order_details_table" class="table table-bordered table-striped table-hover">
                     <!-- ///  Table  Headings ///  -->
                     <thead >
                         <tr>
                             <th></th>
                             <th>Application No.</th>
-                            <th>Application Name</th>
+                            <th>Applicient Name</th>
                             <th>KYC</th>
                             <th>Policy Name</th>
                             <th>Amount</th>
@@ -289,7 +288,7 @@ tbody.scrollContent tr.alternateRow td {
     
                         <!-- ///  Table  Data ///  -->
     
-                    <tbody>
+                    <tbody id = "order_details_data">
                         {{-- <tr>
                             <td>
                                 <label><input type="checkbox" value=""></label>
@@ -329,24 +328,36 @@ tbody.scrollContent tr.alternateRow td {
                             <td colspan="5">
                                 Gross Amount
                             </td>
-                            <td class="la">----------------</td>
+                            <td class="la">
+                                <div id = "gross_amount">
+                                    0.00
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <td style="vertical-align:middle">Tax Amount</td>
                             <td colspan="4">
-                                CGST<br>
-                                SGST
+                                <div id = "gst_type_result">
+                                    CGST<br>
+                                    SGST
+                                </div>
                             </td>
                             <td class="la">
-                                ----------------<br>
-                                ----------------
+                                <div id = "gst_type_result_amount">
+                                    0.00<br>
+                                    0.00
+                                </div>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="5">
                                 Net Amount
                             </td>
-                            <td class="la">----------------</td>
+                            <td class="la">
+                                <div id = "net_amount">
+                                    0.00
+                                </div>
+                            </td>
                         </tr>
                     {{-- @foreach($motherSubCompanyRelation as $relation)<!--//Fetch Records to show ///-->
                         <tr>

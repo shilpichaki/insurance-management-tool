@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use DB;
 use Validator;
 use App\Util;
+use Auth;
 
 class PaymentRecivedController extends Controller
 {
@@ -114,6 +115,25 @@ class PaymentRecivedController extends Controller
                 DB::rollback();
             }
         }
+    }
+
+    public function orderdetails($companyid, $companytype)
+    {
+        $roleID = Auth::user()->role_id;
+        if($roleID == 1 || $roleID == 2)
+        {
+            if($companytype == "mother")
+            {
+                $orderDetails = DB::select("SELECT order_id,policy_id,amount,application_no, (SELECT policy_name from `tbl_policy_mast` as tpm where tpm.policy_id = tpo.policy_id ) as 'policy_name',(SELECT tcm.customer_name from `tbl_customer_mast` as tcm where tcm.customer_id = tpo.customer_id) as 'applicient_name',(SELECT tcm.customer_id from `tbl_customer_mast` as tcm where tcm.customer_id = tpo.customer_id) as 'applicient_id' FROM `tbl_policy_order` as tpo WHERE handover_to_company_type = ? AND handover_to_mother_company_id = ? and handover_to_sub_company_id IS NULL and order_id NOT IN (SELECT order_id FROM `tbl_payment_recived_against_details`)",[$companytype, $companyid]);
+            }
+            else if($companytype == "sub")
+            {
+                $orderDetails = DB::select("SELECT order_id,policy_id,amount,application_no, (SELECT policy_name from `tbl_policy_mast` as tpm where tpm.policy_id = tpo.policy_id ) as 'policy_name', (SELECT tcm.customer_name from `tbl_customer_mast` as tcm where tcm.customer_id = tpo.customer_id) as 'applicient_name',(SELECT tcm.customer_id from `tbl_customer_mast` as tcm where tcm.customer_id = tpo.customer_id) as 'applicient_id' FROM `tbl_policy_order` as tpo WHERE handover_to_company_type = ? AND handover_to_sub_company_id = ? and order_id NOT IN (SELECT order_id FROM `tbl_payment_recived_against_details`)",[$companytype, $companyid]);
+            }
+        }
+        else
+            $orderDetails = "Not Accessable";
+        return $orderDetails;
     }
 
     /**

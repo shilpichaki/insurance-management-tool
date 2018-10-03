@@ -468,6 +468,7 @@
 <!-- End Wrapper -->
 <!-- All Jquery -->
 <script src="{{asset("dashboard/js/lib/jquery/jquery.min.js")}}"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
 <!-- Bootstrap tether Core JavaScript -->
 <script src="{{asset("dashboard/js/lib/bootstrap/js/popper.min.js")}}"></script>
 <script src="{{asset("dashboard/js/lib/bootstrap/js/bootstrap.min.js")}}"></script>
