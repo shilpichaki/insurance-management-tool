@@ -291,15 +291,15 @@ tbody.scrollContent tr.alternateRow td {
                     <tbody id = "order_details_data">
                         {{-- <tr>
                             <td>
-                                <label><input type="checkbox" value=""></label>
+                                <input id = 'checkbox_details' type="checkbox" value="">
                             </td>
                             <td>2</td>
                             <td>Moe</td>
                             <td>mary@example.com</td>
                             <td>john@example.com</td>
                             <td class="la">----------------</td>
-                        </tr>
-                        <tr>
+                        </tr> --}}
+                        {{--<tr>
                             <td>
                                 <label><input type="checkbox" value=""></label>
                             </td>
