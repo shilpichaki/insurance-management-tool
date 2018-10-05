@@ -193,7 +193,7 @@ tbody.scrollContent tr.alternateRow td {
             <label for="tax_percentage" class="col-md-4 control-label">Tax Percent</label>
 
             <div class="col-md-6">
-                <input id="tax_percentage" type="text" class="form-control" name="tax_percentage" value="{{ old('tax_percentage') }}" required autofocus>
+                <input id="tax_percentage" type="number" class="form-control" name="tax_percentage" value="{{ old('tax_percentage') }}" required autofocus>
 
                 @if ($errors->has('tax_percentage'))
                     <span class="help-block">
@@ -344,8 +344,8 @@ tbody.scrollContent tr.alternateRow td {
                             </td>
                             <td class="la">
                                 <div id = "gst_type_result_amount">
-                                    0.00<br>
-                                    0.00
+                                    <div id = 'cgst_amount'>0.00</div>
+                                    <div id = 'sgst_amount'>0.00</div>
                                 </div>
                             </td>
                         </tr>
