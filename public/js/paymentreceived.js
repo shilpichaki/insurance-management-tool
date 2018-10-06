@@ -172,14 +172,20 @@ function tax_percent_change_calculation(obj)
         case "state" :
             var divided_tax_amount = (gross_amount * (tax_percentage/200)).toFixed(2);
             var tax_amount = parseFloat(divided_tax_amount) + parseFloat(divided_tax_amount);
+            var net_amount = gross_amount + tax_amount;
             document.getElementById('tax_amount').value = tax_amount.toFixed(2);
+            document.getElementById('payment_amount').value = parseFloat(net_amount).toFixed(2);
             document.getElementById('cgst_amount').innerHTML = divided_tax_amount;
             document.getElementById('sgst_amount').innerHTML = divided_tax_amount;
+            document.getElementById('net_amount').innerHTML = parseFloat(net_amount).toFixed(2);
         break;
         case "interstate" :
             var tax_amount = (gross_amount * (tax_percentage/100)).toFixed(2);
+            var net_amount = gross_amount + tax_amount;
             document.getElementById('tax_amount').value = tax_amount;
+            document.getElementById('payment_amount').value = parseFloat(net_amount).toFixed(2);
             document.getElementById('igst_amount').innerHTML = tax_amount;
+            document.getElementById('net_amount').innerHTML = parseFloat(net_amount).toFixed(2);
         break;
     }
 }
@@ -209,14 +215,20 @@ function gross_salary_calc(checkbox_id)
             case "state" :
                 var divided_tax_amount = (gross_amount * (tax_percentage/200)).toFixed(2);
                 var tax_amount = parseFloat(divided_tax_amount) + parseFloat(divided_tax_amount);
+                var net_amount = gross_amount + tax_amount;
                 document.getElementById('tax_amount').value = tax_amount.toFixed(2);
+                document.getElementById('payment_amount').value = parseFloat(net_amount).toFixed(2);
                 document.getElementById('cgst_amount').innerHTML = divided_tax_amount;
                 document.getElementById('sgst_amount').innerHTML = divided_tax_amount;
+                document.getElementById('net_amount').innerHTML = parseFloat(net_amount).toFixed(2);
             break;
             case "interstate" :
                 var tax_amount = (gross_amount * (tax_percentage/100)).toFixed(2);
+                var net_amount = gross_amount + tax_amount;
                 document.getElementById('tax_amount').value = tax_amount;
+                document.getElementById('payment_amount').value = parseFloat(net_amount).toFixed(2);
                 document.getElementById('igst_amount').innerHTML = tax_amount;
+                document.getElementById('net_amount').innerHTML = parseFloat(net_amount).toFixed(2);
             break;
         }
         
@@ -230,14 +242,20 @@ function gross_salary_calc(checkbox_id)
             case "state" :
                 var divided_tax_amount = (gross_amount * (tax_percentage/200)).toFixed(2);
                 var tax_amount = parseFloat(divided_tax_amount) + parseFloat(divided_tax_amount);
+                var net_amount = gross_amount + tax_amount;
                 document.getElementById('tax_amount').value = tax_amount.toFixed(2);
+                document.getElementById('payment_amount').value = parseFloat(net_amount).toFixed(2);
                 document.getElementById('cgst_amount').innerHTML = divided_tax_amount;
                 document.getElementById('sgst_amount').innerHTML = divided_tax_amount;
+                document.getElementById('net_amount').innerHTML = parseFloat(net_amount).toFixed(2);
             break;
             case "interstate" :
                 var tax_amount = (gross_amount * (tax_percentage/100)).toFixed(2);
+                var net_amount = gross_amount + tax_amount;
                 document.getElementById('tax_amount').value = tax_amount;
+                document.getElementById('payment_amount').value = parseFloat(net_amount).toFixed(2);
                 document.getElementById('igst_amount').innerHTML = tax_amount;
+                document.getElementById('net_amount').innerHTML = parseFloat(net_amount).toFixed(2);
             break;
         }
     }
