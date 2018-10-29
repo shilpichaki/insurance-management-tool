@@ -1,4 +1,6 @@
 var gross_amount = 0.00;
+var order_details_array = [];
+
 $( document ).ready(function() {
     companytype('#company_type');
     isgst('#is_gst');
@@ -6,6 +8,7 @@ $( document ).ready(function() {
 });
 
 $('#company_type').change(function(){ 
+    resetFooterOfTable();
     companytype(this);
 });
 
@@ -18,15 +21,22 @@ $('#gst_type').change(function(){
 });
 
 $('#m_company_id').change(function(){ 
+    resetFooterOfTable();
     orderdetails(this, 'mother');
 });
 
 $('#s_company_id').change(function(){ 
+    resetFooterOfTable();
     orderdetails(this, 'sub');
 });
 
 $( '#tax_percentage' ).change(function() {
     tax_percent_change_calculation(this);
+});
+
+$('#payment_received_submit_form').submit(function(){
+    document.getElementById('payment_details_json').value = "[" + order_details_array + "]";
+    return true;
 });
 
 function isgst(obj)
@@ -155,7 +165,7 @@ function tax_percent_change_calculation(obj)
 {
     var tax_percentage_in_str = $(obj).val();
     var gst_type = $('#gst_type').val();
-    var gross_amount = $('#gross_amount').html();
+    //var gross_amount = $('#gross_amount').html();
 
     var tax_percentage = 0;
     if(tax_percentage_in_str.trim() == "")
@@ -181,7 +191,7 @@ function tax_percent_change_calculation(obj)
         break;
         case "interstate" :
             var tax_amount = (gross_amount * (tax_percentage/100)).toFixed(2);
-            var net_amount = gross_amount + tax_amount;
+            var net_amount = gross_amount + parseFloat(tax_amount);
             document.getElementById('tax_amount').value = tax_amount;
             document.getElementById('payment_amount').value = parseFloat(net_amount).toFixed(2);
             document.getElementById('igst_amount').innerHTML = tax_amount;
@@ -194,6 +204,9 @@ function gross_salary_calc(checkbox_id)
 {
     var order_id = checkbox_id.substring(12);
     var current_order_amount = parseFloat(document.getElementById('amount_of_order_' + order_id).innerHTML);
+    var policy_id = document.getElementById('policy_id_of_order_' + order_id).innerHTML;
+    var clicked_order = '{"order_id":' + order_id + ',"policy_id":' + policy_id + ',"order_amount":"' + current_order_amount + '"}';
+
     var gst_type = $('#gst_type').val();
     var tax_percentage_in_str = document.getElementById('tax_percentage').value;
     var tax_percentage = 0;
@@ -208,6 +221,8 @@ function gross_salary_calc(checkbox_id)
     
     if (document.getElementById(checkbox_id).checked) 
     {
+        order_details_array.push(clicked_order);
+
         gross_amount = gross_amount + current_order_amount;
         document.getElementById('gross_amount').innerHTML = gross_amount.toFixed(2);
         switch(gst_type)
@@ -224,7 +239,7 @@ function gross_salary_calc(checkbox_id)
             break;
             case "interstate" :
                 var tax_amount = (gross_amount * (tax_percentage/100)).toFixed(2);
-                var net_amount = gross_amount + tax_amount;
+                var net_amount = gross_amount + parseFloat(tax_amount);
                 document.getElementById('tax_amount').value = tax_amount;
                 document.getElementById('payment_amount').value = parseFloat(net_amount).toFixed(2);
                 document.getElementById('igst_amount').innerHTML = tax_amount;
@@ -235,6 +250,11 @@ function gross_salary_calc(checkbox_id)
     } 
     else 
     {
+        var index_of_clicked_order = order_details_array.indexOf(clicked_order);
+        if (index_of_clicked_order > -1) {
+            order_details_array.splice(index_of_clicked_order, 1);
+        }
+
         gross_amount = gross_amount - current_order_amount;
         document.getElementById('gross_amount').innerHTML = gross_amount.toFixed(2);
         switch(gst_type)
@@ -251,7 +271,7 @@ function gross_salary_calc(checkbox_id)
             break;
             case "interstate" :
                 var tax_amount = (gross_amount * (tax_percentage/100)).toFixed(2);
-                var net_amount = gross_amount + tax_amount;
+                var net_amount = gross_amount + parseFloat(tax_amount);
                 document.getElementById('tax_amount').value = tax_amount;
                 document.getElementById('payment_amount').value = parseFloat(net_amount).toFixed(2);
                 document.getElementById('igst_amount').innerHTML = tax_amount;
@@ -279,5 +299,27 @@ function companytype(obj)
         default:
             $('#s_company_id').parents('.form-group').hide();
             $("#s_company_id").find( 'option[value=""]' ).prop( "selected", true );
+    }
+}
+
+function resetFooterOfTable()
+{
+    gross_amount = 0.00;
+    order_details_array = [];
+    var gst_type = $('#gst_type').val();
+    document.getElementById('gross_amount').innerHTML = 0.00;
+    document.getElementById('tax_amount').value = 0.00;
+    document.getElementById('payment_amount').value = 0.00;
+    document.getElementById('net_amount').innerHTML = 0.00;
+    document.getElementById('order_details_data').innerHTML = "";
+    switch(gst_type)
+    {
+        case "state" :
+            document.getElementById('cgst_amount').innerHTML = 0.00;
+            document.getElementById('sgst_amount').innerHTML = 0.00;
+        break;
+        case "interstate" :
+            document.getElementById('igst_amount').innerHTML = 0.00;
+        break;
     }
 }

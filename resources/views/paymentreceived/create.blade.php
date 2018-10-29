@@ -120,7 +120,7 @@ tbody.scrollContent tr.alternateRow td {
 @section('content')
 
 <div class="cotainer">
-    <form class="form-horizontal" method="POST" action="{{ route('paymentreceive.store') }}">
+    <form id = "payment_received_submit_form" class="form-horizontal" method="POST" action="{{ route('paymentreceive.store') }}">
 
         {{ csrf_field() }}
     
@@ -203,33 +203,9 @@ tbody.scrollContent tr.alternateRow td {
             </div>
         </div>
 
-        <div class="form-group{{ $errors->has('tax_amount') ? ' has-error' : '' }}">
-            <label for="tax_amount" class="col-md-4 control-label">Tax Amount</label>
+        <input id="tax_amount" type="text" class="form-control" name="tax_amount" required hidden>
 
-            <div class="col-md-6">
-                <input id="tax_amount" type="text" class="form-control" name="tax_amount" value="{{ old('tax_amount') }}" required autofocus>
-
-                @if ($errors->has('tax_amount'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('tax_amount') }}</strong>
-                    </span>
-                @endif
-            </div>
-        </div>
-
-        <div class="form-group{{ $errors->has('payment_amount') ? ' has-error' : '' }}">
-            <label for="payment_amount" class="col-md-4 control-label">Payment Amount</label>
-
-            <div class="col-md-6">
-                <input id="payment_amount" type="text" class="form-control" name="payment_amount" value="{{ old('payment_amount') }}" required autofocus>
-
-                @if ($errors->has('payment_amount'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('payment_amount') }}</strong>
-                    </span>
-                @endif
-            </div>
-        </div>
+        <input id="payment_amount" type="text" class="form-control" name="payment_amount" required hidden>
 
         <div class="form-group{{ $errors->has('payment_mode') ? ' has-error' : '' }}">
             <label for="payment_mode" class="col-md-4 control-label">Payment Mode</label>
@@ -384,19 +360,7 @@ tbody.scrollContent tr.alternateRow td {
 
         <!--END OF TABLE VIEW POLICY ORDER-->
 
-        <div class="form-group{{ $errors->has('payment_details_json') ? ' has-error' : '' }}">
-            <label for="payment_details_json" class="col-md-4 control-label">Payment Details JSON</label>
-
-            <div class="col-md-6">
-                <input id="payment_details_json" type="text" class="form-control" name="payment_details_json" value="{{ old('payment_details_json') }}" required autofocus>
-
-                @if ($errors->has('payment_details_json'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('payment_details_json') }}</strong>
-                    </span>
-                @endif
-            </div>
-        </div>
+        <input id="payment_details_json" type="text" class="form-control" name="payment_details_json" value="{{ old('payment_details_json') }}" required hidden>
     
         <div class="form-group">
             <div class="col-md-6 col-md-offset-4">
