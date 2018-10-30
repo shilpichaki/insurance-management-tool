@@ -360,7 +360,7 @@ tbody.scrollContent tr.alternateRow td {
 
         <!--END OF TABLE VIEW POLICY ORDER-->
 
-        <input id="payment_details_json" type="text" class="form-control" name="payment_details_json" value="{{ old('payment_details_json') }}" required hidden>
+        <input id="payment_details_json" type="text" class="form-control" name="payment_details_json" value="{{ old('payment_details_json') }}">
     
         <div class="form-group">
             <div class="col-md-6 col-md-offset-4">
