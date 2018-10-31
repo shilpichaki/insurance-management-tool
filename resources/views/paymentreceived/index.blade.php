@@ -34,10 +34,25 @@
 <p>Collapsible Set:</p>
 
 @foreach ($paymentReceived as $payment)
-    <option value="{{ $payment->s_company_id }}">{{ $subcompany->s_company_name }}</option>
+    <div class="collapsible">{{$payment->instrument_date}} | {{$payment->company_name}}</div>
+    <div class="content">
+        <table>
+        @foreach ($paymentReceivedDetails as $paymentDetail)
+            @if ($paymentDetail->payment_id == $payment->payment_id)
+                <tr>
+                    <td>{{$paymentDetail->application_no}}</td>
+                    <td>{{$paymentDetail->policy_name}}</td>
+                    <td>{{$paymentDetail->customer_name}}</td>
+                    <td>{{$paymentDetail->amount}}</td>
+                </tr>
+                <?php break;?>
+            @endif
+        @endforeach
+        </table>
+    </div>
 @endforeach
 
-<div class="collapsible">Open Section 1</div>
+{{-- <div class="collapsible">Open Section 1</div>
 <div class="content">
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 </div>
@@ -48,7 +63,7 @@
 <div class="collapsible">Open Section 3</div>
 <div class="content">
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-</div>
+</div> --}}
 </div>
 @endsection
 

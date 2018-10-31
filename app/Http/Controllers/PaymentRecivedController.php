@@ -25,7 +25,7 @@ class PaymentRecivedController extends Controller
         ELSE NULL
         END) as 'company_name' FROM `tbl_payment_recived` as tpr");
 
-        $paymentReceivedDetails = DB::select("SELECT payment_id,(SELECT tpo.application_no from tbl_policy_order as tpo where tpo.order_id = tprad.order_id) as 'Application No', (SELECT tpm.policy_name from tbl_policy_mast as tpm where tpm.policy_id = tprad.policy_id) as 'Policy Name' ,(SELECT (SELECT tcm.customer_name from tbl_customer_mast as tcm where tcm.customer_id = tpo.customer_id) from tbl_policy_order as tpo where tpo.order_id = tprad.order_id) as 'Customer Name',tprad.order_amount as 'Amount' FROM tbl_payment_recived_against_details as tprad");
+        $paymentReceivedDetails = DB::select("SELECT payment_id,(SELECT tpo.application_no from tbl_policy_order as tpo where tpo.order_id = tprad.order_id) as 'application_no', (SELECT tpm.policy_name from tbl_policy_mast as tpm where tpm.policy_id = tprad.policy_id) as 'policy_name' ,(SELECT (SELECT tcm.customer_name from tbl_customer_mast as tcm where tcm.customer_id = tpo.customer_id) from tbl_policy_order as tpo where tpo.order_id = tprad.order_id) as 'customer_name',tprad.order_amount as 'amount' FROM tbl_payment_recived_against_details as tprad");
 
         return view('paymentreceived.index',compact('paymentReceived','paymentReceivedDetails'));
     }
