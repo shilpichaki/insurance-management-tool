@@ -19,13 +19,13 @@ class PaymentRecivedController extends Controller
      */
     public function index()
     {
-        $paymentReceived = DB::select("SELECT `payment_id`,`instrument_date`,`company_type`,`payment_amount`,`payment_mode`,(CASE company_type
+        $paymentReceived = DB::select("SELECT `payment_id`,`instrument_date`,`company_type`,`payment_amount`,`payment_mode`,`company_type`,(CASE company_type
         WHEN 'mother' THEN (select tmcm.m_company_name from tbl_mother_company_mast as tmcm where tmcm.m_company_id = tpr.m_company_id)
         WHEN 'sub' THEN (select tscm.s_company_name from tbl_sub_company_mast as tscm where tscm.s_company_id = tpr.s_company_id)
         ELSE NULL
         END) as 'company_name' FROM `tbl_payment_recived` as tpr");
 
-        $paymentReceivedDetails = DB::select("SELECT payment_id,(SELECT tpo.application_no from tbl_policy_order as tpo where tpo.order_id = tprad.order_id) as 'application_no', (SELECT tpm.policy_name from tbl_policy_mast as tpm where tpm.policy_id = tprad.policy_id) as 'policy_name' ,(SELECT (SELECT tcm.customer_name from tbl_customer_mast as tcm where tcm.customer_id = tpo.customer_id) from tbl_policy_order as tpo where tpo.order_id = tprad.order_id) as 'customer_name',tprad.order_amount as 'amount' FROM tbl_payment_recived_against_details as tprad");
+        $paymentReceivedDetails = DB::select("SELECT payment_id,(SELECT tpo.application_no from tbl_policy_order as tpo where tpo.order_id = tprad.order_id) as 'application_no', (SELECT tpm.policy_name from tbl_policy_mast as tpm where tpm.policy_id = tprad.policy_id) as 'policy_name' ,(SELECT (SELECT tcm.customer_name from tbl_customer_mast as tcm where tcm.customer_id = tpo.customer_id) from tbl_policy_order as tpo where tpo.order_id = tprad.order_id) as 'customer_name',tprad.order_amount as 'amount' FROM tbl_payment_recived_against_details as tprad order by tprad.payment_id ASC");
 
         return view('paymentreceived.index',compact('paymentReceived','paymentReceivedDetails'));
     }

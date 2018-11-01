@@ -24,6 +24,10 @@
         overflow: hidden;
         background-color: #f1f1f1;
     }
+    
+    .container{
+        padding: 18px;
+    }
 </style>
 @endsection
 
@@ -33,10 +37,44 @@
 
 <p>Collapsible Set:</p>
 
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2">Date</div>
+        <div class="col-sm-3">Company</div>
+        <div class="col-sm-3">Amount</div>
+        <div class="col-sm-2">Paymen Mode</div>
+        <div class="col-sm-2">Company Type</div>
+    </div>
+</div>
+
 @foreach ($paymentReceived as $payment)
-    <div class="collapsible">{{$payment->instrument_date}} | {{$payment->company_name}}</div>
+
+    <div class="collapsible">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">{{App\Util::phpDateFetch($payment->instrument_date)}}</div>
+                <div class="col-sm-3">{{$payment->company_name}}</div>
+                <div class="col-sm-3">{{$payment->payment_amount}}</div>
+                <div class="col-sm-2">{{$payment->payment_mode}}</div>
+                <div class="col-sm-2">{{$payment->company_type}}<span class=pull-right>+</span></div>
+            </div>
+        </div>
+    </div>
     <div class="content">
-        <table>
+        <table class="table table-bordered table-striped table-hover">
+            <thead >
+                <tr>
+                    <th>Application No.</th>
+                    <th>Policy Name</th>
+                    <th>Applicient Name</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+        <?php 
+            $executing = false;
+            $notExecuting = true;
+        ?>
+            <tbody>
         @foreach ($paymentReceivedDetails as $paymentDetail)
             @if ($paymentDetail->payment_id == $payment->payment_id)
                 <tr>
@@ -45,9 +83,21 @@
                     <td>{{$paymentDetail->customer_name}}</td>
                     <td>{{$paymentDetail->amount}}</td>
                 </tr>
+                <?php
+                    $executing = true;
+                    $notExecuting = false;
+                ?>
+            @else
+                <?php 
+                    $notExecuting = true;
+                ?>
+            @endif
+
+            @if ($executing && $notExecuting)
                 <?php break;?>
             @endif
         @endforeach
+            </tbody>
         </table>
     </div>
 @endforeach

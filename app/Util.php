@@ -10,6 +10,21 @@ Class Util
         return date('Y-m-d H:i:s', strtotime($date));
     }
 
+    public static function phpDateFetch($date)
+    {
+        return date('d/m/Y', strtotime($date));
+    }
+
+    public static function phpTimeFetchFormatTwelveHour($date)
+    {
+        return date('g:i A', strtotime($date));
+    }
+
+    public static function phpTimeFetchFormatTwentyFourHour($date)
+    {
+        return date('H:i', strtotime($date));
+    }
+
     public static function addMinutes($dateTime,$noOfMinutes)
     {
         $time = strtotime($dateTime);
