@@ -1,49 +1,23 @@
 @extends('layouts.app')
 
 @section('style')
-<style>
-    .collapsible {
-        background-color: #777;
-        color: white;
-        cursor: pointer;
-        padding: 18px;
-        width: 100%;
-        border: none;
-        text-align: left;
-        outline: none;
-        font-size: 15px;
-    }
-    
-    .active, .collapsible:hover {
-        background-color: #555;
-    }
-    
-    .content {
-        padding: 0 18px;
-        display: none;
-        overflow: hidden;
-        background-color: #f1f1f1;
-    }
-    
-    .container{
-        padding: 18px;
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/paymentreceived_index.css') }}">
 @endsection
 
 @section('content')
 <div class = "container"> 
-<h2>Collapsibles</h2>
+<h2>Payment Done</h2>
 
-<p>Collapsible Set:</p>
-
-<div class="container">
-    <div class="row">
-        <div class="col-sm-2">Date</div>
-        <div class="col-sm-3">Company</div>
-        <div class="col-sm-3">Amount</div>
-        <div class="col-sm-2">Paymen Mode</div>
-        <div class="col-sm-2">Company Type</div>
+<div class="paymentReceivedHeader">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-2">Date</div>
+            <div class="col-sm-3">Company</div>
+            <div class="col-sm-2">Company Type</div>
+            <div class="col-sm-2">Payment Mode</div>
+            <div class="col-sm-2">Amount</div>
+        </div>
     </div>
 </div>
 
@@ -52,11 +26,12 @@
     <div class="collapsible">
         <div class="container">
             <div class="row">
+                <div class="col-sm-1"><span class="dropdown-arrow">Hello</span></div>
                 <div class="col-sm-2">{{App\Util::phpDateFetch($payment->instrument_date)}}</div>
                 <div class="col-sm-3">{{$payment->company_name}}</div>
-                <div class="col-sm-3">{{$payment->payment_amount}}</div>
+                <div class="col-sm-2">{{$payment->company_type}}</div>
                 <div class="col-sm-2">{{$payment->payment_mode}}</div>
-                <div class="col-sm-2">{{$payment->company_type}}<span class=pull-right>+</span></div>
+                <div class="col-sm-2">{{$payment->payment_amount}}</div>
             </div>
         </div>
     </div>
@@ -115,23 +90,35 @@
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 </div> --}}
 </div>
+<br>
+<div class="container">
+    <h2>Pending Payment</h2>
+    <input type="text" id="searchInput" onkeyup="pendingResultSearch()" placeholder="Search for names..">
+    <table id = "pendingPayment" class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <td>Application No</td>
+                <td>Policy Name</td>
+                <td>Company Name</td>
+                <td>Company Type</td>
+                <td>Amount</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($pendingPayments as $pendingPayment)
+                <tr>
+                    <td>{{$pendingPayment->application_no}}</td>
+                    <td>{{$pendingPayment->policy_name}}</td>
+                    <td>{{$pendingPayment->company_name}}</td>
+                    <td>{{$pendingPayment->handover_to_company_type}}</td>
+                    <td>{{$pendingPayment->amount}}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
 @endsection
 
 @section('scripts')
-<script>
-    var coll = document.getElementsByClassName("collapsible");
-    var i;
-    
-    for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var content = this.nextElementSibling;
-            if (content.style.display === "block") {
-                content.style.display = "none";
-            } else {
-                content.style.display = "block";
-            }
-        });
-    }
-    </script>
+<script src="{{ asset('dashboard/js/paymentreceived_index.js') }}"></script>
 @endsection
