@@ -16,7 +16,7 @@
             <div class="col-sm-3">Company</div>
             <div class="col-sm-2">Company Type</div>
             <div class="col-sm-2">Payment Mode</div>
-            <div class="col-sm-2">Amount</div>
+            <div class="col-sm-2">Amount(Inc. Tax)</div>
         </div>
     </div>
 </div>
@@ -26,7 +26,7 @@
     <div class="collapsible">
         <div class="container">
             <div class="row">
-                <div class="col-sm-1"><span class="dropdown-arrow">Hello</span></div>
+                <div class="col-sm-1"><span class="dropdown-arrow"></span></div>
                 <div class="col-sm-2">{{App\Util::phpDateFetch($payment->instrument_date)}}</div>
                 <div class="col-sm-3">{{$payment->company_name}}</div>
                 <div class="col-sm-2">{{$payment->company_type}}</div>
@@ -42,7 +42,7 @@
                     <th>Application No.</th>
                     <th>Policy Name</th>
                     <th>Applicient Name</th>
-                    <th>Amount</th>
+                    <th>Amount(Exc. Tax)</th>
                 </tr>
             </thead>
         <?php 
@@ -93,7 +93,7 @@
 <br>
 <div class="container">
     <h2>Pending Payment</h2>
-    <input type="text" id="searchInput" onkeyup="pendingResultSearch()" placeholder="Search for names..">
+    <input type="text" id="searchInput" onkeyup="pendingResultSearch()" placeholder="Search for data..">
     <table id = "pendingPayment" class="table table-bordered table-striped table-hover">
         <thead>
             <tr>

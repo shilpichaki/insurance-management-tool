@@ -366,8 +366,8 @@
             <div class="col-md-6">
                 <select id="recovered" class="form-control" name="recovered" autofocus>
                     <option value = "">-Please Select One-</option>
-                    <option value = "0">Active</option>
-                    <option value = "1">Inacive</option>
+                    <option value = "0">No</option>
+                    <option value = "1">Yes</option>
                 </select>
                 @if ($errors->has('recovered'))
                     <span class="help-block">

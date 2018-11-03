@@ -39,7 +39,7 @@
 
 .dropdown-arrow
 {
-    background-image: url('/dashboard/css/down-squared.png');
+    content: url('/dashboard/css/down-squared.png');
     background-position: 10px 10px;
     background-repeat: no-repeat;
 }
