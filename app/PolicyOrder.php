@@ -51,4 +51,10 @@ class PolicyOrder extends Model
     {
         return $this->belongsTo('App\Familyrelation', 'nominee_relation_id', 'state_id');
     }
+
+    //For Order status details
+    public function payment_status_details()
+    {
+        return $this->belongsTo('App\OrderPaymentStatus', 'order_payment_status_id', 'order_payment_status_id');
+    }
 }

@@ -360,6 +360,25 @@
             </div>
         </div>
 
+        <div class="form-group{{ $errors->has('order_payment_status_id') ? ' has-error' : '' }}">
+            <label for="order_payment_status_id" class="col-md-4 control-label">Policy Status</label>
+
+            <div class="col-md-6">
+                <select id="order_payment_status_id" class="form-control" name="order_payment_status_id" autofocus>
+                    <option value = "">-Please Select One-</option>
+                @foreach ($orderPaymentStatus as $orderStatus)
+                    <option value="{{ $orderStatus->order_payment_status_id }}">{{ $orderStatus->order_payment_status_name }}</option>
+                @endforeach
+                </select>
+
+                @if ($errors->has('order_payment_status_id'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('order_payment_status_id') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
         <div class="form-group{{ $errors->has('recovered') ? ' has-error' : '' }}">
             <label for="recovered" class="col-md-4 control-label">Recovered</label>
 

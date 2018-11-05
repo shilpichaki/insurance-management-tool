@@ -35,8 +35,9 @@ class PolicyorderController extends Controller
         $policyMaster = DB::select("select policy_id,policy_name from tbl_policy_mast");
         $nomineeRelationMaster = DB::select("select relation_code,relation_name from tbl_family_relation_mast");
         $policyStatusMaster = DB::select("select policy_status_id,policy_status_name from tbl_policy_status");
+        $orderPaymentStatus = DB::select("SELECT order_payment_status_id,order_payment_status_name FROM `tbl_order_payment_status`");
 
-        return view('policyorder.create')->with(['policyMaster' => $policyMaster, 'nomineeRelationMaster' => $nomineeRelationMaster, 'policyStatusMaster' => $policyStatusMaster, 'mothercompanylist' => $mothercompanylist, 'subcompanylist' => $subcompanylist, 'brokercompanylist' => $brokercompanylist]);
+        return view('policyorder.create')->with(['policyMaster' => $policyMaster, 'nomineeRelationMaster' => $nomineeRelationMaster, 'policyStatusMaster' => $policyStatusMaster, 'orderPaymentStatus' => $orderPaymentStatus, 'mothercompanylist' => $mothercompanylist, 'subcompanylist' => $subcompanylist, 'brokercompanylist' => $brokercompanylist]);
     }
 
     /**
@@ -74,6 +75,7 @@ class PolicyorderController extends Controller
                     'handover_date' => 'string',
                     'plvc' => 'integer',
                     'policy_status_id' => 'integer|required',
+                    'order_payment_status_id' => 'integer|required',
                     'recovered' => 'integer|required',
                     'issuence_date' => 'string|nullable'
                 ]
@@ -107,6 +109,7 @@ class PolicyorderController extends Controller
                     'handover_date' => 'string',
                     'plvc' => 'integer',
                     'policy_status_id' => 'integer|required',
+                    'order_payment_status_id' => 'integer|required',
                     'recovered' => 'integer|required',
                     'issuence_date' => 'string|nullable'
                 ]
@@ -139,6 +142,7 @@ class PolicyorderController extends Controller
         $policyOrder->handover_date = Util::mysqlDateTimeConverter($request->input('handover_date'));
         $policyOrder->plvc = $request->input('plvc');
         $policyOrder->policy_status_id = $request->input('policy_status_id');
+        $policyOrder->order_payment_status_id = $request->input('order_payment_status_id');
         $policyOrder->recovered = $request->input('recovered');
         $policyOrder->issuence_date = Util::mysqlDateTimeConverter($request->input('issuence_date'));
 
@@ -175,8 +179,9 @@ class PolicyorderController extends Controller
         $nomineeRelationMaster = DB::select("select relation_code,relation_name from tbl_family_relation_mast");
         $policyStatusMaster = DB::select("select policy_status_id,policy_status_name from tbl_policy_status");
         $policyOrder = PolicyOrder::where('order_id',$id)->first();
+        $orderPaymentStatus = DB::select("SELECT order_payment_status_id,order_payment_status_name FROM `tbl_order_payment_status`");
 
-        return view('policyorder.edit')->with(['id'=> $id,'policyMaster' => $policyMaster, 'nomineeRelationMaster' => $nomineeRelationMaster, 'policyStatusMaster' => $policyStatusMaster, 'policyOrder' => $policyOrder, 'mothercompanylist' => $mothercompanylist, 'subcompanylist' => $subcompanylist, 'brokercompanylist' => $brokercompanylist]);
+        return view('policyorder.edit')->with(['id'=> $id,'policyMaster' => $policyMaster, 'nomineeRelationMaster' => $nomineeRelationMaster, 'policyStatusMaster' => $policyStatusMaster, 'policyOrder' => $policyOrder, 'orderPaymentStatus' => $orderPaymentStatus, 'mothercompanylist' => $mothercompanylist, 'subcompanylist' => $subcompanylist, 'brokercompanylist' => $brokercompanylist]);
     }
 
     public function policydetails($id)

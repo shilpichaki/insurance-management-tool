@@ -106,6 +106,14 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator'
     Route::post('policyorder','PolicyorderController@store')->name('policyorder.store');
     Route::put('policyorder','PolicyorderController@store')->name('policyorder.update');
 
+    //Policy Order Payment Recovery Routes 
+    Route::get('policyrecoverydata','PolicyrecoverydataController@index')->name('policyrecoverydata.home');
+    Route::get('policyrecoverydata/create/{orderid}','PolicyrecoverydataController@create')->name('policyrecoverydata.create');
+    Route::get('policyrecoverydata/edit/{id}','PolicyrecoverydataController@edit');
+    Route::get('policyrecoverydata/{id}','PolicyrecoverydataController@show');
+    Route::post('policyrecoverydata','PolicyrecoverydataController@store')->name('policyrecoverydata.store');
+    Route::put('policyrecoverydata','PolicyrecoverydataController@store')->name('policyrecoverydata.update');
+
     //Payment Received Routes 
     Route::get('paymentreceive','PaymentRecivedController@index')->name('paymentreceive.home');
     Route::get('paymentreceive/create','PaymentRecivedController@create')->name('paymentreceive.create');
