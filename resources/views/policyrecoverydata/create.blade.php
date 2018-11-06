@@ -10,7 +10,28 @@
 
             {{ csrf_field() }}
 
-            <input type="hidden" name="order_id" value = "{{$orderid}}">
+            {{-- <input type="hidden" name="order_id" value = "{{$orderid}}"> --}}
+            <div class="form-group{{ $errors->has('order_id') ? ' has-error' : '' }}">
+                <label for="order_id" class="col-md-4 control-label">Select Order</label>
+
+                <div class="col-md-6">
+                    
+                    <select id="order_id" class="form-control" name="order_id" autofocus>
+                        <option value = "" selected>-Please Select One-</option>
+                        @foreach($orderData as $data)
+                            @if($data->order_id == $orderid)
+                                <option value = "{{$data->order_id}}" selected>{{$data->application_no}}</option>
+                            @endif
+                            <option value = "{{$data->order_id}}">{{$data->application_no}}</option>
+                        @endforeach
+                    </select>
+                    @if ($errors->has('order_id'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('order_id') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
 
             <div class="form-group{{ $errors->has('recovery_date') ? ' has-error' : '' }}">
                 <label for="recovery_date" class="col-md-4 control-label">Recovery Date</label>

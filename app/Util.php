@@ -10,6 +10,11 @@ Class Util
         return date('Y-m-d H:i:s', strtotime($date));
     }
 
+    public static function htmlDateConverter($date)
+    {
+        return date('Y-m-d', strtotime($date));
+    }
+
     public static function phpDateFetch($date)
     {
         return date('d/m/Y', strtotime($date));

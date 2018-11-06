@@ -32,7 +32,11 @@ class PolicyrecoverydataController extends Controller
      */
     public function create($orderid)
     {
-        return view('policyrecoverydata.create',compact('orderid'));
+        //Find all Policyorder model with Payment Status ID 3
+        $orderPaymentId = 3;
+
+        $orderData = PolicyOrder::select('application_no','order_id')->where('order_payment_status_id', $orderPaymentId)->get();
+        return view('policyrecoverydata.create',compact('orderid','orderData'));
     }
 
     /**
@@ -122,7 +126,12 @@ class PolicyrecoverydataController extends Controller
      */
     public function edit($id)
     {
-        //
+        //Find all Policyorder model with Payment Status ID 3
+        $orderPaymentId = 3;
+
+        $recoveryData = PolicyRecoveryData::where('recovery_id', $id)->first();
+        $orderData = PolicyOrder::select('application_no','order_id')->where('order_payment_status_id', $orderPaymentId)->orWhere('order_id',$recoveryData->order_id)->get();
+        return view('policyrecoverydata.edit',compact('id','orderData', 'recoveryData'));
     }
 
     /**
