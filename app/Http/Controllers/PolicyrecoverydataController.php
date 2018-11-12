@@ -22,7 +22,8 @@ class PolicyrecoverydataController extends Controller
         $orderPaymentId = 3;
 
         $orderPaymentToRecover = PolicyOrder::where('order_payment_status_id', $orderPaymentId)->get();
-        return view('policyrecoverydata.index',compact('orderPaymentToRecover'));
+        $recoverdPolicyData = PolicyRecoveryData::all();
+        return view('policyrecoverydata.index',compact('orderPaymentToRecover','recoverdPolicyData'));
     }
 
     /**
@@ -95,7 +96,7 @@ class PolicyrecoverydataController extends Controller
             $policyPaymentRecovery->instrument_date = Util::mysqlDateTimeConverter($request->input('instrument_date'));
             $policyPaymentRecovery->save();
 
-            $policyOrder = PolicyOrder::where('order_id', $request->input('order_id'))->update(array('order_payment_status_id' => 1));
+            $policyOrder = PolicyOrder::where('order_id', $request->input('order_id'))->update(array('order_payment_status_id' => 1,'recovered' => 1));
 
             DB::commit();
             return redirect('/policyrecoverydata');
