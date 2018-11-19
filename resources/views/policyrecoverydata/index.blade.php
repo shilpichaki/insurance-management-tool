@@ -25,6 +25,7 @@
                             <th>Recovery Date</th>
                             <th>Payment Mode</th>
                             <th>Instrument No(If any)</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,6 +37,7 @@
                             <td>{{App\Util::phpDateFetch($recoveryData->recovery_date)}}</td>
                             <td>{{$recoveryData->instrument_no}}</td>
                             <td>{{$recoveryData->instrument_no}}</td>
+                            <td><a href="{{action('PolicyrecoverydataController@edit',$recoveryData->recovery_id)}}" class="btn btn-success">Edit</a></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -55,12 +57,13 @@
                             <th>Payment Date</th>
                             <th>Payment Mode</th>
                             <th>Instrument No(If any)</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($orderPaymentToRecover as $orderPayment)
                         <tr class="tell_index">
-                        <td>{{$orderPayment->customer_details->customer_name}}</td>
+                            <td>{{$orderPayment->customer_details->customer_name}}</td>
                             <td>{{$orderPayment->application_no}}</td>
                             <td>{{$orderPayment->amount}}</td>
                             <td>
@@ -73,6 +76,7 @@
                             <td>{{App\Util::phpDateFetch($orderPayment->instrument_date)}}</td>
                             <td>{{$orderPayment->payment_mode}}</td>
                             <td>{{$orderPayment->instrument_no}}</td>
+                            <td><a href="{{action('PolicyrecoverydataController@create',$orderPayment->order_id)}}" class="btn btn-success">Create</a></td>
                         </tr>
                         @endforeach
                     </tbody>
