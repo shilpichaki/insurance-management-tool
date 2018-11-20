@@ -78,10 +78,10 @@ $totalProfit = 0;
         <div class="eh_c_c">
             <span class="eh_show_close"><i class="fa fa-close"></i></span>
             <ul class="eh_breadcrumbs">
-                <li><a class="btn"><i class="fa fa-user-circle-o"></i> Suman</a></li>
-                <li class="active"><a class="btn"><i class="fa fa-user-circle-o"></i> Rishu</a></li>
-                <li><a class="btn"><i class="fa fa-user-circle-o"></i> VK</a></li>
-                <li><a class="btn"><i class="fa fa-user-circle-o"></i> Guddu</a></li>
+                <li><a href="#" class="btn"><i class="fa fa-user-circle-o"></i> Suman</a></li>
+                <li class="active"><a href="#" class="btn"><i class="fa fa-user-circle-o"></i> Rishu</a></li>
+                <li><a href = "#" class="btn"><i class="fa fa-user-circle-o"></i> VK</a></li>
+                <li><a href="#" class="btn"><i class="fa fa-user-circle-o"></i> Guddu</a></li>
             </ul>
         </div>
     </div>

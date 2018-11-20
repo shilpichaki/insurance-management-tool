@@ -361,7 +361,7 @@
         </div>
 
         <div class="form-group{{ $errors->has('order_payment_status_id') ? ' has-error' : '' }}">
-            <label for="order_payment_status_id" class="col-md-4 control-label">Policy Status</label>
+            <label for="order_payment_status_id" class="col-md-4 control-label">Payment Status</label>
 
             <div class="col-md-6">
                 <select id="order_payment_status_id" class="form-control" name="order_payment_status_id" autofocus>

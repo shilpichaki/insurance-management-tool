@@ -28,7 +28,7 @@ $(document).ready(function () {
 
             dataArray.forEach(function (data) {
                 var isActiveClass = data.isCurrent == 1 ? "class=\"active\"" : "class=\"\"" ;
-                inH1 = "<li " + isActiveClass + "><a href='' class='btn1'><i class=\"fa fa-user-circle-o\"></i>" + data.empname + "</a></li>";
+                inH1 = "<li " + isActiveClass + "><a href='#' class='btn1'><i class=\"fa fa-user-circle-o\"></i>" + data.empname + "</a></li>";
                 myHtml = myHtml + inH1;
             });
             $(".showRelationship").find(".eh_breadcrumbs").html(myHtml);

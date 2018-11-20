@@ -10,7 +10,8 @@
         <div class="panel-body">
             <form method="post" action="{{ route('brokercompany.update' , $brokercompany->b_company_id)}}" > 
             {{ csrf_field()}}
-            <input type="hidden"  name='_method' value="PUT">       
+            <input type="hidden"  name='_method' value="PUT">
+            <input type="hidden"  name='company_id' value="{{$id}}">
             
                 <div class="form-group">
                         <label for="company_name" class="col-md-4 control-label">company_name</label>

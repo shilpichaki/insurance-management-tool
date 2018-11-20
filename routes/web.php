@@ -133,4 +133,7 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator'
     Route::post('orderstatement','OrderStatementController@showform')->name('orderstatement');
     Route::get('orderstatement/hierarchy/{orderid}','OrderStatementController@hierarchy')->name('orderstatement.hierarchy');
     
+    //User Profile update Route
+    Route::get('profile','UserController@edit')->name('profile.edit');
+    Route::post('profile','UserController@store')->name('paymentreceive.update');
 });

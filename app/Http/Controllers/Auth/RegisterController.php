@@ -99,7 +99,8 @@ class RegisterController extends Controller
             "role_id" => $input["role"]
         ];
 
-        return User::create($user_input);
+        User::create($user_input);
+        return redirect('/home');
     }
 
     public function showRegistrationForm()
