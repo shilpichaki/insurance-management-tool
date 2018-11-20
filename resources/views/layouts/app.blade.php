@@ -295,7 +295,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                 <ul class="dropdown-user">
-                                    <li><a href="#"><i class="ti-user"></i> Profile</a></li>
+                                    <li><a href="{{route('profile.edit')}}"><i class="ti-user"></i> Profile</a></li>
                                     <li><a href="#"><i class="ti-wallet"></i> Balance</a></li>
                                     <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
                                     <li><a href="#"><i class="ti-settings"></i> Setting</a></li>
@@ -395,6 +395,24 @@
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">Policy Order</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{route('policyorder.create')}}" class="">Add</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Order Payment Status -->
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">Policy Payment Status</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{route('policyrecoverydata.home')}}" class="">Show All</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Payment Related Status -->
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">Payment Details</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{route('paymentreceive.home')}}" class="">Show All</a>
+                                </li>
+                                <li><a href="{{route('paymentreceive.create')}}" class="">Add</a>
                                 </li>
                             </ul>
                         </li>

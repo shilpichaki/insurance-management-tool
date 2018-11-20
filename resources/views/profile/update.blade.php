@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<?php var_dump($currentUser);?>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -105,76 +104,6 @@
                                 @if ($errors->has('emp_phno'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('emp_phno') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('emp_desg_id') ? ' has-error' : '' }}">
-                            <label for="emp_desg_id" class="col-md-4 control-label">Designation</label>
-
-                            <div class="col-md-6">
-                                    <select id="emp_desg_id" class="form-control" name="emp_desg_id" autofocus>
-                                        
-                                        <option value = "0">-Please Select One-</option>
-                                        @foreach ($designationlist as $designation)
-                                            <option value="{{ $designation->designation_id }}" {{ (old("role") == $designation->designation_id ? "selected":"") }}>{{ $designation->designation_name }}</option>
-                                        @endforeach
-                                    </select>
-
-                                @if ($errors->has('emp_desg_id'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('emp_desg_id') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('emp_reports_to') ? ' has-error' : '' }}">
-                            <label for="emp_reports_to" class="col-md-4 control-label">Employee Reports To</label>
-
-                            <div class="col-md-6">
-                                <input id="emp_reports_to" type="text" class="form-control" name="emp_reports_to" value="{{ old('emp_reports_to') }}" required autofocus>
-
-                                @if ($errors->has('emp_reports_to'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('emp_reports_to') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <!--Employee's status will be activated by default at the time of Registering the Employee. Thats why there is no field for employee status-->
-
-                        <!--Blow portion is for User access control or Register the Employee as User-->
-
-                        <div class="form-group{{ $errors->has('userid') ? ' has-error' : '' }}">
-                            <label for="userid" class="col-md-4 control-label">User ID</label>
-
-                            <div class="col-md-6">
-                                <input id="userid" type="text" class="form-control" name="userid" value="{{ old('userid') }}" required autofocus>
-
-                                @if ($errors->has('userid'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('userid') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
-                            <label for="role" class="col-md-4 control-label">User Role</label>
-
-                            <div class="col-md-6">
-                                <select id="role" class="form-control" name="role" autofocus>
-                                    <option value = "0">-Please Select One-</option>
-                                    @foreach ($rolelist as $role)
-                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
-                                    @endforeach
-                                </select>
-
-                                @if ($errors->has('role'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('role') }}</strong>
                                     </span>
                                 @endif
                             </div>

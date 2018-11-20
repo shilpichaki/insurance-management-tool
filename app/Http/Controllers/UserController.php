@@ -52,27 +52,31 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User;
-        $employee = new Employee;
+        $user = new \stdClass;
+        $employee = new \stdClass;
 
         DB::beginTransaction();
 
         try
         {
-            $employee->emp_id = Auth::user()->empid;
+            //$employee->emp_id = Auth::user()->empid;
             $employee->emp_first_name = $request->input('emp_first_name');
             $employee->emp_middle_name = $request->input('emp_middle_name');
             $employee->emp_last_name = $request->input('emp_last_name');
             $employee->emp_dob = Util::mysqlDateTimeConverter($request->input('emp_dob'));
             $employee->emp_email = $request->input('emp_email');
             $employee->emp_phno = $request->input('emp_phno');
-            $employee->save();
+            $empArray = (array) $employee;
+            //$employee->save();
+            $empUpdate = Employee::where('emp_id', Auth::user()->empid)->update($empArray);
 
-            $user->userid = Auth::user()->userid;
-            $user->empid = Auth::user()->empid;
             $user->email = $request->input('emp_email');
-            $user->password = bcrypt($request->input('password'));
-            $user->save();
+            $pass = $request->input('password');
+            if(trim($pass) != "")
+                $user->password = bcrypt($request->input('password'));
+           // $user->save();
+           $userArray = (array)$user;
+           $usrUpdate = User::where('empid', Auth::user()->empid)->update($userArray);
 
             DB::commit();
             return redirect('/home');
