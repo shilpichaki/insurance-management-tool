@@ -58,7 +58,7 @@
         </div>
     
         <div class="form-group{{ $errors->has('end_date') ? ' has-error' : '' }}">
-            <label for="end_date" class="col-md-4 control-label">Start Date</label>
+            <label for="end_date" class="col-md-4 control-label">End Date</label>
             <div class="col-md-6">
                 <input id="end_date" type="date" class="form-control" name="end_date" value="{{ old('end_date') }}" required autofocus>
                 </select>
