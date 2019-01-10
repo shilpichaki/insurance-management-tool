@@ -137,3 +137,7 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator'
     Route::get('profile','UserController@edit')->name('profile.edit');
     Route::post('profile','UserController@store')->name('paymentreceive.update');
 });
+
+Route::group(['middleware' => ['auth' , 'roles'], 'roles' => ['specialAdmin']], function(){
+    Route::get('policycreate','PolicycreateController@index')->name('policy.home');
+});
