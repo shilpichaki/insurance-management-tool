@@ -181,6 +181,7 @@
                 <ul class="navbar-nav my-lg-0">
                     @guest
                         <li><a href="{{ route('login') }}">Login</a></li>
+                        <li><a href="{{ route('register') }}">Register</a></li>
                     @else
                         <!-- Comment -->
                         <li class="nav-item dropdown">
@@ -432,6 +433,31 @@
                         </li>
                         <?php
                         }
+                        if(Auth::user()->role->name == "SpecialAdmin")
+                        {
+                        ?>
+                        <!-- Policy Master -->
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">Policy Master</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{route('policymaster.home')}}" class="">Show All</a>
+                                </li>
+                                <li><a href="{{route('policymaster.create')}}" class="">Add</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <?php
+                        }
+                        if(Auth::user()->role->name == "SubBroker")
+                        {
+                        ?>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">Details Info</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{route('home')}}" class="">Show All</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <?php
+                        }
                         ?>
                         {{-- <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-map-marker"></i><span class="hide-menu">Maps</span></a>
                             <ul aria-expanded="false" class="collapse">
@@ -484,6 +510,7 @@
     <!-- End Page wrapper  -->
 </div>
 <!-- End Wrapper -->
+
 <!-- All Jquery -->
 <script src="{{asset("dashboard/js/lib/jquery/jquery.min.js")}}"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
@@ -532,6 +559,7 @@
     gtag('config', 'UA-23581568-13');
 </script>
 @yield('scripts')
+@stack('script')
 </body>
 
 

@@ -66,4 +66,39 @@ class User extends Authenticatable
 	{
 		return (strtolower($need_role) == strtolower($this->have_role->name)) ? true : false;
 	}
+
+	public function bank()
+    {
+        return $this->hasOne('App\BankMaster', 'sub_broker_id');
+    }
+
+    public function address()
+    {
+        return $this->hasOne('App\Address', 'sub_broker_id');
+    }
+
+    public function nominee()
+    {
+        return $this->hasOne('App\Nominee', 'sub_broker_id');
+    }
+
+    public function fileupload()
+    {
+        return $this->hasMany('App\FileUpload', 'sub_broker_id');
+    }
+
+    public function product()
+    {
+        return $this->hasone('App\Product', 'sub_broker_id');
+    }
+
+    public function userActivation()
+    {
+        return $this->hasone('App\UserActivation', 'sub_broker_id');
+    }
+
+    public function policies()
+    {
+        return $this->hasMany('App\Policy', 'user_id');
+    }
 }

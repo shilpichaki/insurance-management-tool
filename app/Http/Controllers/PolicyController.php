@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Policy;
 use Validator;
@@ -16,6 +17,12 @@ class PolicyController extends Controller
      */
     public function index()
     {
+        if(Auth::user()->role->name == "SpecialAdmin")
+        {
+            $policies = Policy::with('subBroker.role_id')->get();
+            dd($policies);
+            return view('policymaster.index')->with(['policies' => $policies]);
+        }
         $policies = Policy::all();
         return view('policymaster.index')->with(['policies' => $policies]);
         // return $policy;

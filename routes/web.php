@@ -21,6 +21,10 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//Registration Route
+Route::get('register','Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register','Auth\RegisterController@register');
+
 Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin']],function(){
     //Company Routes
     Route::get('company','CompanyController@index');
@@ -29,11 +33,8 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin']],function()
     Route::get('company/{id}','CompanyController@index');
     Route::post('company','CompanyController@store')->name('company.store');
     Route::put('company','CompanyController@store')->name('company.update');
-
-    //Registration Route
-    Route::get('register','Auth\RegisterController@showRegistrationForm')->name('register');
-    Route::post('register','Auth\RegisterController@register');
 });
+
 
 Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator']],function(){
 
@@ -138,6 +139,21 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin', 'modarator'
     Route::post('profile','UserController@store')->name('paymentreceive.update');
 });
 
-Route::group(['middleware' => ['auth' , 'roles'], 'roles' => ['specialAdmin']], function(){
-    Route::get('policycreate','PolicycreateController@index')->name('policy.home');
+//Shilpi added two new route group to give permission to SpecialAdmin and SubBroker on 10.01.2019
+Route::group(['middleware' => ['auth' , 'roles'], 'roles' => ['SpecialAdmin']], function(){
+    //Policy Master Routes
+    Route::get('policy','PolicyController@index')->name('policymaster.home');
+    Route::get('policy/create','PolicyController@create')->name('policymaster.create');
+    Route::get('policy/edit/{id}','PolicyController@edit');
+    Route::get('policy/{id}','PolicyController@show');
+    Route::post('policy','PolicyController@store')->name('policymaster.store');
+    Route::put('policy','PolicyController@store')->name('policymaster.update');
 });
+
+// Route::group(['middleware' => ['auth' , 'roles'], 'roles' => ['SubBroker']], function(){
+//     //Home Route
+//     // Route::get('home','HomeController@index')->name('home');
+//     //Registration Route
+//     Route::get('register','Auth\RegisterController@showRegistrationForm')->name('register');
+//     Route::post('register','Auth\RegisterController@register');
+// });

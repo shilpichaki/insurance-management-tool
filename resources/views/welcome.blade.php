@@ -62,6 +62,8 @@
         <li class="m_nav"><a href="policies.html">policies</a></li>
         
         <li class="m_nav"><a href="contact.html">contact</a></li>
+
+        <li class="m_nav"><a href="{{ route('register') }}">Register for SubBrokership</a></li>
       </div>
 
       <li class="p_nav"><a href=""><span class="glyphicon glyphicon-earphone"></span> 9836513953</a></li>
