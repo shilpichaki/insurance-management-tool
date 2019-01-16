@@ -51,7 +51,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('auth');
     }
 
     /**
@@ -117,41 +117,41 @@ class RegisterController extends Controller
     {
         
 
-        // if(Auth::user()->role->name == "Admin")
-        // {
-        //     DB::beginTransaction();
-        //     $user = new User;
-        //     $employee = new Employee;
-        //     $employee_input = [
-        //         'emp_id' => $input["emp_id"], 
-        //         'emp_first_name' => $input["emp_first_name"], 
-        //         'emp_middle_name' => $input["emp_middle_name"],
-        //         'emp_last_name' => $input["emp_last_name"],
-        //         'emp_dob' => Util::mysqlDateTimeConverter($input["emp_dob"]),
-        //         'emp_email' => $input["emp_email"],
-        //         'emp_phno' => $input["emp_phno"],
-        //         'emp_desg_id' => $input["emp_desg_id"],
-        //         'emp_reports_to' => $input["emp_reports_to"],
-        //         'emp_status' => '1'
-        //     ];
-        //     Employee::create($employee_input);
-        //     $user_input = [
-        //         "empid" => $input["emp_id"],
-        //         "userid" => $input["userid"],
-        //         "email" => $input["emp_email"],
-        //         "password" => bcrypt($input['password']),
-        //         "role_id" => $input["role"]
-        //     ];
-        //     $createdUser = User::create($user_input);
-        //     DB::commit();
-        //     // return $createdUser;
-        // }
-        // elseif(Auth::user()->role->name == "Modarator" || Auth::user()->role->name == "Viewer" || Auth::user()->role->name == "SpecialAdmin" || Auth::user()->role->name == "SubBroker")
-        // {
-        //     return redirect('/home')->with('status' , 'You are not authorized to do this!!');
-        // }
-        // else
-        // {
+        if(Auth::user()->role->name == "Admin")
+        {
+            DB::beginTransaction();
+            $user = new User;
+            $employee = new Employee;
+            $employee_input = [
+                'emp_id' => $input["emp_id"], 
+                'emp_first_name' => $input["emp_first_name"], 
+                'emp_middle_name' => $input["emp_middle_name"],
+                'emp_last_name' => $input["emp_last_name"],
+                'emp_dob' => Util::mysqlDateTimeConverter($input["emp_dob"]),
+                'emp_email' => $input["emp_email"],
+                'emp_phno' => $input["emp_phno"],
+                'emp_desg_id' => $input["emp_desg_id"],
+                'emp_reports_to' => $input["emp_reports_to"],
+                'emp_status' => '1'
+            ];
+            Employee::create($employee_input);
+            $user_input = [
+                "empid" => $input["emp_id"],
+                "userid" => $input["userid"],
+                "email" => $input["emp_email"],
+                "password" => bcrypt($input['password']),
+                "role_id" => $input["role"]
+            ];
+            $createdUser = User::create($user_input);
+            DB::commit();
+            // return $createdUser;
+        }
+        elseif(Auth::user()->role->name == "Modarator" || Auth::user()->role->name == "Viewer" || Auth::user()->role->name == "SpecialAdmin")
+        {
+            return redirect('/home')->with('status' , 'You are not authorized to do this!!');
+        }
+        else
+        {
             DB::beginTransaction();
             $employee_input = [
                 'emp_id' => $input["emp_id"], 
@@ -295,7 +295,7 @@ class RegisterController extends Controller
             // dd($file);
 
             DB::commit();
-        // }
+        }
         // // return $user_array ;
     }
 
@@ -309,17 +309,17 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        // if(Auth::user()->role->name == "Admin")
-        // {
-        //     $rolelist = DB::select("select id,name from roles");
-        //     $designationlist = DB::select("select designation_id,designation_name from tbl_designation_mast");
-        //     return view("auth.register", compact('rolelist', 'designationlist'));
-        // }
-        // else
-        // {
+        if(Auth::user()->role->name == "Admin")
+        {
+            $rolelist = DB::select("select id,name from roles");
+            $designationlist = DB::select("select designation_id,designation_name from tbl_designation_mast");
+            return view("auth.register", compact('rolelist', 'designationlist'));
+        }
+        else
+        {
             $states = DB::select("select state_id,state_name from states");
             $designationlist = DB::select("select designation_id,designation_name from tbl_designation_mast");
             return view("auth.register", compact('states', 'designationlist'));
-        // }
+        }
     }
 }

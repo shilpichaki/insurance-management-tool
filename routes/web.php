@@ -21,9 +21,9 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Registration Route
-Route::get('register','Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('register','Auth\RegisterController@register');
+Route::get('subbroker','SubBrokerController@index');
+Route::get('subbroker/create','SubBrokerController@create')->name('subbroker.create');
+Route::post('subbroker','SubBrokerController@store')->name('subbroker.store');
 
 Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin']],function(){
     //Company Routes
@@ -33,6 +33,10 @@ Route::group(['middleware' => ['auth','roles'], 'roles' => ['admin']],function()
     Route::get('company/{id}','CompanyController@index');
     Route::post('company','CompanyController@store')->name('company.store');
     Route::put('company','CompanyController@store')->name('company.update');
+
+    //Registration Route
+    Route::get('register','Auth\RegisterController@showRegistrationForm')->name('register');
+    Route::post('register','Auth\RegisterController@register');
 });
 
 
@@ -150,10 +154,11 @@ Route::group(['middleware' => ['auth' , 'roles'], 'roles' => ['SpecialAdmin']], 
     Route::put('policy','PolicyController@store')->name('policymaster.update');
 });
 
-// Route::group(['middleware' => ['auth' , 'roles'], 'roles' => ['SubBroker']], function(){
-//     //Home Route
-//     // Route::get('home','HomeController@index')->name('home');
-//     //Registration Route
-//     Route::get('register','Auth\RegisterController@showRegistrationForm')->name('register');
-//     Route::post('register','Auth\RegisterController@register');
-// });
+Route::group(['middleware' => ['auth' , 'roles'], 'roles' => ['SubBroker']], function(){
+    //Home Route
+    // Route::get('home','HomeController@index')->name('home');
+    //Registration Route
+    // Route::get('register','Auth\RegisterController@showRegistrationForm')->name('register');
+    // Route::post('register','Auth\RegisterController@register');
+
+});

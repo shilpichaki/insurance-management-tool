@@ -19,8 +19,9 @@ class PolicyController extends Controller
     {
         if(Auth::user()->role->name == "SpecialAdmin")
         {
-            $policies = Policy::with('subBroker.role_id')->get();
-            dd($policies);
+            $policies = Policy::with('subBroker')->get()->pluck('subBroker');
+            // $policy = $po->whereHas('subBroker')->get();
+            // dd($po);
             return view('policymaster.index')->with(['policies' => $policies]);
         }
         $policies = Policy::all();
@@ -35,6 +36,7 @@ class PolicyController extends Controller
      */
     public function create()
     {
+        $subBroker = DB::select("select emp_id,emp_first_name,emp_last_name from tbl_employee_mast");
         $mothercompanylist = DB::select("select m_company_id,m_company_name from tbl_mother_company_mast");
         return view('policymaster.create',compact('mothercompanylist'));
     }
