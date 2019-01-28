@@ -184,9 +184,9 @@ class SubBrokerController extends Controller
                 'emp_pan_no' => $request['panno'],
                 'emp_aadhar_no' => $request['aadharno'],
             ];
-        //  dd($employee_input);
+        
             $employee = Employee::create($employee_input);
-            // dd($employee);
+            
             $user_input = [
                 "empid" => $request["emp_id"],
                 //"userid" => $request["userid"],
@@ -196,7 +196,7 @@ class SubBrokerController extends Controller
             ];
 
             $user_array = User::create($user_input);
-            // dd($user_array);
+            
 
             //bank-details
             $bank_input = [
@@ -213,7 +213,7 @@ class SubBrokerController extends Controller
             ];
             $bank = BankMaster::create($bank_input);
 
-            // dd($bank);
+            
 
             //nominee-details
             Nominee::create([
@@ -237,7 +237,6 @@ class SubBrokerController extends Controller
 
             //Generate User-ID and save
             $string_name = strtoupper($request['emp_first_name']);
-            // dd($string_name);
             $string_town = strtoupper($request['presenttown']);
             $rand_no = mt_rand(100000, 999999);
             $string_const = "RCDK/" ;
@@ -257,15 +256,14 @@ class SubBrokerController extends Controller
             $part4 = ($rand_no)?rand(0, $rand_no):"";
 
             $username = $part1.$part2."/".$part3."/".$part4;
-            // dd($username);
+            
 
             $userid = UserActivation::create([
-                'user_id' => $request["emp_id"],
+                'employee_id' => $request["emp_id"],
                 'user_activation_id' => $username,
                 
             ]);
-            // dd($userid);
-            // dd($user_array->userActivation);
+          
             \Mail::to($employee->emp_email)->send(new VerifyMail($employee)); //sending mail to the new sub-broker
 
 
@@ -279,17 +277,17 @@ class SubBrokerController extends Controller
             $title = $request['amfi_file'];
             $imageName = $title->getClientOriginalName();
             $title->move(public_path('upload'), $imageName);
-            // dd($title);
+            
 
             $phototitle = $request['photo'];
             $nameOfPhoto = $phototitle->getClientOriginalName();
             $phototitle->move(public_path('upload'), $nameOfPhoto);
-            // dd($phototitle);
+            
 
             $signtitle = $request['sign'];
             $nameOfSign = $signtitle->getClientOriginalName();
             $signtitle->move(public_path('upload'), $nameOfSign);
-            // dd($signtitle);
+            
 
             $file = FileUpload::create([
                 'user_id' => $request["emp_id"],
@@ -297,15 +295,11 @@ class SubBrokerController extends Controller
                 'photo' => $nameOfPhoto,
                 'sign' => $nameOfSign,
             ]);
-            // dd($file);
+            
 
             DB::commit();
             return redirect('/')->with('success', ['You have successfully registered as SubBroker. Please check your email.']);
 
-        // if($policy->save())
-        // {
-        //     return redirect('/policy');
-        // }
     }
 
 }
