@@ -8,15 +8,19 @@ class UserActivation extends Model
 {
     protected $table = "user_activation";
 
-    public $primaryKey = "id";
     public $timestamps = true;
     protected $fillable = [
-         'user_id', 'user_activation_id'
+         'employee_id', 'user_activation_id'
     ];
 
     //sub broker details
-    public function sub_broker()
+
+    public function employee()
     {
-        return $this->belongsTo('App\SubBroker');
+        return $this->belongsTo('App\Employee', 'employee_id', 'emp_id');
+    }
+
+    public function employeesWithIntroducerCode() {
+        return $this->hasMany('App\Employee', 'emp_introducer_code', 'user_activation_id');
     }
 }

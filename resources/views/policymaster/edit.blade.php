@@ -74,6 +74,13 @@
                     </div>
             </div>
 
+            <div class="form-group">
+                    <label for="status" class="col-md-4 control-label" >Policy Issuing Status</label>
+                    <div class="col-md-6">
+                        <input type="text" name="status" autocomplete="off" class="form-control" id="status" placeholder="Pending/Issued" value = "{{$policyMaster->issuing_status}}">
+                    </div>
+            </div>
+
             <!-- //End of Form Body // -->
             <button type="submit" class="btn btn-primary">Update</button>
             <input type="button" class="btn btn-primary" value="Go back" onclick="history.back()">

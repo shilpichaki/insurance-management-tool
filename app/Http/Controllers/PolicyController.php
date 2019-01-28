@@ -17,13 +17,12 @@ class PolicyController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->role->name == "SpecialAdmin")
-        {
-            $policies = Policy::with('subBroker')->get()->pluck('subBroker');
-            // $policy = $po->whereHas('subBroker')->get();
-            // dd($po);
-            return view('policymaster.index')->with(['policies' => $policies]);
-        }
+        // if(Auth::user()->role->name == "SpecialAdmin")
+        // {
+        //     $policies = Policy::with('subBroker')->get();
+            
+        //     return view('policymaster.index')->with(['policies' => $policies]);
+        // }
         $policies = Policy::all();
         return view('policymaster.index')->with(['policies' => $policies]);
         // return $policy;
@@ -36,9 +35,18 @@ class PolicyController extends Controller
      */
     public function create()
     {
-        $subBroker = DB::select("select emp_id,emp_first_name,emp_last_name from tbl_employee_mast");
-        $mothercompanylist = DB::select("select m_company_id,m_company_name from tbl_mother_company_mast");
-        return view('policymaster.create',compact('mothercompanylist'));
+        if(Auth::user()->role->name == "SpecialAdmin")
+        {
+            $subBrokers = DB::select("select emp_id,emp_first_name,emp_last_name from tbl_employee_mast");
+            // dd($subBrokers);
+            $mothercompanylist = DB::select("select m_company_id,m_company_name from tbl_mother_company_mast");
+            return view('policymaster.create',compact('mothercompanylist', 'subBrokers'));
+        }
+        else
+        {
+            $mothercompanylist = DB::select("select m_company_id,m_company_name from tbl_mother_company_mast");
+            return view('policymaster.create',compact('mothercompanylist', 'subBrokers'));
+        }
     }
 
     /**
@@ -55,6 +63,7 @@ class PolicyController extends Controller
         {
             $validator = Validator::make($request->all(), 
                 [
+                    'user_id' => 'string|max:50',
                     'policy_id' => 'required|integer', 
                     'policy_no' => 'required|string|max:100', 
                     'policy_name' => 'required|string',
@@ -74,6 +83,7 @@ class PolicyController extends Controller
         {
             $validator = Validator::make($request->all(), 
                 [
+                    'user_id' => 'string|max:50',
                     'policy_no' => 'required|string|max:100', 
                     'policy_name' => 'required|string',
                     'm_company_id' => 'integer|max:15',
@@ -90,6 +100,8 @@ class PolicyController extends Controller
         }
 
         $policy->policy_id = $request->input('policy_id');
+        $policy->user_id = $request->input('user_id');
+        $policy->employee_id = $request->input('emp_id');
         $policy->policy_no = $request->input('policy_no');
         $policy->policy_name = $request->input('policy_name');
         $policy->m_company_id = $request->input('m_company_id');
@@ -97,6 +109,7 @@ class PolicyController extends Controller
         $policy->premium_time = $request->input('premium_time');
         $policy->maturity_time = $request->input('maturity_time');
         $policy->amount = $request->input('amount');
+        $policy->issuing_status = $request->input('status');
 
         if($policy->save())
         {
@@ -124,9 +137,20 @@ class PolicyController extends Controller
      */
     public function edit($id)
     {
-        $mothercompanylist = DB::select("select m_company_id,m_company_name from tbl_mother_company_mast");
-        $policyMaster = Policy::where('policy_id',$id)->first();
-        return view('policymaster.edit',compact('mothercompanylist','policyMaster','id'));
+        if(Auth::user()->role->name == "SpecialAdmin")
+        {
+            $subBrokers = DB::select("select emp_id,emp_first_name,emp_last_name from tbl_employee_mast");
+            // dd($subBrokers);
+            $mothercompanylist = DB::select("select m_company_id,m_company_name from tbl_mother_company_mast");
+            $policyMaster = Policy::where('policy_id',$id)->first();
+            return view('policymaster.edit',compact('subBrokers','mothercompanylist','policyMaster','id'));
+        }
+        else
+        {
+            $mothercompanylist = DB::select("select m_company_id,m_company_name from tbl_mother_company_mast");
+            $policyMaster = Policy::where('policy_id',$id)->first();
+            return view('policymaster.edit',compact('mothercompanylist','policyMaster','id'));
+        }
     }
 
     /**

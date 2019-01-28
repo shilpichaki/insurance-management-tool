@@ -452,7 +452,7 @@
                         ?>
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">Details Info</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{route('home')}}" class="">Show All</a>
+                                <li><a href="{{route('subbrokerdata.home')}}" class="">Show All</a>
                                 </li>
                             </ul>
                         </li>

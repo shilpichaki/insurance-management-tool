@@ -69,36 +69,36 @@ class User extends Authenticatable
 
 	public function bank()
     {
-        return $this->hasOne('App\BankMaster', 'sub_broker_id');
+        return $this->hasOne('App\BankMaster', 'user_id');
     }
 
     public function address()
     {
-        return $this->hasOne('App\Address', 'sub_broker_id');
+        return $this->hasOne('App\Address', 'user_id');
     }
 
     public function nominee()
     {
-        return $this->hasOne('App\Nominee', 'sub_broker_id');
+        return $this->hasOne('App\Nominee', 'user_id');
     }
 
     public function fileupload()
     {
-        return $this->hasMany('App\FileUpload', 'sub_broker_id');
+        return $this->hasMany('App\FileUpload', 'user_id');
     }
 
     public function product()
     {
-        return $this->hasone('App\Product', 'sub_broker_id');
+        return $this->hasone('App\Product', 'user_id');
     }
 
     public function userActivation()
     {
-        return $this->hasone('App\UserActivation', 'sub_broker_id');
+        return $this->hasone('App\UserActivation', 'employee_id', 'empid');
     }
 
     public function policies()
     {
-        return $this->hasMany('App\Policy', 'user_id');
+        return $this->hasMany('App\Policy', 'user_id', 'empid');
     }
 }

@@ -259,12 +259,13 @@ class SubBrokerController extends Controller
             $username = $part1.$part2."/".$part3."/".$part4;
             // dd($username);
 
-            UserActivation::firstOrNew([
+            $userid = UserActivation::create([
                 'user_id' => $request["emp_id"],
                 'user_activation_id' => $username,
                 
             ]);
-            // dd($employee->userActivation);
+            // dd($userid);
+            // dd($user_array->userActivation);
             \Mail::to($employee->emp_email)->send(new VerifyMail($employee)); //sending mail to the new sub-broker
 
 
@@ -299,7 +300,7 @@ class SubBrokerController extends Controller
             // dd($file);
 
             DB::commit();
-            return redirect('/login');
+            return redirect('/')->with('success', ['You have successfully registered as SubBroker. Please check your email.']);
 
         // if($policy->save())
         // {

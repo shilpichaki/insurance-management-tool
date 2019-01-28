@@ -160,5 +160,5 @@ Route::group(['middleware' => ['auth' , 'roles'], 'roles' => ['SubBroker']], fun
     //Registration Route
     // Route::get('register','Auth\RegisterController@showRegistrationForm')->name('register');
     // Route::post('register','Auth\RegisterController@register');
-
+    Route::get('subbrokerdata','SubbrokerDataController@index')->name('subbrokerdata.home');
 });
